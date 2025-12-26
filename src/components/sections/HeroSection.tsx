@@ -1,4 +1,5 @@
 import { ExternalLink, MessageCircle } from "lucide-react";
+import CountdownTimer from "../CountdownTimer";
 
 const HeroSection = () => {
   return (
@@ -32,7 +33,7 @@ const HeroSection = () => {
         
         {/* Event Details */}
         <div 
-          className="space-y-2 mb-10 opacity-0 animate-fade-in"
+          className="space-y-2 mb-8 opacity-0 animate-fade-in"
           style={{ animationDelay: '0.4s' }}
         >
           <p className="text-lg text-foreground/60">
@@ -42,6 +43,14 @@ const HeroSection = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             Online
           </p>
+        </div>
+        
+        {/* Countdown Timer */}
+        <div 
+          className="mb-10 opacity-0 animate-fade-in"
+          style={{ animationDelay: '0.45s' }}
+        >
+          <CountdownTimer />
         </div>
         
         {/* CTA Buttons */}
