@@ -4,6 +4,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import AboutSection from "@/components/sections/AboutSection";
 import DetailsSection from "@/components/sections/DetailsSection";
 import SponsorsSection from "@/components/sections/SponsorsSection";
+import CreaoPromoSection from "@/components/sections/CreaoPromoSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
@@ -26,6 +27,7 @@ const Index = () => {
           <HeroSection />
           <AboutSection />
           <DetailsSection />
+          <CreaoPromoSection />
           <SponsorsSection />
         </main>
         
