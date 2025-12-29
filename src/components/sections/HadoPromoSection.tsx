@@ -25,14 +25,14 @@ const HadoPromoSection = () => {
               />
               <div className="h-8 w-px bg-foreground/20 hidden sm:block" />
               <h3 className="text-2xl md:text-3xl font-bold text-foreground">
-                Boost Your SEO with AI
+                1 Month Free Pro Plan
               </h3>
             </div>
             
             {/* Description */}
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
-              HadoSEO is an <span className="text-foreground font-semibold">AI-powered SEO platform</span> that helps you optimize your content, 
-              track rankings, and outrank your competition. Perfect for developers and marketers alike.
+              Every LovHack participant gets <span className="text-foreground font-semibold">1 month of HadoSEO Pro</span> absolutely free! 
+              An AI-powered SEO platform that helps you optimize your content, track rankings, and outrank your competition.
             </p>
             
             {/* Features list */}
