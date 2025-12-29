@@ -1,6 +1,6 @@
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
-import hadoLogo from "@/assets/hado-logo.svg";
+import hadoLogo from "@/assets/hado-logo-v3.png";
 import flootLogo from "@/assets/floot-logo.png";
 import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
