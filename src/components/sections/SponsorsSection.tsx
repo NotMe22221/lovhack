@@ -2,6 +2,8 @@ import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
 import hadoLogo from "@/assets/hado-logo.svg";
 import flootLogo from "@/assets/floot-logo.png";
+import qoderLogo from "@/assets/qoder-logo.png";
+import dualiteLogo from "@/assets/dualite-logo.png";
 
 const SponsorsSection = () => {
   return (
@@ -72,6 +74,36 @@ const SponsorsSection = () => {
               src={flootLogo} 
               alt="Floot - Build real websites and apps with AI" 
               className="h-12 md:h-16 w-auto relative z-10 rounded-xl"
+            />
+          </a>
+          
+          {/* Qoder Sponsor */}
+          <a 
+            href="https://qoder.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#2dd4bf]/10 to-[#2dd4bf]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img 
+              src={qoderLogo} 
+              alt="Qoder - AI-powered coding platform" 
+              className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+          
+          {/* Dualite Sponsor */}
+          <a 
+            href="https://alpha.dualite.dev" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/5 to-foreground/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img 
+              src={dualiteLogo} 
+              alt="Dualite - Design to code platform" 
+              className="h-12 md:h-16 w-auto relative z-10"
             />
           </a>
         </div>
