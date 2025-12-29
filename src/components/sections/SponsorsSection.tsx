@@ -1,5 +1,6 @@
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
+import hadoLogo from "@/assets/hado-logo.svg";
 
 const SponsorsSection = () => {
   return (
@@ -39,6 +40,21 @@ const SponsorsSection = () => {
             <img 
               src={creaoLogo} 
               alt="Creao - Creative AI platform" 
+              className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+          
+          {/* Hado Sponsor */}
+          <a 
+            href="https://hado.dev" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#4f9df3]/10 to-[#4f9df3]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img 
+              src={hadoLogo} 
+              alt="Hado - Developer tools" 
               className="h-12 md:h-16 w-auto relative z-10"
             />
           </a>
