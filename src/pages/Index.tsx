@@ -6,6 +6,7 @@ import DetailsSection from "@/components/sections/DetailsSection";
 import SponsorsSection from "@/components/sections/SponsorsSection";
 import CreaoPromoSection from "@/components/sections/CreaoPromoSection";
 import HadoPromoSection from "@/components/sections/HadoPromoSection";
+import FlootPromoSection from "@/components/sections/FlootPromoSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
@@ -30,6 +31,7 @@ const Index = () => {
           <DetailsSection />
           <CreaoPromoSection />
           <HadoPromoSection />
+          <FlootPromoSection />
           <SponsorsSection />
         </main>
         

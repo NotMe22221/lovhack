@@ -1,6 +1,7 @@
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
 import hadoLogo from "@/assets/hado-logo.svg";
+import flootLogo from "@/assets/floot-logo.png";
 
 const SponsorsSection = () => {
   return (
@@ -56,6 +57,21 @@ const SponsorsSection = () => {
               src={hadoLogo} 
               alt="Hado - Developer tools" 
               className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+          
+          {/* Floot Sponsor */}
+          <a 
+            href="https://floot.com" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#f5e6d3]/10 to-[#f5e6d3]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img 
+              src={flootLogo} 
+              alt="Floot - Build real websites and apps with AI" 
+              className="h-12 md:h-16 w-auto relative z-10 rounded-xl"
             />
           </a>
         </div>
