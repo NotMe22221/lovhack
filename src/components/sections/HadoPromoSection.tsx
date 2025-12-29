@@ -1,4 +1,4 @@
-import hadoLogo from "@/assets/hado-logo.svg";
+import hadoLogo from "@/assets/hado-logo-v2.svg";
 import { ExternalLink } from "lucide-react";
 
 const HadoPromoSection = () => {
@@ -32,22 +32,22 @@ const HadoPromoSection = () => {
             {/* Description */}
             <p className="text-lg text-muted-foreground mb-6 max-w-2xl">
               Every LovHack participant gets <span className="text-foreground font-semibold">1 month of HadoSEO Pro</span> absolutely free! 
-              An AI-powered SEO platform that helps you optimize your content, track rankings, and outrank your competition.
+              An SEO platform that helps you pre-render your Lovable site for search engines, optimize your pages, and outrank your competition.
             </p>
             
             {/* Features list */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
               <div className="flex items-center gap-2 text-muted-foreground">
                 <div className="w-2 h-2 rounded-full bg-primary" />
-                <span>AI Content Optimization</span>
+                <span>Static HTML for Crawlers</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <div className="w-2 h-2 rounded-full bg-primary" />
-                <span>Keyword Research</span>
+                <span>Optimize On-page SEO</span>
               </div>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <div className="w-2 h-2 rounded-full bg-primary" />
-                <span>Rank Tracking</span>
+                <span>Enable Social Previews</span>
               </div>
             </div>
             
