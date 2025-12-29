@@ -1,4 +1,4 @@
-import hadoLogo from "@/assets/hado-logo-v2.svg";
+import hadoLogo from "@/assets/hado-logo-v3.png";
 import { ExternalLink } from "lucide-react";
 
 const HadoPromoSection = () => {
