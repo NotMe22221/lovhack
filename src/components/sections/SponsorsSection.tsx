@@ -46,8 +46,8 @@ const SponsorsSection = () => {
           
           {/* Hado Sponsor */}
           <a 
-            href="https://hado.dev" 
-            target="_blank" 
+            href="https://hadoseo.com" 
+            target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
           >
