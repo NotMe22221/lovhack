@@ -3,9 +3,9 @@ import { Zap, Users, Sparkles } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section className="relative py-24 px-4">
+    <section className="relative py-24 px-4" id="about" aria-labelledby="about-title">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-foreground mb-12">
+        <h2 id="about-title" className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-foreground mb-12">
           What is <span className="text-primary">LovHack</span>?
         </h2>
         
