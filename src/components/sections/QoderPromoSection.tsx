@@ -46,7 +46,7 @@ const QoderPromoSection = () => {
             
             {/* CTA Buttons */}
             <div className="flex flex-wrap items-center gap-4">
-              <a href="https://qoder.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <a target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-foreground text-background font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg" href="https://qoder.com/referral?referral_code=Yc4LeTxf67HsC3FWxqWlhyhdsUNwgnMO">
                 Try Qoder
                 <ExternalLink className="w-4 h-4" />
               </a>
