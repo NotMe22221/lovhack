@@ -3,19 +3,22 @@ import CountdownTimer from "../CountdownTimer";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 py-20">
+    <section className="relative min-h-screen flex items-center justify-center px-4 py-20" aria-labelledby="hero-title">
       <div className="text-center max-w-4xl mx-auto">
         {/* Badge */}
         <div 
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 backdrop-blur-md border border-white/50 shadow-glass mb-8 animate-fade-in"
           style={{ animationDelay: '0.1s' }}
+          role="status"
+          aria-label="Event date"
         >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" aria-hidden="true" />
           <span className="text-sm font-medium text-foreground/80">January 2026</span>
         </div>
         
         {/* Main Title */}
         <h1 
+          id="hero-title"
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-4 opacity-0 animate-fade-in"
           style={{ animationDelay: '0.2s' }}
         >

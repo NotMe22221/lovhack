@@ -1,3 +1,6 @@
+# Robots.txt for LovHack
+# https://lovhack.dev
+
 User-agent: Googlebot
 Allow: /
 
@@ -12,3 +15,6 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://lovhack.dev/sitemap.xml
