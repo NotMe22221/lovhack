@@ -7,6 +7,8 @@ import SponsorsSection from "@/components/sections/SponsorsSection";
 import CreaoPromoSection from "@/components/sections/CreaoPromoSection";
 import HadoPromoSection from "@/components/sections/HadoPromoSection";
 import FlootPromoSection from "@/components/sections/FlootPromoSection";
+import LovablePromoSection from "@/components/sections/LovablePromoSection";
+import QoderPromoSection from "@/components/sections/QoderPromoSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
@@ -29,9 +31,11 @@ const Index = () => {
           <HeroSection />
           <AboutSection />
           <DetailsSection />
+          <LovablePromoSection />
           <CreaoPromoSection />
           <HadoPromoSection />
           <FlootPromoSection />
+          <QoderPromoSection />
           <SponsorsSection />
         </main>
         
