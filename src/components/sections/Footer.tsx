@@ -31,7 +31,7 @@ const Footer = () => {
               Discord
             </a>
             <Link 
-              to="/auth"
+              to="/gfdglfdnogrioetireiotoiwe"
               className="text-sm text-foreground/50 hover:text-primary transition-colors"
             >
               Admin

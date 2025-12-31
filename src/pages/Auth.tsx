@@ -17,11 +17,10 @@ const authSchema = z.object({
 });
 
 const Auth = () => {
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user, signIn, signUp } = useAuth();
+  const { user, signIn } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,43 +46,18 @@ const Auth = () => {
     }
 
     try {
-      if (isLogin) {
-        const { error } = await signIn(email, password);
-        if (error) {
-          toast({
-            title: "Login Failed",
-            description: error.message,
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Welcome back!",
-            description: "You have successfully logged in.",
-          });
-        }
+      const { error } = await signIn(email, password);
+      if (error) {
+        toast({
+          title: "Login Failed",
+          description: error.message,
+          variant: "destructive",
+        });
       } else {
-        const { error } = await signUp(email, password);
-        if (error) {
-          if (error.message.includes("already registered")) {
-            toast({
-              title: "Account Exists",
-              description: "This email is already registered. Please log in instead.",
-              variant: "destructive",
-            });
-          } else {
-            toast({
-              title: "Sign Up Failed",
-              description: error.message,
-              variant: "destructive",
-            });
-          }
-        } else {
-          toast({
-            title: "Account Created",
-            description: "You can now log in with your credentials.",
-          });
-          setIsLogin(true);
-        }
+        toast({
+          title: "Welcome back!",
+          description: "You have successfully logged in.",
+        });
       }
     } catch (error) {
       toast({
@@ -121,12 +95,10 @@ const Auth = () => {
                 <span className="text-2xl font-bold text-foreground">LovHack</span>
               </div>
               <h1 className="text-2xl font-bold text-foreground mb-2">
-                {isLogin ? "Welcome Back" : "Create Account"}
+                Admin Login
               </h1>
               <p className="text-muted-foreground">
-                {isLogin
-                  ? "Sign in to access the admin dashboard"
-                  : "Sign up for an admin account"}
+                Sign in to access the admin dashboard
               </p>
             </div>
 
@@ -168,25 +140,9 @@ const Auth = () => {
                 className="w-full glass-button-primary"
                 disabled={isSubmitting}
               >
-                {isSubmitting
-                  ? "Loading..."
-                  : isLogin
-                  ? "Sign In"
-                  : "Create Account"}
+                {isSubmitting ? "Loading..." : "Sign In"}
               </Button>
             </form>
-
-            <div className="mt-6 text-center">
-              <button
-                type="button"
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-              >
-                {isLogin
-                  ? "Don't have an account? Sign up"
-                  : "Already have an account? Sign in"}
-              </button>
-            </div>
           </GlassCard>
         </div>
       </div>
