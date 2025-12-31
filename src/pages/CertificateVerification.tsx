@@ -96,7 +96,7 @@ const CertificateVerification = () => {
       link.href = canvas.toDataURL("image/png");
       link.click();
     };
-    img.src = "/certificate-template.jpg";
+    img.src = "/certificate-template-v2.jpg";
   };
 
   const shareUrl = certificate 
@@ -158,7 +158,7 @@ const CertificateVerification = () => {
                 {/* Template Background */}
                 <div className="relative">
                   <img 
-                    src="/certificate-template.jpg" 
+                    src="/certificate-template-v2.jpg" 
                     alt="Certificate Template"
                     className="w-full h-auto"
                   />
