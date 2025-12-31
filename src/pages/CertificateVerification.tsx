@@ -4,13 +4,19 @@ import { supabase } from "@/integrations/supabase/client";
 import GlassCard from "@/components/GlassCard";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { 
   CheckCircle, 
   XCircle, 
   Heart, 
   ArrowLeft, 
   Download,
-  Share2,
+  ChevronDown,
   Linkedin,
   Twitter,
 } from "lucide-react";
@@ -66,48 +72,75 @@ const CertificateVerification = () => {
     fetchCertificate();
   }, [certificateId]);
 
-  const handleDownload = () => {
-    // Create a canvas to composite the certificate
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    if (!ctx || !certificate) return;
+  const generateCertificateCanvas = (): Promise<HTMLCanvasElement> => {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (!ctx || !certificate) {
+        reject(new Error("Canvas or certificate not available"));
+        return;
+      }
 
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      
-      // Draw template
-      ctx.drawImage(img, 0, 0);
-      
-      // Add recipient name in the blank area (around 38% from top)
-      const nameY = img.height * 0.42;
-      const fontSize = Math.min(72, img.width / 12);
-      ctx.font = `bold ${fontSize}px 'Dancing Script', cursive, serif`;
-      ctx.fillStyle = "#8B4513";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        
+        // Draw template
+        ctx.drawImage(img, 0, 0);
+        
+        // Add recipient name in the blank area (around 38% from top)
+        const nameY = img.height * 0.42;
+        const fontSize = Math.min(72, img.width / 12);
+        ctx.font = `bold ${fontSize}px 'Dancing Script', cursive, serif`;
+        ctx.fillStyle = "#8B4513";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
 
-      // Add verification URL at the bottom (covering the placeholder)
-      const urlY = img.height * 0.97;
-      const urlFontSize = Math.min(16, img.width / 60);
-      ctx.font = `${urlFontSize}px Arial, sans-serif`;
-      ctx.fillStyle = "#FDF5E6"; // Background to cover placeholder
-      ctx.fillRect(0, img.height * 0.955, img.width, img.height * 0.035);
-      ctx.fillStyle = "#666666";
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(`Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`, canvas.width / 2, urlY);
+        // Add verification URL at the bottom (black text, no background)
+        const urlY = img.height * 0.965;
+        const urlFontSize = Math.min(14, img.width / 70);
+        ctx.font = `${urlFontSize}px Arial, sans-serif`;
+        ctx.fillStyle = "#333333";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(`Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`, canvas.width / 2, urlY);
 
-      // Download
-      const link = document.createElement("a");
-      link.download = `LovHack2026-Certificate-${certificate.recipient_name.replace(/\s+/g, "-")}.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    };
-    img.src = "/certificate-template-v2.jpg";
+        resolve(canvas);
+      };
+      img.onerror = () => reject(new Error("Failed to load image"));
+      img.src = "/certificate-template-v2.jpg";
+    });
+  };
+
+  const handleDownload = async (format: "png" | "jpeg" | "pdf") => {
+    if (!certificate) return;
+
+    try {
+      const canvas = await generateCertificateCanvas();
+      const fileName = `LovHack2026-Certificate-${certificate.recipient_name.replace(/\s+/g, "-")}`;
+
+      if (format === "pdf") {
+        const { jsPDF } = await import("jspdf");
+        const imgData = canvas.toDataURL("image/jpeg", 0.95);
+        const pdf = new jsPDF({
+          orientation: "landscape",
+          unit: "px",
+          format: [canvas.width, canvas.height],
+        });
+        pdf.addImage(imgData, "JPEG", 0, 0, canvas.width, canvas.height);
+        pdf.save(`${fileName}.pdf`);
+      } else {
+        const link = document.createElement("a");
+        link.download = `${fileName}.${format}`;
+        link.href = canvas.toDataURL(`image/${format}`, format === "jpeg" ? 0.95 : 1);
+        link.click();
+      }
+    } catch (error) {
+      console.error("Error generating certificate:", error);
+    }
   };
 
   const shareUrl = certificate 
@@ -193,18 +226,15 @@ const CertificateVerification = () => {
                     className="absolute left-0 right-0 flex items-center justify-center"
                     style={{ bottom: "2.5%" }}
                   >
-                    <a 
-                      href={`https://lovhack.dev/certificate/${certificate?.certificate_id}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs sm:text-sm px-4 bg-[#FDF5E6] hover:underline"
+                    <span 
+                      className="text-xs sm:text-sm px-4"
                       style={{ 
-                        color: "#666666",
+                        color: "#333333",
                         fontFamily: "Arial, sans-serif",
                       }}
                     >
                       Certificate Verification URL : https://lovhack.dev/certificate/{certificate?.certificate_id}
-                    </a>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -220,13 +250,26 @@ const CertificateVerification = () => {
               {/* Action Buttons */}
               <GlassCard hover={false} className="!p-4">
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    onClick={handleDownload}
-                    className="flex-1 gap-2"
-                  >
-                    <Download className="w-4 h-4" />
-                    Download Certificate
-                  </Button>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button className="flex-1 gap-2">
+                        <Download className="w-4 h-4" />
+                        Download Certificate
+                        <ChevronDown className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => handleDownload("png")}>
+                        Download as PNG
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleDownload("jpeg")}>
+                        Download as JPEG
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => handleDownload("pdf")}>
+                        Download as PDF
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
                   
                   <Button 
                     variant="outline"
