@@ -99,14 +99,24 @@ const CertificateVerification = () => {
         ctx.textBaseline = "middle";
         ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
 
-        // Add verification URL at the bottom (black text, no background)
-        const urlY = img.height * 0.965;
+        // Cover the placeholder text with background, then add real URL
+        const urlY = img.height * 0.962;
         const urlFontSize = Math.min(14, img.width / 70);
+        const urlText = `Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`;
+        
+        // Measure text to create proper background
         ctx.font = `${urlFontSize}px Arial, sans-serif`;
+        const textWidth = ctx.measureText(urlText).width;
+        
+        // Draw background rectangle to cover placeholder
+        ctx.fillStyle = "#FDF5E6";
+        ctx.fillRect(canvas.width / 2 - textWidth / 2 - 10, urlY - urlFontSize / 2 - 4, textWidth + 20, urlFontSize + 8);
+        
+        // Draw the real URL text
         ctx.fillStyle = "#333333";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(`Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`, canvas.width / 2, urlY);
+        ctx.fillText(urlText, canvas.width / 2, urlY);
 
         resolve(canvas);
       };
@@ -221,16 +231,17 @@ const CertificateVerification = () => {
                       {certificate?.recipient_name}
                     </span>
                   </div>
-                  {/* Overlay Verification URL at the bottom to replace placeholder */}
+                  {/* Overlay Verification URL at the bottom to cover the placeholder */}
                   <div 
                     className="absolute left-0 right-0 flex items-center justify-center"
-                    style={{ bottom: "2.5%" }}
+                    style={{ bottom: "3.8%" }}
                   >
                     <span 
-                      className="text-xs sm:text-sm px-4"
+                      className="text-xs sm:text-sm px-6 py-1"
                       style={{ 
                         color: "#333333",
                         fontFamily: "Arial, sans-serif",
+                        backgroundColor: "#FDF5E6",
                       }}
                     >
                       Certificate Verification URL : https://lovhack.dev/certificate/{certificate?.certificate_id}
