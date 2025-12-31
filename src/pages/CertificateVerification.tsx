@@ -81,20 +81,19 @@ const CertificateVerification = () => {
       // Draw template
       ctx.drawImage(img, 0, 0);
       
-      // Add participant name
-      ctx.font = "bold 72px 'Dancing Script', cursive, serif";
+      // Cover the "participant" text with background color
+      const coverY = img.height * 0.40;
+      const coverHeight = img.height * 0.10;
+      ctx.fillStyle = "#f5f0e6";
+      ctx.fillRect(img.width * 0.20, coverY, img.width * 0.60, coverHeight);
+      
+      // Add recipient name over the covered area
+      const fontSize = Math.min(72, img.width / 15);
+      ctx.font = `bold ${fontSize}px 'Dancing Script', cursive, serif`;
       ctx.fillStyle = "#8B4513";
       ctx.textAlign = "center";
-      ctx.fillText(certificate.recipient_name, canvas.width / 2, 430);
-      
-      // Add verification URL
-      ctx.font = "14px Arial, sans-serif";
-      ctx.fillStyle = "#666666";
-      ctx.fillText(
-        `https://lovhack.dev/certificate/${certificate.certificate_id}`,
-        canvas.width / 2,
-        880
-      );
+      ctx.textBaseline = "middle";
+      ctx.fillText(certificate.recipient_name, canvas.width / 2, coverY + coverHeight / 2);
 
       // Download
       const link = document.createElement("a");
@@ -168,17 +167,26 @@ const CertificateVerification = () => {
                     alt="Certificate Template"
                     className="w-full h-auto"
                   />
+                  {/* White box to cover "participant" text */}
+                  <div 
+                    className="absolute bg-[#f5f0e6]"
+                    style={{ 
+                      top: "40%",
+                      left: "20%",
+                      right: "20%",
+                      height: "10%",
+                    }}
+                  />
                   {/* Overlay Name */}
                   <div 
-                    className="absolute inset-0 flex items-center justify-center"
-                    style={{ paddingTop: "18%", paddingBottom: "35%" }}
+                    className="absolute left-0 right-0 flex items-center justify-center"
+                    style={{ top: "40%" }}
                   >
                     <span 
-                      className="text-4xl md:text-5xl lg:text-6xl font-bold"
+                      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center px-4"
                       style={{ 
                         fontFamily: "'Dancing Script', cursive, serif",
                         color: "#8B4513",
-                        textShadow: "1px 1px 2px rgba(0,0,0,0.1)",
                       }}
                     >
                       {certificate?.recipient_name}
