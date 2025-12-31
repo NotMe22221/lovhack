@@ -158,10 +158,14 @@ serve(async (req) => {
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error: unknown) {
+    // Log full details server-side for debugging
     console.error("Error in generate-certificate function:", error);
-    const errorMessage = error instanceof Error ? error.message : "Internal server error";
+    
+    // Return generic error to client (never expose internal error details)
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ 
+        error: "An unexpected error occurred. Please try again or contact support if the issue persists." 
+      }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
