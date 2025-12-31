@@ -3,7 +3,17 @@ import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import GlassCard from "@/components/GlassCard";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import { CheckCircle, XCircle, Heart, ArrowLeft, Shield, Calendar, User, Award, Building, Hash } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { 
+  CheckCircle, 
+  XCircle, 
+  Heart, 
+  ArrowLeft, 
+  Download,
+  Share2,
+  Linkedin,
+  Twitter,
+} from "lucide-react";
 
 interface Certificate {
   certificate_id: string;
@@ -56,6 +66,60 @@ const CertificateVerification = () => {
     fetchCertificate();
   }, [certificateId]);
 
+  const handleDownload = () => {
+    // Create a canvas to composite the certificate
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    if (!ctx || !certificate) return;
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      
+      // Draw template
+      ctx.drawImage(img, 0, 0);
+      
+      // Add participant name
+      ctx.font = "bold 72px 'Dancing Script', cursive, serif";
+      ctx.fillStyle = "#8B4513";
+      ctx.textAlign = "center";
+      ctx.fillText(certificate.recipient_name, canvas.width / 2, 430);
+      
+      // Add verification URL
+      ctx.font = "14px Arial, sans-serif";
+      ctx.fillStyle = "#666666";
+      ctx.fillText(
+        `https://lovhack.dev/certificate/${certificate.certificate_id}`,
+        canvas.width / 2,
+        880
+      );
+
+      // Download
+      const link = document.createElement("a");
+      link.download = `LovHack2026-Certificate-${certificate.recipient_name.replace(/\s+/g, "-")}.png`;
+      link.href = canvas.toDataURL("image/png");
+      link.click();
+    };
+    img.src = "/certificate-template.jpg";
+  };
+
+  const shareUrl = certificate 
+    ? `https://lovhack.dev/certificate/${certificate.certificate_id}` 
+    : "";
+
+  const shareOnLinkedIn = () => {
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+    window.open(url, "_blank");
+  };
+
+  const shareOnTwitter = () => {
+    const text = `I participated in LovHack 2026 Hackathon! Check out my certificate:`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <AnimatedBackground />
@@ -94,61 +158,98 @@ const CertificateVerification = () => {
               </p>
             </GlassCard>
           ) : (
-            <GlassCard className="w-full max-w-lg" hover={false}>
-              {/* Logo */}
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <Heart className="w-8 h-8 text-primary fill-primary" />
-                <span className="text-2xl font-bold text-foreground">LovHack</span>
+            <div className="w-full max-w-4xl space-y-6">
+              {/* Certificate Display */}
+              <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden">
+                {/* Template Background */}
+                <div className="relative">
+                  <img 
+                    src="/certificate-template.jpg" 
+                    alt="Certificate Template"
+                    className="w-full h-auto"
+                  />
+                  {/* Overlay Name */}
+                  <div 
+                    className="absolute inset-0 flex items-center justify-center"
+                    style={{ paddingTop: "18%", paddingBottom: "35%" }}
+                  >
+                    <span 
+                      className="text-4xl md:text-5xl lg:text-6xl font-bold"
+                      style={{ 
+                        fontFamily: "'Dancing Script', cursive, serif",
+                        color: "#8B4513",
+                        textShadow: "1px 1px 2px rgba(0,0,0,0.1)",
+                      }}
+                    >
+                      {certificate?.recipient_name}
+                    </span>
+                  </div>
+                </div>
               </div>
 
               {/* Valid Badge */}
-              <div className="flex justify-center mb-6">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="font-semibold text-green-600">VALID CERTIFICATE</span>
+              <div className="flex justify-center">
+                <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30 backdrop-blur-sm">
+                  <CheckCircle className="w-6 h-6 text-green-500" />
+                  <span className="font-semibold text-green-600 text-lg">VERIFIED CERTIFICATE</span>
                 </div>
               </div>
 
+              {/* Action Buttons */}
+              <GlassCard hover={false} className="!p-4">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button 
+                    onClick={handleDownload}
+                    className="flex-1 gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download Certificate
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={shareOnLinkedIn}
+                    className="flex-1 gap-2"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    Add to LinkedIn
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={shareOnTwitter}
+                    className="flex-1 gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Share on X
+                  </Button>
+                </div>
+              </GlassCard>
+
               {/* Certificate Details */}
-              <div className="space-y-4">
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50">
-                  <User className="w-5 h-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Recipient</p>
+              <GlassCard hover={false}>
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <Heart className="w-6 h-6 text-primary fill-primary" />
+                  <span className="text-xl font-bold text-foreground">Certificate Details</span>
+                </div>
+                
+                <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                  <div className="p-3 rounded-lg bg-secondary/50">
+                    <p className="text-muted-foreground">Recipient</p>
                     <p className="font-medium text-foreground">{certificate?.recipient_name}</p>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50">
-                  <Award className="w-5 h-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Certificate Type</p>
+                  <div className="p-3 rounded-lg bg-secondary/50">
+                    <p className="text-muted-foreground">Certificate Type</p>
                     <p className="font-medium text-foreground">
                       {certificateTypeLabels[certificate?.certificate_type || ""] || certificate?.certificate_type}
                     </p>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50">
-                  <Building className="w-5 h-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Event</p>
+                  <div className="p-3 rounded-lg bg-secondary/50">
+                    <p className="text-muted-foreground">Event</p>
                     <p className="font-medium text-foreground">{certificate?.hackathon_name}</p>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50">
-                  <Shield className="w-5 h-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Issued By</p>
-                    <p className="font-medium text-foreground">{certificate?.issuer_name}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50">
-                  <Calendar className="w-5 h-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Issue Date</p>
+                  <div className="p-3 rounded-lg bg-secondary/50">
+                    <p className="text-muted-foreground">Issue Date</p>
                     <p className="font-medium text-foreground">
                       {certificate?.issued_at
                         ? new Date(certificate.issued_at).toLocaleDateString("en-US", {
@@ -161,24 +262,14 @@ const CertificateVerification = () => {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3 p-3 rounded-xl bg-secondary/50">
-                  <Hash className="w-5 h-5 text-primary mt-0.5" />
-                  <div>
-                    <p className="text-sm text-muted-foreground">Certificate ID</p>
-                    <p className="font-mono text-sm text-foreground break-all">
-                      {certificate?.certificate_id}
-                    </p>
-                  </div>
+                <div className="mt-4 p-3 rounded-lg bg-secondary/50">
+                  <p className="text-muted-foreground text-sm">Certificate ID</p>
+                  <p className="font-mono text-xs text-foreground break-all">
+                    {certificate?.certificate_id}
+                  </p>
                 </div>
-              </div>
-
-              {/* Verification Message */}
-              <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20 text-center">
-                <p className="text-sm text-muted-foreground">
-                  This certificate has been verified against official LovHack records.
-                </p>
-              </div>
-            </GlassCard>
+              </GlassCard>
+            </div>
           )}
         </div>
       </div>

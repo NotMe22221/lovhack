@@ -58,6 +58,8 @@ const Auth = () => {
           title: "Welcome back!",
           description: "You have successfully logged in.",
         });
+        // Navigate immediately after successful login
+        navigate("/admin/certificates");
       }
     } catch (error) {
       toast({
