@@ -6,10 +6,8 @@ import AnimatedBackground from "@/components/AnimatedBackground";
 import { CheckCircle, XCircle, Heart, ArrowLeft, Shield, Calendar, User, Award, Building, Hash } from "lucide-react";
 
 interface Certificate {
-  id: string;
   certificate_id: string;
   recipient_name: string;
-  recipient_email: string;
   certificate_type: string;
   hackathon_name: string;
   issuer_name: string;
@@ -43,17 +41,14 @@ const CertificateVerification = () => {
         setIsLoading(false);
         return;
       }
-
+      // Use RPC function for public verification (doesn't expose email)
       const { data, error } = await supabase
-        .from("certificates")
-        .select("*")
-        .eq("certificate_id", certificateId)
-        .maybeSingle();
+        .rpc("verify_certificate", { p_certificate_id: certificateId });
 
-      if (error || !data) {
+      if (error || !data || data.length === 0) {
         setNotFound(true);
       } else {
-        setCertificate(data);
+        setCertificate(data[0]);
       }
       setIsLoading(false);
     };
