@@ -100,7 +100,7 @@ const CertificateVerification = () => {
         ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
 
         // Cover the placeholder text with background, then add real URL
-        const urlY = img.height * 0.962;
+        const urlY = img.height * 0.978;
         const urlFontSize = Math.min(14, img.width / 70);
         const urlText = `Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`;
         
@@ -110,7 +110,7 @@ const CertificateVerification = () => {
         
         // Draw background rectangle to cover placeholder
         ctx.fillStyle = "#FDF5E6";
-        ctx.fillRect(canvas.width / 2 - textWidth / 2 - 10, urlY - urlFontSize / 2 - 4, textWidth + 20, urlFontSize + 8);
+        ctx.fillRect(canvas.width / 2 - textWidth / 2 - 20, urlY - urlFontSize - 2, textWidth + 40, urlFontSize * 2 + 4);
         
         // Draw the real URL text
         ctx.fillStyle = "#333333";
@@ -234,10 +234,10 @@ const CertificateVerification = () => {
                   {/* Overlay Verification URL at the bottom to cover the placeholder */}
                   <div 
                     className="absolute left-0 right-0 flex items-center justify-center"
-                    style={{ bottom: "3.8%" }}
+                    style={{ bottom: "2.2%" }}
                   >
                     <span 
-                      className="text-xs sm:text-sm px-6 py-1"
+                      className="text-xs sm:text-sm px-8 py-2"
                       style={{ 
                         color: "#333333",
                         fontFamily: "Arial, sans-serif",
