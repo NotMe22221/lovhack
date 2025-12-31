@@ -56,18 +56,48 @@ serve(async (req) => {
     // Parse request body
     const { recipientName, recipientEmail, certificateType } = await req.json();
 
-    if (!recipientName || !recipientEmail || !certificateType) {
+    // Comprehensive input validation
+    const validCertificateTypes = [
+      'participant', 'winner_1', 'winner_2', 'winner_3', 'winner_4',
+      'winner_5', 'winner_6', 'winner_7', 'winner_8', 'winner_9', 'winner_10'
+    ];
+
+    // Validate recipientName
+    if (!recipientName || typeof recipientName !== 'string' || 
+        recipientName.trim().length === 0 || recipientName.length > 100) {
       return new Response(
-        JSON.stringify({ error: "Missing required fields: recipientName, recipientEmail, certificateType" }),
+        JSON.stringify({ error: "Invalid recipient name: must be 1-100 characters" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    // Validate recipientEmail
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!recipientEmail || typeof recipientEmail !== 'string' ||
+        !emailRegex.test(recipientEmail) || recipientEmail.length > 255) {
+      return new Response(
+        JSON.stringify({ error: "Invalid email address" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate certificateType
+    if (!validCertificateTypes.includes(certificateType)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid certificate type" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Trim and normalize inputs
+    const trimmedName = recipientName.trim();
+    const trimmedEmail = recipientEmail.trim().toLowerCase();
 
     // Check for duplicate certificate
     const { data: existingCert } = await supabase
       .from("certificates")
       .select("id")
-      .eq("recipient_email", recipientEmail)
+      .eq("recipient_email", trimmedEmail)
       .eq("certificate_type", certificateType)
       .maybeSingle();
 
@@ -87,8 +117,8 @@ serve(async (req) => {
       .from("certificates")
       .insert({
         certificate_id: certificateId,
-        recipient_name: recipientName,
-        recipient_email: recipientEmail,
+        recipient_name: trimmedName,
+        recipient_email: trimmedEmail,
         certificate_type: certificateType,
         hackathon_name: "LovHack 2026",
         issuer_name: "LovHack Team",
@@ -106,8 +136,7 @@ serve(async (req) => {
 
     console.log("Certificate created successfully:", {
       certificateId,
-      recipientName,
-      recipientEmail,
+      recipientName: trimmedName,
       certificateType,
     });
 
@@ -119,8 +148,8 @@ serve(async (req) => {
         certificate: {
           id: certificate.id,
           certificateId: certificateId,
-          recipientName: recipientName,
-          recipientEmail: recipientEmail,
+          recipientName: trimmedName,
+          recipientEmail: trimmedEmail,
           certificateType: certificateType,
           verificationUrl: verificationUrl,
           issuedAt: certificate.issued_at,
