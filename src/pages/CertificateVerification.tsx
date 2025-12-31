@@ -81,19 +81,14 @@ const CertificateVerification = () => {
       // Draw template
       ctx.drawImage(img, 0, 0);
       
-      // Cover the "participant" text with background color
-      const coverY = img.height * 0.40;
-      const coverHeight = img.height * 0.10;
-      ctx.fillStyle = "#f5f0e6";
-      ctx.fillRect(img.width * 0.20, coverY, img.width * 0.60, coverHeight);
-      
-      // Add recipient name over the covered area
-      const fontSize = Math.min(72, img.width / 15);
+      // Add recipient name in the blank area (around 38% from top)
+      const nameY = img.height * 0.42;
+      const fontSize = Math.min(72, img.width / 12);
       ctx.font = `bold ${fontSize}px 'Dancing Script', cursive, serif`;
       ctx.fillStyle = "#8B4513";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(certificate.recipient_name, canvas.width / 2, coverY + coverHeight / 2);
+      ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
 
       // Download
       const link = document.createElement("a");
@@ -167,20 +162,10 @@ const CertificateVerification = () => {
                     alt="Certificate Template"
                     className="w-full h-auto"
                   />
-                  {/* White box to cover "participant" text */}
-                  <div 
-                    className="absolute bg-[#f5f0e6]"
-                    style={{ 
-                      top: "40%",
-                      left: "20%",
-                      right: "20%",
-                      height: "10%",
-                    }}
-                  />
-                  {/* Overlay Name */}
+                  {/* Overlay Name in blank area */}
                   <div 
                     className="absolute left-0 right-0 flex items-center justify-center"
-                    style={{ top: "40%" }}
+                    style={{ top: "38%" }}
                   >
                     <span 
                       className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center px-4"
