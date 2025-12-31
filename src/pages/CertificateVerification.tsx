@@ -90,6 +90,17 @@ const CertificateVerification = () => {
       ctx.textBaseline = "middle";
       ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
 
+      // Add verification URL at the bottom (covering the placeholder)
+      const urlY = img.height * 0.97;
+      const urlFontSize = Math.min(16, img.width / 60);
+      ctx.font = `${urlFontSize}px Arial, sans-serif`;
+      ctx.fillStyle = "#FDF5E6"; // Background to cover placeholder
+      ctx.fillRect(0, img.height * 0.955, img.width, img.height * 0.035);
+      ctx.fillStyle = "#666666";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(`Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`, canvas.width / 2, urlY);
+
       // Download
       const link = document.createElement("a");
       link.download = `LovHack2026-Certificate-${certificate.recipient_name.replace(/\s+/g, "-")}.png`;
@@ -176,6 +187,24 @@ const CertificateVerification = () => {
                     >
                       {certificate?.recipient_name}
                     </span>
+                  </div>
+                  {/* Overlay Verification URL at the bottom to replace placeholder */}
+                  <div 
+                    className="absolute left-0 right-0 flex items-center justify-center"
+                    style={{ bottom: "2.5%" }}
+                  >
+                    <a 
+                      href={`https://lovhack.dev/certificate/${certificate?.certificate_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs sm:text-sm px-4 bg-[#FDF5E6] hover:underline"
+                      style={{ 
+                        color: "#666666",
+                        fontFamily: "Arial, sans-serif",
+                      }}
+                    >
+                      Certificate Verification URL : https://lovhack.dev/certificate/{certificate?.certificate_id}
+                    </a>
                   </div>
                 </div>
               </div>
