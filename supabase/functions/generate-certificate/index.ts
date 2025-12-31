@@ -7,6 +7,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Certificate template configuration
+const TEMPLATE_CONFIG = {
+  // Position for participant name (center of where "participant" text is)
+  nameX: 650,  // Center X position
+  nameY: 400,  // Y position for name
+  fontSize: 72,
+  fontFamily: "Dancing Script, cursive",
+  textColor: "#2c3e50",
+};
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -112,6 +122,14 @@ serve(async (req) => {
     const certificateId = crypto.randomUUID();
     const verificationUrl = `https://lovhack.dev/certificate/${certificateId}`;
 
+    // Generate certificate image with participant name using SVG overlay
+    const certificateImageUrl = await generateCertificateImage(
+      supabase,
+      trimmedName,
+      certificateId,
+      verificationUrl
+    );
+
     // Store certificate in database
     const { data: certificate, error: insertError } = await supabase
       .from("certificates")
@@ -138,10 +156,10 @@ serve(async (req) => {
       certificateId,
       recipientName: trimmedName,
       certificateType,
+      imageUrl: certificateImageUrl,
     });
 
     // Return success response
-    // NOTE: PDF generation with template overlay will be implemented when templates are uploaded
     return new Response(
       JSON.stringify({
         success: true,
@@ -152,6 +170,7 @@ serve(async (req) => {
           recipientEmail: trimmedEmail,
           certificateType: certificateType,
           verificationUrl: verificationUrl,
+          imageUrl: certificateImageUrl,
           issuedAt: certificate.issued_at,
         },
       }),
@@ -170,3 +189,79 @@ serve(async (req) => {
     );
   }
 });
+
+async function generateCertificateImage(
+  supabase: any,
+  recipientName: string,
+  certificateId: string,
+  verificationUrl: string
+): Promise<string> {
+  // Create an SVG overlay with the recipient name positioned over the template
+  // The template image will be embedded and the name overlaid on top
+  
+  const templateWidth = 1300;
+  const templateHeight = 919;
+  
+  // Create SVG with the name positioned in the correct location
+  const svgContent = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${templateWidth}" height="${templateHeight}" viewBox="0 0 ${templateWidth} ${templateHeight}">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&amp;display=swap');
+      .name-text {
+        font-family: 'Dancing Script', cursive;
+        font-size: 72px;
+        font-weight: 700;
+        fill: #8B4513;
+        text-anchor: middle;
+      }
+      .verification-text {
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        fill: #666666;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  
+  <!-- Participant name - positioned where "participant" placeholder is -->
+  <text x="${templateWidth / 2}" y="430" class="name-text">${escapeXml(recipientName)}</text>
+  
+  <!-- Verification URL at the bottom -->
+  <text x="${templateWidth / 2}" y="880" class="verification-text">${escapeXml(verificationUrl)}</text>
+</svg>`;
+
+  // Convert SVG to bytes
+  const svgBytes = new TextEncoder().encode(svgContent);
+  
+  // Upload the SVG overlay to storage
+  const overlayPath = `overlays/${certificateId}.svg`;
+  const { error: uploadError } = await supabase.storage
+    .from("certificates")
+    .upload(overlayPath, svgBytes, {
+      contentType: "image/svg+xml",
+      upsert: true,
+    });
+
+  if (uploadError) {
+    console.error("Error uploading certificate overlay:", uploadError);
+    throw new Error("Failed to generate certificate image");
+  }
+
+  // Get public URL for the overlay
+  const { data: urlData } = supabase.storage
+    .from("certificates")
+    .getPublicUrl(overlayPath);
+
+  return urlData.publicUrl;
+}
+
+// Helper function to escape XML special characters
+function escapeXml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
