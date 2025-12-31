@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   
@@ -28,6 +30,12 @@ const Footer = () => {
             >
               Discord
             </a>
+            <Link 
+              to="/auth"
+              className="text-sm text-foreground/50 hover:text-primary transition-colors"
+            >
+              Admin
+            </Link>
           </nav>
           <p className="mt-6 text-xs text-foreground/40">
             © {currentYear} LovHack. All rights reserved.
