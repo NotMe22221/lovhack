@@ -24,7 +24,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/admin" element={<Auth />} />
+              <Route path="/oejofwfdshfhowoadminloginpageiiitf" element={<Auth />} />
               <Route
                 path="/admin/certificates"
                 element={
