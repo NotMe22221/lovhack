@@ -28,7 +28,7 @@ serve(async (req) => {
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
-    // Get auth header for user verification
+    // Get authenticated user from Supabase JWT (automatically validated by verify_jwt = true)
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) {
       return new Response(
@@ -37,7 +37,7 @@ serve(async (req) => {
       );
     }
 
-    // Verify user and check admin role
+    // Get user from the already-validated JWT token
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabase.auth.getUser(token);
 
@@ -48,7 +48,7 @@ serve(async (req) => {
       );
     }
 
-    // Check admin role
+    // Check admin role (additional authorization layer)
     const { data: roleData } = await supabase
       .from("user_roles")
       .select("role")
