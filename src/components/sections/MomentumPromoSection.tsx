@@ -1,9 +1,7 @@
 import momentumLogo from "@/assets/momentum-logo.png";
 import { ExternalLink } from "lucide-react";
-
 const MomentumPromoSection = () => {
-  return (
-    <section className="relative py-24 px-4">
+  return <section className="relative py-24 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="relative rounded-3xl bg-gradient-to-br from-foreground/5 via-foreground/10 to-foreground/5 backdrop-blur-xl border border-foreground/10 p-8 md:p-12 overflow-hidden">
           {/* Decorative elements */}
@@ -18,11 +16,7 @@ const MomentumPromoSection = () => {
             
             {/* Logo and Title */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
-              <img 
-                src={momentumLogo} 
-                alt="MOMENTUM - AI Accelerator" 
-                className="h-10 md:h-12 w-auto rounded-xl" 
-              />
+              <img src={momentumLogo} alt="MOMENTUM - AI Accelerator" className="h-10 md:h-12 w-auto rounded-xl" />
               <div className="h-8 w-px bg-foreground/20 hidden sm:block" />
               <h3 className="text-2xl md:text-3xl font-bold text-foreground">
                 $50 Off First Sprint
@@ -53,12 +47,7 @@ const MomentumPromoSection = () => {
             
             {/* CTA Button */}
             <div className="flex flex-wrap items-center gap-4">
-              <a 
-                href="https://www.yourmomentum.co/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
-              >
+              <a target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-yellow-500 text-white font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg" href="https://niklasmey.com/momentum-builders">
                 Learn More
                 <ExternalLink className="w-4 h-4" />
               </a>
@@ -66,8 +55,6 @@ const MomentumPromoSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default MomentumPromoSection;
