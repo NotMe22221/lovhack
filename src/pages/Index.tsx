@@ -9,6 +9,7 @@ import HadoPromoSection from "@/components/sections/HadoPromoSection";
 import FlootPromoSection from "@/components/sections/FlootPromoSection";
 import LovablePromoSection from "@/components/sections/LovablePromoSection";
 import QoderPromoSection from "@/components/sections/QoderPromoSection";
+import MomentumPromoSection from "@/components/sections/MomentumPromoSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
@@ -40,6 +41,7 @@ const Index = () => {
           </section>
           <aside aria-label="Sponsor Offers">
             <LovablePromoSection />
+            <MomentumPromoSection />
             <CreaoPromoSection />
             <HadoPromoSection />
             <FlootPromoSection />

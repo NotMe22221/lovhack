@@ -4,6 +4,7 @@ import hadoLogo from "@/assets/hado-logo-v3.png";
 import flootLogo from "@/assets/floot-logo.png";
 import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
+import momentumLogo from "@/assets/momentum-logo.png";
 
 const SponsorsSection = () => {
   return (
@@ -104,6 +105,21 @@ const SponsorsSection = () => {
               src={dualiteLogo} 
               alt="Dualite - Design to code platform" 
               className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+          
+          {/* Momentum Sponsor */}
+          <a 
+            href="https://www.yourmomentum.co/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/10 to-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img 
+              src={momentumLogo} 
+              alt="MOMENTUM - AI Accelerator for Vibe-Coders" 
+              className="h-12 md:h-16 w-auto relative z-10 rounded-xl"
             />
           </a>
         </div>
