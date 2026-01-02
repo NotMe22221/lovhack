@@ -22,7 +22,7 @@ const HeroSection = () => {
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-4 opacity-0 animate-fade-in"
           style={{ animationDelay: '0.2s' }}
         >
-          LovHack
+          LovHack 2026
           <span className="block text-primary">Hackathon</span>
         </h1>
         

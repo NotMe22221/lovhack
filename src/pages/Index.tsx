@@ -19,9 +19,9 @@ const Index = () => {
         <title>LovHack 2026 — 48 Hour Online Hackathon | Build Real Apps</title>
         <meta 
           name="description" 
-          content="Join LovHack, a 48-hour build-first hackathon. Create real web apps with AI tools, win prizes, and ship something amazing. January 2-4, 2026." 
+          content="Join LovHack 2026, the ultimate 48-hour online hackathon for developers. LovHack brings together web app builders to create real apps with AI tools. January 2-4, 2026 at lovhack.dev" 
         />
-        <meta name="keywords" content="hackathon, web development, coding, AI, LovHack, 48 hour hackathon, online hackathon, build apps, 2026 hackathon" />
+        <meta name="keywords" content="LovHack, LovHack hackathon, LovHack 2026, LovHack 48-hour online hackathon, LovHack dev tools, LovHack developers, LovHack web apps, lovhack.dev, hackathon, web development, coding, AI, 48 hour hackathon, online hackathon, build apps, January 2026 hackathon, vibe coding hackathon" />
         <link rel="canonical" href="https://lovhack.dev" />
       </Helmet>
       

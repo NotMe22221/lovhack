@@ -12,8 +12,8 @@ const AboutSection = () => {
         <GlassCard className="text-center">
           <div className="space-y-6">
             <p className="text-lg sm:text-xl text-foreground/80 leading-relaxed">
-              LovHack is a <strong className="text-foreground">48-hour build-first hackathon</strong> focused 
-              on shipping real web applications. No fluff, no long talks — just building.
+              <strong className="text-foreground">LovHack 2026</strong> is a <strong className="text-foreground">48-hour online hackathon</strong> focused 
+              on shipping real web applications. LovHack developers come together to build web apps with AI-assisted workflows — no fluff, no long talks, just building at <strong className="text-foreground">lovhack.dev</strong>.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 pt-4">
@@ -32,8 +32,8 @@ const AboutSection = () => {
             </div>
             
             <p className="text-base text-foreground/60 pt-2">
-              Whether you're a seasoned developer or just starting out, LovHack is your chance to 
-              create something real in a supportive, high-energy environment.
+              Whether you're a seasoned developer or just starting out, the LovHack hackathon is your chance to 
+              create something real in a supportive, high-energy environment. Join LovHack 2026 and build your next web app!
             </p>
           </div>
         </GlassCard>
