@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import lovhackLogo from "@/assets/lovhack-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,9 +24,8 @@ const Navbar = () => {
         <div className="bg-white/60 backdrop-blur-xl border border-white/50 rounded-2xl shadow-glass px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <span className="text-2xl">💖</span>
-              <span className="font-bold text-xl text-foreground">LovHack</span>
+            <Link to="/" className="flex items-center">
+              <img src={lovhackLogo} alt="LovHack" className="h-10 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
