@@ -5,6 +5,7 @@ import NewHeroSection from "@/components/sections/NewHeroSection";
 import WhatIsLovHackSection from "@/components/sections/WhatIsLovHackSection";
 import WhoIsForSection from "@/components/sections/WhoIsForSection";
 import Season1PreviewSection from "@/components/sections/Season1PreviewSection";
+import WinnersSection from "@/components/sections/WinnersSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import DiscordCTASection from "@/components/sections/DiscordCTASection";
 import SponsorsPreviewSection from "@/components/sections/SponsorsPreviewSection";
@@ -46,6 +47,7 @@ const Index = () => {
         <WhatIsLovHackSection />
         <WhoIsForSection />
         <Season1PreviewSection />
+        <WinnersSection />
         <UpcomingEventsSection />
         <SponsorsPreviewSection />
         <FAQSection />
