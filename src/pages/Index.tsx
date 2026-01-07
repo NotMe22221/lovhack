@@ -1,59 +1,58 @@
 import { Helmet } from "react-helmet-async";
+import Navbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackground";
-import HeroSection from "@/components/sections/HeroSection";
-import AboutSection from "@/components/sections/AboutSection";
-import DetailsSection from "@/components/sections/DetailsSection";
-import SponsorsSection from "@/components/sections/SponsorsSection";
-import CreaoPromoSection from "@/components/sections/CreaoPromoSection";
-import HadoPromoSection from "@/components/sections/HadoPromoSection";
-import FlootPromoSection from "@/components/sections/FlootPromoSection";
-import LovablePromoSection from "@/components/sections/LovablePromoSection";
-import QoderPromoSection from "@/components/sections/QoderPromoSection";
-import MomentumPromoSection from "@/components/sections/MomentumPromoSection";
+import NewHeroSection from "@/components/sections/NewHeroSection";
+import WhatIsLovHackSection from "@/components/sections/WhatIsLovHackSection";
+import WhoIsForSection from "@/components/sections/WhoIsForSection";
+import Season1PreviewSection from "@/components/sections/Season1PreviewSection";
+import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
+import DiscordCTASection from "@/components/sections/DiscordCTASection";
+import SponsorsPreviewSection from "@/components/sections/SponsorsPreviewSection";
+import FAQSection from "@/components/sections/FAQSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
   return (
     <>
       <Helmet>
-        <title>LovHack 2026 — 48 Hour Online Hackathon | Build Real Apps</title>
-        <meta 
-          name="description" 
-          content="Join LovHack 2026, the ultimate 48-hour online hackathon for developers. LovHack brings together web app builders to create real apps with AI tools. January 2-4, 2026 at lovhack.dev" 
+        <title>LovHack | Build Something Real. No Experience Required.</title>
+        <meta
+          name="description"
+          content="LovHack is a beginner-friendly online hackathon where developers, designers, and first-time builders ship real projects together in 48 hours. Join 500+ builders today."
         />
-        <meta name="keywords" content="LovHack, LovHack hackathon, LovHack 2026, LovHack 48-hour online hackathon, LovHack dev tools, LovHack developers, LovHack web apps, lovhack.dev, hackathon, web development, coding, AI, 48 hour hackathon, online hackathon, build apps, January 2026 hackathon, vibe coding hackathon" />
+        <meta
+          name="keywords"
+          content="LovHack, hackathon, beginner hackathon, online hackathon, AI hackathon, vibe coding, build projects, learn to code, coding competition, web development"
+        />
         <link rel="canonical" href="https://lovhack.dev" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="LovHack | Build Something Real. No Experience Required." />
+        <meta property="og:description" content="Join the beginner-friendly online hackathon where 500+ builders ship real projects in 48 hours." />
+        <meta property="og:url" content="https://lovhack.dev" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="LovHack | Build Something Real. No Experience Required." />
+        <meta name="twitter:description" content="Join the beginner-friendly online hackathon where 500+ builders ship real projects in 48 hours." />
       </Helmet>
+
+      <AnimatedBackground />
+      <Navbar />
       
-      <div className="relative min-h-screen overflow-x-hidden">
-        <AnimatedBackground />
-        
-        <header>
-          <HeroSection />
-        </header>
-        
-        <main>
-          <article>
-            <AboutSection />
-          </article>
-          <section aria-label="Event Details">
-            <DetailsSection />
-          </section>
-          <aside aria-label="Sponsor Offers">
-            <LovablePromoSection />
-            <MomentumPromoSection />
-            <CreaoPromoSection />
-            <HadoPromoSection />
-            <FlootPromoSection />
-            <QoderPromoSection />
-          </aside>
-          <section aria-label="Sponsors">
-            <SponsorsSection />
-          </section>
-        </main>
-        
-        <Footer />
-      </div>
+      <main>
+        <NewHeroSection />
+        <WhatIsLovHackSection />
+        <WhoIsForSection />
+        <Season1PreviewSection />
+        <UpcomingEventsSection />
+        <SponsorsPreviewSection />
+        <FAQSection />
+        <DiscordCTASection />
+      </main>
+      
+      <Footer />
     </>
   );
 };
