@@ -7,6 +7,10 @@ import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
+import Season1 from "./pages/Season1";
+import About from "./pages/About";
+import Sponsors from "./pages/Sponsors";
+import Hackathons from "./pages/Hackathons";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import AdminCertificates from "./pages/AdminCertificates";
@@ -24,6 +28,10 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/season-1" element={<Season1 />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/sponsors" element={<Sponsors />} />
+              <Route path="/hackathons" element={<Hackathons />} />
               <Route path="/oejofwfdshfhowoadminloginpageiiitf" element={<Auth />} />
               <Route
                 path="/admin/certificates"
