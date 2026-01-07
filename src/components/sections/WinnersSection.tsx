@@ -3,40 +3,41 @@ import GlassCard from "@/components/GlassCard";
 import { Button } from "@/components/ui/button";
 
 const WinnersSection = () => {
-  const winners = [
+  const topWinners = [
     {
       place: "1st",
       emoji: "🥇",
-      project: "TaskFlow AI",
-      team: "Team Innovate",
-      description: "An AI-powered task management app that learns your productivity patterns.",
-      prize: "$500",
-      link: "#",
+      project: "Molyn",
+      description: "An innovative project that impressed judges with its creativity and execution.",
+      link: "http://molyn.lovable.app/",
     },
     {
       place: "2nd",
       emoji: "🥈",
-      project: "EcoTrack",
-      team: "Green Coders",
-      description: "A sustainability tracker helping users reduce their carbon footprint daily.",
-      prize: "$300",
-      link: "#",
+      project: "Vibe2Learn",
+      description: "A learning platform that makes education engaging and accessible.",
+      link: "https://www.learn2vibecode.dev/",
     },
     {
       place: "3rd",
       emoji: "🥉",
-      project: "StudyBuddy",
-      team: "Learn Together",
-      description: "A collaborative study platform with real-time flashcard sharing.",
-      prize: "$200",
-      link: "#",
+      project: "InternHub",
+      description: "Connecting interns with opportunities in a seamless way.",
+      link: "https://internershiphub.lovable.app/",
     },
   ];
 
-  const honorableMentions = [
-    { project: "HealthPulse", team: "Wellness Warriors", category: "Best Design" },
-    { project: "CodeMentor", team: "Debug Squad", category: "Most Innovative" },
-    { project: "LocalEats", team: "Foodies United", category: "Community Choice" },
+  const runnersUp = [
+    {
+      place: "4th",
+      project: "Your Inner Forms",
+      link: "https://yourinnerforms.lovable.app/",
+    },
+    {
+      place: "5th",
+      project: "Reserve and Ready",
+      link: "http://reserve-and-dash.lovable.app/",
+    },
   ];
 
   return (
@@ -53,13 +54,13 @@ const WinnersSection = () => {
           </h2>
           <p className="text-base sm:text-lg text-foreground/70 max-w-xl mx-auto px-2">
             These incredible builders shipped real projects in just 48 hours. 
-            Here's what they created.
+            Here&apos;s what they created.
           </p>
         </div>
 
         {/* Top 3 Winners */}
-        <div className="grid gap-4 sm:gap-6 md:grid-cols-3 mb-10 sm:mb-12">
-          {winners.map((winner, index) => (
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3 mb-8 sm:mb-10">
+          {topWinners.map((winner, index) => (
             <GlassCard
               key={index}
               className={`p-5 sm:p-6 md:p-8 relative overflow-hidden ${
@@ -73,21 +74,13 @@ const WinnersSection = () => {
 
               {/* Content */}
               <div className="pr-12 sm:pr-14">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xs sm:text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-                    {winner.place} Place
-                  </span>
-                  <span className="text-xs sm:text-sm font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full">
-                    {winner.prize}
-                  </span>
-                </div>
+                <span className="text-xs sm:text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                  {winner.place} Place
+                </span>
                 
-                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1">
+                <h3 className="text-lg sm:text-xl font-bold text-foreground mt-3 mb-2">
                   {winner.project}
                 </h3>
-                <p className="text-xs sm:text-sm text-foreground/60 mb-3">
-                  by {winner.team}
-                </p>
                 <p className="text-sm sm:text-base text-foreground/70 mb-4">
                   {winner.description}
                 </p>
@@ -98,7 +91,12 @@ const WinnersSection = () => {
                   size="sm"
                   className="rounded-xl bg-white/60 border-white/50 hover:bg-white/80 text-xs sm:text-sm"
                 >
-                  <a href={winner.link} className="flex items-center gap-1.5">
+                  <a 
+                    href={winner.link} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5"
+                  >
                     View Project
                     <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </a>
@@ -108,33 +106,46 @@ const WinnersSection = () => {
           ))}
         </div>
 
-        {/* Honorable Mentions */}
-        <div className="text-center mb-6 sm:mb-8">
+        {/* Runners Up (4th & 5th) */}
+        <div className="text-center mb-4 sm:mb-6">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Star className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-            <h3 className="text-lg sm:text-xl font-bold text-foreground">Honorable Mentions</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-foreground">Runners Up</h3>
             <Star className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
           </div>
         </div>
 
-        <div className="grid gap-3 sm:gap-4 sm:grid-cols-3">
-          {honorableMentions.map((mention, index) => (
+        <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 max-w-2xl mx-auto mb-10 sm:mb-12">
+          {runnersUp.map((runner, index) => (
             <GlassCard key={index} className="p-4 sm:p-5 text-center">
               <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-2 sm:mb-3">
-                {mention.category}
+                {runner.place} Place
               </span>
-              <h4 className="text-base sm:text-lg font-bold text-foreground mb-1">
-                {mention.project}
+              <h4 className="text-base sm:text-lg font-bold text-foreground mb-3">
+                {runner.project}
               </h4>
-              <p className="text-xs sm:text-sm text-foreground/60">
-                by {mention.team}
-              </p>
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="rounded-xl bg-white/60 border-white/50 hover:bg-white/80 text-xs sm:text-sm"
+              >
+                <a 
+                  href={runner.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5"
+                >
+                  View Project
+                  <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                </a>
+              </Button>
             </GlassCard>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="text-center mt-10 sm:mt-12">
+        <div className="text-center">
           <p className="text-sm sm:text-base text-foreground/60 mb-4">
             Want to see your project here?
           </p>
