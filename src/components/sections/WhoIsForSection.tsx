@@ -17,67 +17,67 @@ const WhoIsForSection = () => {
   ];
 
   return (
-    <section className="relative py-24 px-4">
+    <section className="relative py-16 sm:py-20 md:py-24 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
             LovHack is for <span className="text-primary">Everyone</span>
           </h2>
-          <p className="text-lg text-foreground/70 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg text-foreground/70 max-w-xl mx-auto px-2">
             Whether you're writing your first line of code or you've shipped dozens of products, 
             there's a place for you here.
           </p>
         </div>
 
         {/* Two Columns */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-2">
           {/* First-Time Builders */}
-          <GlassCard className="p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">🌱</span>
-              <h3 className="text-2xl font-bold text-foreground">First-Time Builders</h3>
+          <GlassCard className="p-5 sm:p-6 md:p-8">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <span className="text-2xl sm:text-3xl">🌱</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">First-Time Builders</h3>
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               {beginnerPoints.map((point, index) => (
-                <li key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
-                    <point.icon className="w-5 h-5 text-green-600" />
+                <li key={index} className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-green-100 flex items-center justify-center">
+                    <point.icon className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                   </div>
-                  <span className="text-foreground/80">{point.text}</span>
+                  <span className="text-sm sm:text-base text-foreground/80">{point.text}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-foreground/60 italic">
+            <p className="mt-4 sm:mt-6 text-xs sm:text-sm text-foreground/60 italic">
               "I had never coded before LovHack. Now I have a live app!" — Past Participant
             </p>
           </GlassCard>
 
           {/* Experienced Developers */}
-          <GlassCard className="p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-3xl">⚡</span>
-              <h3 className="text-2xl font-bold text-foreground">Experienced Developers</h3>
+          <GlassCard className="p-5 sm:p-6 md:p-8">
+            <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <span className="text-2xl sm:text-3xl">⚡</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">Experienced Developers</h3>
             </div>
-            <ul className="space-y-4">
+            <ul className="space-y-3 sm:space-y-4">
               {experiencedPoints.map((point, index) => (
-                <li key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                    <point.icon className="w-5 h-5 text-blue-600" />
+                <li key={index} className="flex items-center gap-2.5 sm:gap-3">
+                  <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-blue-100 flex items-center justify-center">
+                    <point.icon className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                   </div>
-                  <span className="text-foreground/80">{point.text}</span>
+                  <span className="text-sm sm:text-base text-foreground/80">{point.text}</span>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-foreground/60 italic">
+            <p className="mt-4 sm:mt-6 text-xs sm:text-sm text-foreground/60 italic">
               "Best hackathon I've done. Great tools, great people." — Past Winner
             </p>
           </GlassCard>
         </div>
 
         {/* Unifying Message */}
-        <div className="text-center mt-12">
-          <p className="text-xl font-medium text-foreground">
+        <div className="text-center mt-8 sm:mt-10 md:mt-12">
+          <p className="text-lg sm:text-xl font-medium text-foreground">
             Everyone builds. Everyone learns. <span className="text-primary">Everyone ships.</span>
           </p>
         </div>
