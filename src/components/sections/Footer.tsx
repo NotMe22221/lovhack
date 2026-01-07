@@ -56,7 +56,7 @@ const Footer = () => {
               Discord
             </a>
             <a
-              href="https://twitter.com/AliHaggworthy"
+              href="https://x.com/Lovhackofficial"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-foreground/50 hover:text-foreground transition-colors flex items-center gap-1"
