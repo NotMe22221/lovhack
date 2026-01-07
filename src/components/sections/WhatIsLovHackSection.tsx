@@ -24,14 +24,14 @@ const WhatIsLovHackSection = () => {
   ];
 
   return (
-    <section className="relative py-24 px-4">
+    <section className="relative py-16 sm:py-20 md:py-24 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-6">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             What is <span className="text-primary">LovHack</span>?
           </h2>
-          <div className="max-w-2xl mx-auto space-y-4 text-foreground/70 text-lg">
+          <div className="max-w-2xl mx-auto space-y-3 sm:space-y-4 text-foreground/70 text-base sm:text-lg px-2">
             <p>
               <strong>A hackathon</strong> is a building event where you create a working project 
               in a short time — usually 48 hours. Think of it as a creative sprint with friends.
@@ -48,16 +48,16 @@ const WhatIsLovHackSection = () => {
         </div>
 
         {/* Pillars */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
           {pillars.map((pillar, index) => (
-            <GlassCard key={index} className="p-8 text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
-                <pillar.icon className="w-8 h-8 text-primary" />
+            <GlassCard key={index} className="p-6 sm:p-8 text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl bg-primary/10 mb-4 sm:mb-6">
+                <pillar.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2 sm:mb-3">
                 {pillar.title}
               </h3>
-              <p className="text-foreground/70">{pillar.description}</p>
+              <p className="text-sm sm:text-base text-foreground/70">{pillar.description}</p>
             </GlassCard>
           ))}
         </div>
