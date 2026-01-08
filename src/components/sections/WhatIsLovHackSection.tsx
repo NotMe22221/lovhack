@@ -8,9 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 const WhatIsLovHackSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const cardsContainerRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
-  const cardsRef = useRef<HTMLDivElement>(null);
 
   const pillars = [
     {
@@ -35,72 +35,73 @@ const WhatIsLovHackSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Header fade in
-      gsap.fromTo(
-        headerRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            end: "top 60%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-
-      // Scroll-to-reveal text (gray to color)
-      textRefs.current.forEach((el) => {
-        if (el) {
-          gsap.fromTo(
-            el,
-            {
-              opacity: 0.3,
-              color: "rgba(0, 0, 0, 0.3)",
-              y: 20
-            },
-            {
-              opacity: 1,
-              color: "rgba(0, 0, 0, 0.7)",
-              y: 0,
-              duration: 0.8,
-              ease: "power2.out",
-              scrollTrigger: {
-                trigger: el,
-                start: "top 85%",
-                end: "top 60%",
-                scrub: 1,
-              },
-            }
-          );
-        }
-      });
-
-      // Cards staggered entrance
-      if (cardsRef.current) {
-        const cards = cardsRef.current.querySelectorAll(".pillar-card");
+      // Sticky left side with text reveal
+      if (leftRef.current) {
+        // Title animation
+        const title = leftRef.current.querySelector("h2");
         gsap.fromTo(
-          cards,
-          { opacity: 0, y: 80, scale: 0.9 },
+          title,
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
             duration: 0.8,
-            stagger: 0.15,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: cardsRef.current,
+              trigger: leftRef.current,
               start: "top 80%",
-              end: "top 50%",
               toggleActions: "play none none reverse",
             },
           }
         );
+
+        // Strong scroll-to-reveal text (very gray → full color)
+        textRefs.current.forEach((el, index) => {
+          if (el) {
+            gsap.fromTo(
+              el,
+              {
+                opacity: 0.15,
+                color: "rgba(0, 0, 0, 0.15)",
+              },
+              {
+                opacity: 1,
+                color: "rgba(0, 0, 0, 0.8)",
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top 80%",
+                  end: "top 50%",
+                  scrub: 1.5,
+                },
+              }
+            );
+          }
+        });
+      }
+
+      // Cards scrolling from bottom
+      if (cardsContainerRef.current) {
+        const cards = cardsContainerRef.current.querySelectorAll(".pillar-card");
+        cards.forEach((card, index) => {
+          gsap.fromTo(
+            card,
+            { opacity: 0, y: 100 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: card,
+                start: "top 90%",
+                end: "top 60%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
       }
     }, sectionRef);
 
@@ -114,45 +115,65 @@ const WhatIsLovHackSection = () => {
   return (
     <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-28 lg:py-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div ref={headerRef} className="text-center mb-10 sm:mb-14 md:mb-20 opacity-0">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-6 sm:mb-8 px-2">
-            What is <span className="text-primary">LovHack</span>?
-          </h2>
-          <div className="max-w-2xl mx-auto space-y-3 sm:space-y-4 md:space-y-5 text-foreground/70 text-sm sm:text-base md:text-lg lg:text-xl px-4">
-            <p ref={setTextRef(0)} className="transition-colors duration-500">
-              <strong className="text-foreground/90">A hackathon</strong> is a building event where you create a working project
-              in a short time — usually 48 hours. Think of it as a creative sprint with friends.
-            </p>
-            <p ref={setTextRef(1)} className="transition-colors duration-500">
-              <strong className="text-foreground/90">LovHack</strong> is beginner-friendly. You don't need coding experience
-              to participate. You can use AI tools, low-code platforms, or learn as you go.
-            </p>
-            <p ref={setTextRef(2)} className="transition-colors duration-500">
-              You can join <strong className="text-foreground/90">solo</strong> or find teammates in our Discord. We'll help
-              you connect with others who complement your skills.
-            </p>
-          </div>
-        </div>
+        {/* Two column layout: Sticky left + Scrolling cards right */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
 
-        {/* Pillars Cards */}
-        <div ref={cardsRef} className="grid gap-4 sm:gap-6 md:gap-8 md:grid-cols-3">
-          {pillars.map((pillar, index) => (
-            <div
-              key={index}
-              className="pillar-card opacity-0 group"
-            >
-              <GlassCard className="p-5 sm:p-6 md:p-8 lg:p-10 text-center h-full backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-2xl">
-                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl sm:rounded-2xl md:rounded-3xl bg-primary/10 mb-4 sm:mb-6 md:mb-8 group-hover:bg-primary/20 transition-colors duration-300">
-                  <pillar.icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 text-primary" />
-                </div>
-                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-2 sm:mb-3 md:mb-4">
-                  {pillar.title}
-                </h3>
-                <p className="text-sm sm:text-base md:text-lg text-foreground/70">{pillar.description}</p>
-              </GlassCard>
+          {/* Left side - Sticky on desktop */}
+          <div ref={leftRef} className="md:sticky md:top-32 md:self-start">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 sm:mb-8 md:mb-10 opacity-0">
+              What is <span className="text-primary">LovHack</span>?
+            </h2>
+
+            <div className="space-y-4 sm:space-y-5 md:space-y-6">
+              <p
+                ref={setTextRef(0)}
+                className="text-lg sm:text-xl md:text-2xl leading-relaxed"
+                style={{ color: "rgba(0, 0, 0, 0.15)" }}
+              >
+                <strong className="font-semibold">A hackathon</strong> is a building event where you create a working project
+                in a short time — usually 48 hours.
+              </p>
+              <p
+                ref={setTextRef(1)}
+                className="text-lg sm:text-xl md:text-2xl leading-relaxed"
+                style={{ color: "rgba(0, 0, 0, 0.15)" }}
+              >
+                <strong className="font-semibold">LovHack</strong> is beginner-friendly. You don't need coding experience.
+                Use AI tools, low-code platforms, or learn as you go.
+              </p>
+              <p
+                ref={setTextRef(2)}
+                className="text-lg sm:text-xl md:text-2xl leading-relaxed"
+                style={{ color: "rgba(0, 0, 0, 0.15)" }}
+              >
+                Join <strong className="font-semibold">solo</strong> or find teammates in our Discord.
+              </p>
             </div>
-          ))}
+          </div>
+
+          {/* Right side - Cards scroll from bottom */}
+          <div ref={cardsContainerRef} className="flex flex-col gap-4 sm:gap-6">
+            {pillars.map((pillar, index) => (
+              <div
+                key={index}
+                className="pillar-card opacity-0"
+              >
+                <GlassCard className="p-5 sm:p-6 md:p-8 backdrop-blur-2xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl">
+                  <div className="flex items-start gap-4 sm:gap-5">
+                    <div className="flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center">
+                      <pillar.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-2">
+                        {pillar.title}
+                      </h3>
+                      <p className="text-sm sm:text-base md:text-lg text-foreground/70">{pillar.description}</p>
+                    </div>
+                  </div>
+                </GlassCard>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

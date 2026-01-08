@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
-import { ArrowRight, Sparkles, Users, Globe, Rocket, Zap } from "lucide-react";
+import { ArrowRight, Users, Globe, Rocket, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 
 const NewHeroSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const subheadRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -17,21 +16,15 @@ const NewHeroSection = () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
       tl.fromTo(
-        badgeRef.current,
-        { opacity: 0, y: 30, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.8 }
+        headlineRef.current,
+        { opacity: 0, y: 60 },
+        { opacity: 1, y: 0, duration: 1 }
       )
-        .fromTo(
-          headlineRef.current,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 1 },
-          "-=0.5"
-        )
         .fromTo(
           subheadRef.current,
           { opacity: 0, y: 40 },
           { opacity: 1, y: 0, duration: 0.8 },
-          "-=0.6"
+          "-=0.5"
         )
         .fromTo(
           ctaRef.current?.children || [],
@@ -62,18 +55,7 @@ const NewHeroSection = () => {
         ref={containerRef}
         className="w-full max-w-5xl mx-auto text-center"
       >
-        {/* Beginner Badge */}
-        <div
-          ref={badgeRef}
-          className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/50 backdrop-blur-xl border border-white/40 shadow-glass mb-6 sm:mb-8 md:mb-10 opacity-0"
-        >
-          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-          <span className="text-xs sm:text-sm md:text-base font-medium text-primary">
-            First hackathon? You're in the right place.
-          </span>
-        </div>
-
-        {/* Main Headline */}
+        {/* Main Headline - Clean, no badge */}
         <h1
           ref={headlineRef}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground mb-4 sm:mb-6 md:mb-8 leading-[1.1] opacity-0 px-2"
