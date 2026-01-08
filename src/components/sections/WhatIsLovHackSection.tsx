@@ -147,7 +147,12 @@ const WhatIsLovHackSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-28 lg:py-32 overflow-hidden bg-background">
+    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-28 lg:py-32 bg-background">
+      {/* Background blobs wrapper with overflow hidden */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Add any background decorations here if needed */}
+      </div>
+
       {/* PART 1: Centered Text Reveal (Massive) */}
       <div
         ref={textContainerRef}
@@ -187,8 +192,8 @@ const WhatIsLovHackSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 relative">
 
           {/* LEFT: Sticky Title */}
-          <div className="hidden lg:block">
-            <div className="sticky top-1/3 sticky-content opacity-0">
+          <div className="hidden lg:block relative"> {/* Removed sticky from here, put it on inner child */}
+            <div className="sticky top-32 sticky-content opacity-0"> {/* Adjusted top value */}
               <h3 className="text-6xl xl:text-8xl font-black text-foreground leading-[0.9] tracking-tighter">
                 Why
                 <br />
