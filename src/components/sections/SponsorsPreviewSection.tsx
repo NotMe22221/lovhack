@@ -1,9 +1,9 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import ScrollAnimation from "@/components/ScrollAnimation";
-import StaggerContainer, { StaggerItem } from "@/components/StaggerContainer";
-import { motion } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
@@ -13,66 +13,153 @@ import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const SponsorsPreviewSection = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
   const sponsors = [
-    { name: "Lovable", logo: lovableLogo },
-    { name: "Creao", logo: creaoLogo },
-    { name: "Hado", logo: hadoLogo },
-    { name: "Floot", logo: flootLogo },
-    { name: "Qoder", logo: qoderLogo },
-    { name: "Dualite", logo: dualiteLogo },
-    { name: "Momentum", logo: momentumLogo },
+    { name: "Lovable", logo: lovableLogo, size: "large" },
+    { name: "Creao", logo: creaoLogo, size: "medium" },
+    { name: "Hado", logo: hadoLogo, size: "medium" },
+    { name: "Floot", logo: flootLogo, size: "small" },
+    { name: "Qoder", logo: qoderLogo, size: "small" },
+    { name: "Dualite", logo: dualiteLogo, size: "small" },
+    { name: "Momentum", logo: momentumLogo, size: "small" },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Header entrance
+      gsap.fromTo(
+        headerRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      // Bento grid items staggered entrance
+      if (gridRef.current) {
+        const items = gridRef.current.querySelectorAll(".bento-item");
+        gsap.fromTo(
+          items,
+          { opacity: 0, scale: 0.8, y: 30 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.08,
+            ease: "back.out(1.2)",
+            scrollTrigger: {
+              trigger: gridRef.current,
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+            },
+          }
+        );
+      }
+
+      // CTA
+      gsap.fromTo(
+        ctaRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ctaRef.current,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="relative py-20 sm:py-24 md:py-32 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-28 lg:py-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         {/* Section Header */}
-        <ScrollAnimation className="text-center mb-12 sm:mb-16 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
+        <div ref={headerRef} className="text-center mb-10 sm:mb-14 md:mb-16 opacity-0">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground mb-3 sm:mb-4 md:mb-6 px-2">
             Backed by <span className="text-primary">Leading Tools</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-xl mx-auto px-2">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-foreground/70 max-w-xl mx-auto px-4">
             LovHack participants get exclusive access to these amazing sponsor tools.
           </p>
-        </ScrollAnimation>
+        </div>
 
-        {/* Sponsor Logos */}
-        <StaggerContainer className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-10 lg:gap-14 mb-12 sm:mb-16" staggerDelay={0.08}>
-          {sponsors.map((sponsor) => (
-            <StaggerItem key={sponsor.name}>
-              <motion.div
-                className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 bg-white/50 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/40 flex items-center justify-center p-3 sm:p-4 md:p-5 shadow-glass"
-                whileHover={{ scale: 1.1, y: -8, backgroundColor: "rgba(255, 255, 255, 0.8)" }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
-              >
+        {/* Bento Grid - Open floating logos */}
+        <div ref={gridRef} className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3 sm:gap-4 md:gap-5 mb-10 sm:mb-14 md:mb-16 auto-rows-fr">
+          {/* Large item spanning 2x2 */}
+          <div className="bento-item col-span-2 row-span-2 opacity-0 group">
+            <div className="w-full h-full bg-white/40 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/30 flex items-center justify-center p-4 sm:p-6 shadow-glass transition-all duration-500 hover:scale-105 hover:bg-white/60 hover:shadow-xl">
+              <img
+                src={sponsors[0].logo}
+                alt={`${sponsors[0].name} logo`}
+                className="max-w-[80%] max-h-[80%] object-contain group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          </div>
+
+          {/* Medium items */}
+          {sponsors.slice(1, 3).map((sponsor, index) => (
+            <div key={index} className="bento-item col-span-2 row-span-1 opacity-0 group">
+              <div className="w-full h-full min-h-[60px] sm:min-h-[80px] md:min-h-[100px] bg-white/40 backdrop-blur-2xl rounded-xl sm:rounded-2xl border border-white/30 flex items-center justify-center p-3 sm:p-4 shadow-glass transition-all duration-500 hover:scale-105 hover:bg-white/60 hover:shadow-xl">
                 <img
                   src={sponsor.logo}
                   alt={`${sponsor.name} logo`}
-                  className="max-w-full max-h-full object-contain"
+                  className="max-w-[70%] max-h-[70%] object-contain group-hover:scale-110 transition-transform duration-500"
                 />
-              </motion.div>
-            </StaggerItem>
+              </div>
+            </div>
           ))}
-        </StaggerContainer>
+
+          {/* Small items */}
+          {sponsors.slice(3).map((sponsor, index) => (
+            <div key={index} className="bento-item col-span-2 sm:col-span-2 row-span-1 opacity-0 group">
+              <div className="w-full h-full min-h-[60px] sm:min-h-[80px] md:min-h-[100px] bg-white/40 backdrop-blur-2xl rounded-xl sm:rounded-2xl border border-white/30 flex items-center justify-center p-3 sm:p-4 shadow-glass transition-all duration-500 hover:scale-105 hover:bg-white/60 hover:shadow-xl">
+                <img
+                  src={sponsor.logo}
+                  alt={`${sponsor.name} logo`}
+                  className="max-w-[70%] max-h-[70%] object-contain group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* CTA */}
-        <ScrollAnimation className="text-center" delay={0.3}>
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto rounded-2xl bg-white/50 backdrop-blur-xl border-white/40 hover:bg-white/80 py-6 shadow-glass"
-            >
-              <Link to="/sponsors" className="flex items-center justify-center gap-3">
-                View All Sponsors & Offers
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
-          </motion.div>
-        </ScrollAnimation>
+        <div ref={ctaRef} className="text-center opacity-0 px-4">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="w-full sm:w-auto rounded-xl sm:rounded-2xl bg-white/50 backdrop-blur-xl border-white/40 hover:bg-white/80 py-5 sm:py-6 px-6 sm:px-8 shadow-glass transition-all duration-300 hover:scale-105"
+          >
+            <Link to="/sponsors" className="flex items-center justify-center gap-2 sm:gap-3">
+              View All Sponsors & Offers
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
