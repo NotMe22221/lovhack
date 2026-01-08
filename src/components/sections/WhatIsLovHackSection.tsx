@@ -39,41 +39,49 @@ const WhatIsLovHackSection = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title
+      // 1. Centered Text Reveal
       if (textContainerRef.current) {
+        // Title Entrance
         const title = textContainerRef.current.querySelector("h2");
         if (title) {
-          gsap.set(title, { opacity: 1 });
           gsap.fromTo(
             title,
-            { y: 40, opacity: 0 },
+            { opacity: 0, y: 50 },
             {
-              y: 0,
               opacity: 1,
-              duration: 0.8,
+              y: 0,
+              duration: 1,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: title,
-                start: "top 85%",
+                start: "top 85%", // Start when top of title hits 85% of viewport
+                toggleActions: "play none none reverse",
               },
             }
           );
         }
 
-        // Text paragraphs
+        // Text Paragraphs Scrub
         textRefs.current.forEach((el) => {
           if (el) {
             gsap.fromTo(
               el,
-              { y: 30, opacity: 0 },
               {
-                y: 0,
+                opacity: 0.1,
+                color: "rgba(0, 0, 0, 0.1)", // Explicitly start gray/transparent
+                y: 30
+              },
+              {
                 opacity: 1,
-                duration: 0.7,
-                ease: "power2.out",
+                color: "rgba(0, 0, 0, 0.9)", // End dark
+                y: 0,
+                duration: 1.5,
+                ease: "none", // Scrub controls ease
                 scrollTrigger: {
                   trigger: el,
-                  start: "top 85%",
+                  start: "top 85%", // Start entering viewport
+                  end: "top 40%",   // Finish near center/top
+                  scrub: 1.5,       // Smooth catch-up
                 },
               }
             );
@@ -81,45 +89,53 @@ const WhatIsLovHackSection = () => {
         });
       }
 
-      // Sticky left title
+      // 2. Sticky Left + Cards Right
       if (cardsSectionRef.current) {
+        // Sticky Title Entrance
         const stickyContent = cardsSectionRef.current.querySelector(".sticky-content");
         if (stickyContent) {
           gsap.fromTo(
             stickyContent,
-            { x: -40, opacity: 0 },
+            { x: -50, opacity: 0 },
             {
               x: 0,
               opacity: 1,
-              duration: 0.9,
+              duration: 1,
               ease: "power3.out",
               scrollTrigger: {
                 trigger: cardsSectionRef.current,
-                start: "top 75%",
+                start: "top 70%", // Triggers later
+                toggleActions: "play none none reverse",
               },
             }
           );
         }
 
-        // Cards
+        // Cards Entrance
         const cards = cardsSectionRef.current.querySelectorAll(".pillar-card");
-        cards.forEach((card, index) => {
+        if (cards.length > 0) {
           gsap.fromTo(
-            card,
-            { y: 80, opacity: 0 },
+            cards,
             {
-              y: 0,
+              opacity: 0,
+              y: 100,
+              scale: 0.95
+            },
+            {
               opacity: 1,
-              duration: 0.7,
-              delay: index * 0.15,
+              y: 0,
+              scale: 1,
+              duration: 1,
+              stagger: 0.2, // 0.2s delay between each card
               ease: "power3.out",
               scrollTrigger: {
-                trigger: card,
-                start: "top 90%",
+                trigger: cardsSectionRef.current, // Trigger when section starts
+                start: "top 60%", // When top of section hits 60% of viewport (cards are visible)
+                toggleActions: "play none none reverse",
               },
             }
           );
-        });
+        }
       }
     }, sectionRef);
 
@@ -131,82 +147,90 @@ const WhatIsLovHackSection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-28 lg:py-32 overflow-hidden">
-      {/* PART 1: Centered Text */}
+    <section ref={sectionRef} className="relative py-16 sm:py-20 md:py-28 lg:py-32 overflow-hidden bg-background">
+      {/* PART 1: Centered Text Reveal (Massive) */}
       <div
         ref={textContainerRef}
-        className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center mb-20 sm:mb-28 md:mb-36"
+        className="min-h-[60vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center mb-20 sm:mb-28 md:mb-36"
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-10 sm:mb-14 md:mb-16 tracking-tight">
+        {/* Initial opacity-0 is crucial for hydration/FOUC prevention */}
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-16 sm:mb-20 tracking-tight opacity-0">
           What is <span className="text-primary">LovHack?</span>
         </h2>
 
-        <div className="space-y-8 sm:space-y-10 md:space-y-14">
+        <div className="space-y-16 sm:space-y-24 max-w-4xl">
           <p
             ref={setTextRef(0)}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium leading-snug text-foreground/80"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight opacity-0"
           >
             A <span className="text-primary font-semibold">hackathon</span> is a building event where you create a working project in a short time — usually 48 hours.
           </p>
 
           <p
             ref={setTextRef(1)}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium leading-snug text-foreground/80"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight opacity-0"
           >
             LovHack is <span className="text-primary font-semibold">beginner-friendly</span>. You don't need coding experience. Use AI tools, low-code platforms, or learn as you go.
           </p>
 
           <p
             ref={setTextRef(2)}
-            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium leading-snug text-foreground/80"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight opacity-0"
           >
             Join <span className="text-primary font-semibold">solo</span> or find teammates in our Discord.
           </p>
         </div>
       </div>
 
-      {/* PART 2: Sticky Left + Big Cards Right */}
-      <div ref={cardsSectionRef} className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      {/* PART 2: Sticky Content + Big Cards */}
+      <div ref={cardsSectionRef} className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[100vh]">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 relative">
+
           {/* LEFT: Sticky Title */}
-          <div className="lg:sticky lg:top-28 sticky-content">
-            <div className="text-center lg:text-left mb-10 lg:mb-0">
-              <h3 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-foreground leading-[0.95] tracking-tight">
+          <div className="hidden lg:block">
+            <div className="sticky top-1/3 sticky-content opacity-0">
+              <h3 className="text-6xl xl:text-8xl font-black text-foreground leading-[0.9] tracking-tighter">
                 Why
                 <br />
-                <span className="text-primary">Lov</span>Hack<span className="text-primary">?</span>
+                <span className="text-primary">Lov</span>Hack<span className="text-primary">.</span>
               </h3>
-              <p className="mt-6 sm:mt-8 text-lg sm:text-xl md:text-2xl text-foreground/60 max-w-md mx-auto lg:mx-0">
-                The perfect environment to ship your first (or fiftieth) project.
+              <p className="mt-8 text-2xl text-foreground/60 max-w-sm font-medium">
+                The perfect environment to ship your first (or fiftieth) product.
               </p>
             </div>
           </div>
 
-          {/* RIGHT: Big Cards with Images */}
-          <div className="flex flex-col gap-8 sm:gap-10 md:gap-12">
+          {/* RIGHT: Big Cards */}
+          <div className="flex flex-col gap-16 pb-20">
+            {/* Mobile Title (visible only on small screens) */}
+            <div className="lg:hidden text-center mb-8">
+              <h3 className="text-4xl font-black text-foreground">Why LovHack?</h3>
+            </div>
+
             {pillars.map((pillar, index) => (
-              <div key={index} className="pillar-card">
-                <GlassCard className="overflow-hidden backdrop-blur-2xl shadow-2xl group hover:-translate-y-2 transition-transform duration-500">
-                  {/* Image */}
-                  <div className="w-full h-48 sm:h-56 md:h-64 overflow-hidden bg-gradient-to-br from-primary/5 to-primary/10">
+              <div key={index} className="pillar-card opacity-0">
+                <GlassCard className="overflow-hidden backdrop-blur-3xl shadow-2xl border-white/20 group hover:-translate-y-2 transition-transform duration-500">
+                  {/* Image Area */}
+                  <div className="w-full h-56 sm:h-64 md:h-72 overflow-hidden bg-primary/5 relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent z-10" />
                     <img
                       src={pillar.image}
                       alt={pillar.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                     />
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6 sm:p-8 md:p-10">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <pillar.icon className="w-6 h-6 sm:w-7 sm:h-7 text-primary" />
+                  {/* Content Area */}
+                  <div className="p-8 sm:p-10">
+                    <div className="flex items-start gap-6 mb-6">
+                      <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:rotate-12 transition-transform duration-500">
+                        <pillar.icon className="w-8 h-8 text-primary" />
                       </div>
-                      <h4 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+                      <h4 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight pt-2">
                         {pillar.title}
                       </h4>
                     </div>
-                    <p className="text-base sm:text-lg md:text-xl text-foreground/70 leading-relaxed">
+                    <p className="text-lg sm:text-xl text-foreground/70 leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
