@@ -5,6 +5,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import GlassCard from "@/components/GlassCard";
+import ScrollAnimation from "@/components/ScrollAnimation";
+import { motion } from "framer-motion";
 
 const FAQSection = () => {
   const faqs = [
@@ -44,29 +46,39 @@ const FAQSection = () => {
     <section className="relative py-16 sm:py-20 md:py-24 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+        <ScrollAnimation className="text-center mb-8 sm:mb-10 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
             Frequently Asked <span className="text-primary">Questions</span>
           </h2>
           <p className="text-base sm:text-lg text-foreground/70 px-2">
             Everything you need to know about participating in LovHack.
           </p>
-        </div>
+        </ScrollAnimation>
 
-        <GlassCard className="p-4 sm:p-6 md:p-8">
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left text-sm sm:text-base text-foreground hover:text-primary py-3 sm:py-4">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm sm:text-base text-foreground/70 pb-3 sm:pb-4">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </GlassCard>
+        <ScrollAnimation delay={0.2}>
+          <GlassCard className="p-4 sm:p-6 md:p-8">
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                >
+                  <AccordionItem value={`item-${index}`}>
+                    <AccordionTrigger className="text-left text-sm sm:text-base text-foreground hover:text-primary py-3 sm:py-4">
+                      {faq.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-sm sm:text-base text-foreground/70 pb-3 sm:pb-4">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                </motion.div>
+              ))}
+            </Accordion>
+          </GlassCard>
+        </ScrollAnimation>
       </div>
     </section>
   );
