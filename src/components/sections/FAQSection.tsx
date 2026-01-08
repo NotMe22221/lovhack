@@ -43,34 +43,34 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 px-4">
+    <section className="relative py-20 sm:py-24 md:py-32 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Section Header */}
-        <ScrollAnimation className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+        <ScrollAnimation className="text-center mb-10 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 sm:mb-6">
             Frequently Asked <span className="text-primary">Questions</span>
           </h2>
-          <p className="text-base sm:text-lg text-foreground/70 px-2">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/70 px-2">
             Everything you need to know about participating in LovHack.
           </p>
         </ScrollAnimation>
 
         <ScrollAnimation delay={0.2}>
-          <GlassCard className="p-4 sm:p-6 md:p-8">
+          <GlassCard className="p-6 sm:p-8 md:p-10 backdrop-blur-2xl">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.05, duration: 0.4 }}
+                  transition={{ delay: index * 0.08, duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
                 >
-                  <AccordionItem value={`item-${index}`}>
-                    <AccordionTrigger className="text-left text-sm sm:text-base text-foreground hover:text-primary py-3 sm:py-4">
+                  <AccordionItem value={`item-${index}`} className="border-white/20">
+                    <AccordionTrigger className="text-left text-base sm:text-lg text-foreground hover:text-primary py-5 sm:py-6 transition-colors duration-300">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-sm sm:text-base text-foreground/70 pb-3 sm:pb-4">
+                    <AccordionContent className="text-base sm:text-lg text-foreground/70 pb-5 sm:pb-6">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>

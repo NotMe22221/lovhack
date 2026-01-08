@@ -10,10 +10,10 @@ interface GlassCardProps {
 
 const GlassCard = ({ children, className, hover = true, style }: GlassCardProps) => {
   return (
-    <div 
+    <div
       className={cn(
-        "relative rounded-2xl bg-white/60 backdrop-blur-xl border border-white/50 shadow-glass p-6 md:p-8",
-        hover && "transition-all duration-300 hover:bg-white/70 hover:shadow-glass-hover hover:-translate-y-1",
+        "relative rounded-3xl bg-white/50 backdrop-blur-2xl border border-white/40 shadow-glass p-6 md:p-8",
+        hover && "transition-all duration-500 ease-out hover:bg-white/60 hover:shadow-glass-hover",
         className
       )}
       style={style}

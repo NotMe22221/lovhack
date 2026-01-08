@@ -6,30 +6,37 @@ import StaggerContainer, { StaggerItem } from "@/components/StaggerContainer";
 import { motion } from "framer-motion";
 
 const WinnersSection = () => {
+  // Ordered as: 2nd, 1st, 3rd for podium display
   const topWinners = [
     {
+      place: "2nd",
+      order: 1,
+      icon: Medal,
+      iconBgColor: "bg-gray-100",
+      iconColor: "text-gray-500",
+      cardClass: "",
+      project: "Learn2Vibecode",
+      description: "A learning platform that makes education engaging and accessible.",
+      link: "https://www.learn2vibecode.dev/",
+    },
+    {
       place: "1st",
+      order: 0,
       icon: Trophy,
-      iconBgColor: "bg-yellow-100",
+      iconBgColor: "bg-gradient-to-br from-yellow-100 to-amber-100",
       iconColor: "text-yellow-600",
+      cardClass: "bg-gradient-to-br from-yellow-50/60 to-orange-50/60 scale-105 z-10",
       project: "Molyn",
       description: "An innovative project that impressed judges with its creativity and execution.",
       link: "http://molyn.lovable.app/",
     },
     {
-      place: "2nd",
-      icon: Medal,
-      iconBgColor: "bg-gray-100",
-      iconColor: "text-gray-500",
-      project: "Vibe2Learn",
-      description: "A learning platform that makes education engaging and accessible.",
-      link: "https://www.learn2vibecode.dev/",
-    },
-    {
       place: "3rd",
+      order: 2,
       icon: Award,
       iconBgColor: "bg-orange-100",
       iconColor: "text-orange-600",
+      cardClass: "",
       project: "InternHub",
       description: "Connecting interns with opportunities in a seamless way.",
       link: "https://internershiphub.lovable.app/",
@@ -50,49 +57,52 @@ const WinnersSection = () => {
   ];
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 px-4">
+    <section className="relative py-20 sm:py-24 md:py-32 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <ScrollAnimation className="text-center mb-10 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-yellow-100 border border-yellow-200 mb-4 sm:mb-6">
-            <Trophy className="w-4 h-4 text-yellow-600" />
-            <span className="text-xs sm:text-sm font-medium text-yellow-700">Season 1 Winners</span>
+        <ScrollAnimation className="text-center mb-12 sm:mb-16 md:mb-20">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-xl border border-white/40 shadow-glass mb-6 sm:mb-8">
+            <Trophy className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600" />
+            <span className="text-sm sm:text-base font-medium text-yellow-700">Season 1 Winners</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
             Celebrating Our <span className="text-primary">Champions</span>
           </h2>
-          <p className="text-base sm:text-lg text-foreground/70 max-w-xl mx-auto px-2">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-xl mx-auto px-2">
             These incredible builders shipped real projects in just 48 hours.
             Here&apos;s what they created.
           </p>
         </ScrollAnimation>
 
-        {/* Top 3 Winners */}
-        <StaggerContainer className="grid gap-4 sm:gap-6 md:grid-cols-3 mb-8 sm:mb-10" staggerDelay={0.15}>
+        {/* Top 3 Winners - Podium Style (2nd, 1st, 3rd) */}
+        <StaggerContainer className="grid gap-4 sm:gap-6 md:grid-cols-3 mb-12 sm:mb-16 items-end" staggerDelay={0.15}>
           {topWinners.map((winner, index) => (
             <StaggerItem key={index}>
-              <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+                className={winner.place === "1st" ? "md:-mt-8" : ""}
+              >
                 <GlassCard
-                  className={`p-5 sm:p-6 md:p-8 relative overflow-hidden h-full ${index === 0 ? "md:order-2 bg-gradient-to-br from-yellow-50/50 to-orange-50/50" : ""
-                    } ${index === 1 ? "md:order-1" : ""} ${index === 2 ? "md:order-3" : ""}`}
+                  className={`p-6 sm:p-8 relative overflow-hidden h-full backdrop-blur-2xl ${winner.cardClass}`}
                 >
                   {/* Place Badge */}
-                  <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${winner.iconBgColor} flex items-center justify-center`}>
-                      <winner.icon className={`w-6 h-6 sm:w-7 sm:h-7 ${winner.iconColor}`} />
+                  <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
+                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${winner.iconBgColor} flex items-center justify-center shadow-lg`}>
+                      <winner.icon className={`w-7 h-7 sm:w-8 sm:h-8 ${winner.iconColor}`} />
                     </div>
                   </div>
 
                   {/* Content */}
-                  <div className="pr-12 sm:pr-14">
-                    <span className="text-xs sm:text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                  <div className="pr-16 sm:pr-20">
+                    <span className="text-sm sm:text-base font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
                       {winner.place} Place
                     </span>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground mt-3 mb-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-foreground mt-4 mb-3">
                       {winner.project}
                     </h3>
-                    <p className="text-sm sm:text-base text-foreground/70 mb-4">
+                    <p className="text-sm sm:text-base text-foreground/70 mb-5">
                       {winner.description}
                     </p>
 
@@ -100,16 +110,16 @@ const WinnersSection = () => {
                       asChild
                       variant="outline"
                       size="sm"
-                      className="rounded-xl bg-white/60 border-white/50 hover:bg-white/80 text-xs sm:text-sm"
+                      className="rounded-xl bg-white/50 backdrop-blur-md border-white/40 hover:bg-white/80 text-sm"
                     >
                       <a
                         href={winner.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1.5"
+                        className="flex items-center gap-2"
                       >
                         View Project
-                        <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                        <ExternalLink className="w-4 h-4" />
                       </a>
                     </Button>
                   </div>
@@ -120,39 +130,42 @@ const WinnersSection = () => {
         </StaggerContainer>
 
         {/* Runners Up (4th & 5th) */}
-        <ScrollAnimation className="text-center mb-4 sm:mb-6" delay={0.3}>
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-            <h3 className="text-lg sm:text-xl font-bold text-foreground">Runners Up</h3>
-            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+        <ScrollAnimation className="text-center mb-6 sm:mb-8" delay={0.3}>
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Star className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+            <h3 className="text-xl sm:text-2xl font-bold text-foreground">Runners Up</h3>
+            <Star className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
           </div>
         </ScrollAnimation>
 
-        <StaggerContainer className="grid gap-3 sm:gap-4 sm:grid-cols-2 max-w-2xl mx-auto mb-10 sm:mb-12" staggerDelay={0.1}>
+        <StaggerContainer className="grid gap-4 sm:gap-6 sm:grid-cols-2 max-w-2xl mx-auto mb-12 sm:mb-16" staggerDelay={0.1}>
           {runnersUp.map((runner, index) => (
             <StaggerItem key={index}>
-              <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-                <GlassCard className="p-4 sm:p-5 text-center">
-                  <span className="inline-block px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-2 sm:mb-3">
+              <motion.div
+                whileHover={{ scale: 1.03, y: -4 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
+              >
+                <GlassCard className="p-5 sm:p-6 text-center backdrop-blur-2xl">
+                  <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-3">
                     {runner.place} Place
                   </span>
-                  <h4 className="text-base sm:text-lg font-bold text-foreground mb-3">
+                  <h4 className="text-lg sm:text-xl font-bold text-foreground mb-4">
                     {runner.project}
                   </h4>
                   <Button
                     asChild
                     variant="outline"
                     size="sm"
-                    className="rounded-xl bg-white/60 border-white/50 hover:bg-white/80 text-xs sm:text-sm"
+                    className="rounded-xl bg-white/50 backdrop-blur-md border-white/40 hover:bg-white/80 text-sm"
                   >
                     <a
                       href={runner.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1.5"
+                      className="flex items-center gap-2"
                     >
                       View Project
-                      <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      <ExternalLink className="w-4 h-4" />
                     </a>
                   </Button>
                 </GlassCard>
@@ -163,13 +176,18 @@ const WinnersSection = () => {
 
         {/* CTA */}
         <ScrollAnimation className="text-center" delay={0.4}>
-          <p className="text-sm sm:text-base text-foreground/60 mb-4">
+          <p className="text-base sm:text-lg text-foreground/60 mb-6">
             Want to see your project here?
           </p>
-          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ duration: 0.2 }}
+          >
             <Button
               asChild
-              className="w-full sm:w-auto bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-2xl px-6 sm:px-8 py-5 sm:py-4"
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl px-8 sm:px-10 py-6 text-base sm:text-lg shadow-xl shadow-primary/20"
             >
               <a
                 href="https://t.co/qMNpoZoiQZ"

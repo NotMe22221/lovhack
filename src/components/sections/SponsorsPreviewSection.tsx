@@ -25,26 +25,27 @@ const SponsorsPreviewSection = () => {
   ];
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 px-4">
+    <section className="relative py-20 sm:py-24 md:py-32 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
-        <ScrollAnimation className="text-center mb-8 sm:mb-10 md:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">
+        <ScrollAnimation className="text-center mb-12 sm:mb-16 md:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
             Backed by <span className="text-primary">Leading Tools</span>
           </h2>
-          <p className="text-base sm:text-lg text-foreground/70 max-w-xl mx-auto px-2">
+          <p className="text-base sm:text-lg md:text-xl text-foreground/70 max-w-xl mx-auto px-2">
             LovHack participants get exclusive access to these amazing sponsor tools.
           </p>
         </ScrollAnimation>
 
         {/* Sponsor Logos */}
-        <StaggerContainer className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-12 mb-8 sm:mb-10" staggerDelay={0.08}>
+        <StaggerContainer className="flex flex-wrap items-center justify-center gap-5 sm:gap-8 md:gap-10 lg:gap-14 mb-12 sm:mb-16" staggerDelay={0.08}>
           {sponsors.map((sponsor) => (
             <StaggerItem key={sponsor.name}>
               <motion.div
-                className="w-16 h-16 sm:w-20 sm:h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 bg-white/60 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/50 flex items-center justify-center p-2 sm:p-3 md:p-4 transition-all duration-300"
-                whileHover={{ scale: 1.08, backgroundColor: "rgba(255, 255, 255, 0.9)" }}
+                className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 bg-white/50 backdrop-blur-2xl rounded-2xl sm:rounded-3xl border border-white/40 flex items-center justify-center p-3 sm:p-4 md:p-5 shadow-glass"
+                whileHover={{ scale: 1.1, y: -8, backgroundColor: "rgba(255, 255, 255, 0.8)" }}
                 whileTap={{ scale: 0.95 }}
+                transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
               >
                 <img
                   src={sponsor.logo}
@@ -63,9 +64,9 @@ const SponsorsPreviewSection = () => {
               asChild
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto rounded-2xl bg-white/60 border-white/50 hover:bg-white/80 py-5 sm:py-4"
+              className="w-full sm:w-auto rounded-2xl bg-white/50 backdrop-blur-xl border-white/40 hover:bg-white/80 py-6 shadow-glass"
             >
-              <Link to="/sponsors" className="flex items-center justify-center gap-2">
+              <Link to="/sponsors" className="flex items-center justify-center gap-3">
                 View All Sponsors & Offers
                 <ArrowRight className="w-5 h-5" />
               </Link>
