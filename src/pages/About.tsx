@@ -5,14 +5,17 @@ import Footer from "@/components/sections/Footer";
 import GlassCard from "@/components/GlassCard";
 import FAQSection from "@/components/sections/FAQSection";
 import DiscordCTASection from "@/components/sections/DiscordCTASection";
-import { Heart, Rocket, Users, GraduationCap, Target, Lightbulb, Clock, Trophy, MessageSquare, Send } from "lucide-react";
+import { Heart, Rocket, Users, GraduationCap, Target, Clock, Trophy, Send, CheckCircle2 } from "lucide-react";
+import aboutHeroImg from "@/assets/about-hero-abstract.png";
+import { motion } from "framer-motion";
 
 const About = () => {
   const values = [
     {
       icon: Rocket,
-      title: "Ship Over Slide Decks",
+      title: "Ship Over Slides",
       description: "We believe in building real, working projects — not just talking about ideas.",
+      size: "large", // spans 2 cols on mobile if needed
     },
     {
       icon: GraduationCap,
@@ -22,181 +25,142 @@ const About = () => {
     {
       icon: Users,
       title: "Community Support",
-      description: "No one builds alone. We help each other succeed through mentorship and collaboration.",
+      description: "No one builds alone. We help each other succeed through mentorship.",
     },
     {
       icon: Heart,
       title: "Beginner-Friendly",
       description: "Everyone starts somewhere. We create space for first-time builders to thrive.",
+      size: "large",
     },
   ];
 
-  const howItWorks = [
+  const timeline = [
     {
-      icon: Users,
-      step: "1",
+      step: "01",
       title: "Form or Join a Team",
       description: "Build solo or find teammates in our Discord. We have channels dedicated to team formation.",
     },
     {
-      icon: Clock,
-      step: "2",
-      title: "48-Hour Building Period",
+      step: "02",
+      title: "48-Hour Sprint",
       description: "Once the hackathon starts, you have 48 hours to build your project from scratch.",
     },
     {
-      icon: Send,
-      step: "3",
-      title: "Submit Your Project",
+      step: "03",
+      title: "Ship It",
       description: "Record a demo video, write a description, and submit before the deadline.",
     },
     {
-      icon: Trophy,
-      step: "4",
-      title: "Judging & Prizes",
-      description: "Our judges review all submissions and announce winners. Multiple categories mean more chances to win!",
+      step: "04",
+      title: "Win & Celebrate",
+      description: "Our judges review all submissions. Multiple categories mean more chances to win!",
     },
   ];
 
   return (
     <>
       <Helmet>
-        <title>About LovHack | Learn About Our Hackathon Community</title>
+        <title>About LovHack | We Build</title>
         <meta
           name="description"
-          content="Learn about LovHack - a beginner-friendly hackathon community focused on shipping real projects. Discover our mission, values, and how hackathons work."
+          content="We are a community of builders. Learn about LovHack's mission to help you ship your first project."
         />
-        <link rel="canonical" href="https://lovhack.dev/about" />
       </Helmet>
 
       <AnimatedBackground />
       <Navbar />
 
-      <main className="pt-24">
-        {/* Hero */}
-        <section className="px-4 py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              About <span className="text-primary">LovHack</span>
-            </h1>
-            <p className="text-xl text-foreground/70 max-w-2xl mx-auto">
-              We're an online hackathon organization for developers, designers, AI builders, 
-              indie makers, and students who want to build real projects fast.
+      <main className="pt-32 pb-20 overflow-hidden">
+        {/* HERO SECTION - SPLIT LAYOUT */}
+        <section className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto mb-20 lg:mb-32">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left Text */}
+            <div className="text-center lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 leading-[0.9] tracking-tighter">
+                  We <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">
+                    Build.
+                  </span>
+                </h1>
+                <p className="text-xl sm:text-2xl text-foreground/70 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+                  We're an online community for developers, designers, and AI creators who want to <span className="text-foreground decoration-primary underline decoration-2 underline-offset-4">ship real projects</span> fast.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Right Image - Floating */}
+            <div className="relative hidden lg:block">
+              <motion.div
+                className="relative z-10"
+                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <motion.img
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+                  src={aboutHeroImg}
+                  alt="Abstract Building Blocks"
+                  className="w-full max-w-md mx-auto drop-shadow-2xl"
+                />
+              </motion.div>
+
+              {/* Decorative blobs behind */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/20 blur-[100px] rounded-full -z-10" />
+            </div>
+          </div>
+        </section>
+
+        {/* MISSION STATEMENT */}
+        <section className="px-4 max-w-4xl mx-auto mb-24 lg:mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground/80">Our Mission</h2>
+            <p className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight text-foreground">
+              "To help people ship their <span className="text-primary">first project</span>, and their next one, and the one after that."
             </p>
-          </div>
+          </motion.div>
         </section>
 
-        {/* Mission */}
-        <section className="px-4 py-16">
-          <div className="max-w-6xl mx-auto">
-            <GlassCard className="p-8 md:p-12">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-shrink-0">
-                  <div className="w-24 h-24 rounded-3xl bg-primary/10 flex items-center justify-center">
-                    <Target className="w-12 h-12 text-primary" />
-                  </div>
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Our Mission</h2>
-                  <p className="text-lg text-foreground/70">
-                    LovHack exists to help people <strong>ship their first project</strong> — and their next one, 
-                    and the one after that. We believe everyone can be a builder, regardless of their 
-                    background or experience level. We create welcoming spaces where beginners can 
-                    learn alongside experienced developers, where ideas become real products in 48 hours, 
-                    and where community support makes the impossible feel possible.
-                  </p>
-                </div>
-              </div>
-            </GlassCard>
-          </div>
-        </section>
-
-        {/* What is a Hackathon */}
-        <section className="px-4 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                What is a <span className="text-primary">Hackathon</span>?
-              </h2>
+        {/* MASONRY VALUES */}
+        <section className="px-4 max-w-6xl mx-auto mb-24 lg:mb-32">
+          <div className="grid md:grid-cols-2 gap-6 items-start">
+            {/* Column 1 */}
+            <div className="flex flex-col gap-6 pt-12">
+              {values.filter((_, i) => i % 2 === 0).map((value, idx) => (
+                <ValueCard key={idx} value={value} />
+              ))}
             </div>
-            
-            <GlassCard className="p-8">
-              <div className="space-y-6 text-lg text-foreground/80">
-                <p>
-                  <strong>A hackathon</strong> is a building event where you create a working project in a short 
-                  time — usually 24 to 48 hours. Think of it as a creative sprint where you turn an idea 
-                  into something real.
-                </p>
-                <p>
-                  The word "hack" doesn't mean breaking into systems — it means <strong>building quickly 
-                  and creatively</strong>. Hackathons are about experimentation, learning, and shipping.
-                </p>
-                <p>
-                  At LovHack, you can build anything: web apps, mobile apps, AI tools, games, 
-                  browser extensions, productivity tools — whatever you can imagine and create in 48 hours.
-                </p>
-                <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-xl border border-primary/10">
-                  <Lightbulb className="w-6 h-6 text-primary flex-shrink-0" />
-                  <p className="text-foreground/70 text-base">
-                    <strong>Pro tip:</strong> You don't need to be a programmer! Many participants use 
-                    AI tools, low-code platforms, or team up with developers.
-                  </p>
-                </div>
-              </div>
-            </GlassCard>
-          </div>
-        </section>
-
-        {/* Our Values */}
-        <section className="px-4 py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                Our <span className="text-primary">Values</span>
-              </h2>
-              <p className="text-lg text-foreground/70">What guides everything we do at LovHack.</p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {values.map((value, index) => (
-                <GlassCard key={index} className="p-6 flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <value.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2">{value.title}</h3>
-                    <p className="text-foreground/70">{value.description}</p>
-                  </div>
-                </GlassCard>
+            {/* Column 2 - Offset */}
+            <div className="flex flex-col gap-6">
+              {values.filter((_, i) => i % 2 !== 0).map((value, idx) => (
+                <ValueCard key={idx} value={value} />
               ))}
             </div>
           </div>
         </section>
 
-        {/* How Hackathons Work */}
-        <section className="px-4 py-16">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                How <span className="text-primary">Hackathons</span> Work
-              </h2>
-              <p className="text-lg text-foreground/70">From start to finish, here's what to expect.</p>
-            </div>
+        {/* TIMELINE PATH */}
+        <section className="px-4 max-w-3xl mx-auto mb-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-black text-foreground mb-4">How it Works</h2>
+            <p className="text-xl text-foreground/60">From zero to shipped in 48 hours.</p>
+          </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {howItWorks.map((item, index) => (
-                <GlassCard key={index} className="p-6 text-center relative">
-                  <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-sm">
-                    {item.step}
-                  </div>
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <item.icon className="w-7 h-7 text-primary" />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">{item.title}</h3>
-                  <p className="text-sm text-foreground/70">{item.description}</p>
-                </GlassCard>
-              ))}
-            </div>
+          <div className="relative border-l-2 border-primary/20 pl-8 ml-4 md:ml-10 space-y-16">
+            {timeline.map((item, index) => (
+              <TimelineItem key={index} item={item} />
+            ))}
           </div>
         </section>
 
@@ -208,5 +172,34 @@ const About = () => {
     </>
   );
 };
+
+// Sub-components for cleaner code
+const ValueCard = ({ value }: { value: any }) => (
+  <GlassCard className="p-8 hover:-translate-y-2 transition-transform duration-300">
+    <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+      <value.icon className="w-7 h-7 text-primary" />
+    </div>
+    <h3 className="text-2xl font-bold mb-3">{value.title}</h3>
+    <p className="text-foreground/70 text-lg leading-relaxed">{value.description}</p>
+  </GlassCard>
+);
+
+const TimelineItem = ({ item }: { item: any }) => (
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    whileInView={{ opacity: 1, x: 0 }}
+    viewport={{ once: true, margin: "-100px" }}
+    className="relative"
+  >
+    {/* Dot on line */}
+    <div className="absolute -left-[41px] top-0 w-5 h-5 rounded-full bg-background border-4 border-primary" />
+
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 items-baseline mb-2">
+      <span className="text-5xl font-black text-primary/20">{item.step}</span>
+      <h3 className="text-2xl font-bold text-foreground">{item.title}</h3>
+    </div>
+    <p className="text-lg text-foreground/70">{item.description}</p>
+  </motion.div>
+);
 
 export default About;
