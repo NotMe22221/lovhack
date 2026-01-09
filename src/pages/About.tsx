@@ -84,7 +84,7 @@ const About = () => {
               >
                 <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 leading-[0.9] tracking-tighter">
                   We <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-rose-400">
                     Build.
                   </span>
                 </h1>

@@ -17,44 +17,6 @@ const Season1 = () => {
     { icon: Trophy, value: "$5K+", label: "In Prizes" },
   ];
 
-  const projects = [
-    {
-      title: "MindFlow",
-      desc: "AI-powered meditation companion that adapts to your biometrics.",
-      category: "Health & Wellness",
-      winner: true,
-    },
-    {
-      title: "DevSprint",
-      desc: "Gamified project management for solo developers.",
-      category: "Productivity",
-      winner: true,
-    },
-    {
-      title: "Echo",
-      desc: "Real-time voice translation for Discord voice channels.",
-      category: "Communication",
-      winner: false,
-    },
-    {
-      title: "PixelCraft",
-      desc: "Browser-based generative pixel art studio.",
-      category: "Creative Tool",
-      winner: false,
-    },
-    {
-      title: "GreenThumb",
-      desc: "IoT plant monitoring dashboard.",
-      category: "IoT",
-      winner: false,
-    },
-    {
-      title: "StudyBuddy",
-      desc: "Collaborative flashcards with spaced repetition.",
-      category: "Education",
-      winner: false,
-    },
-  ];
 
   return (
     <>
@@ -94,38 +56,6 @@ const Season1 = () => {
 
         {/* WINNERS PODIUM */}
         <WinnersSection />
-
-        {/* PROJECT GALLERY */}
-        <section className="px-4 max-w-7xl mx-auto mb-20">
-          <h2 className="text-3xl font-bold mb-8">Shipped Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <GlassCard key={index} className="p-6 group hover:border-primary/50 transition-colors">
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-xs font-bold px-2 py-1 rounded bg-black/5 uppercase tracking-wide">
-                    {project.category}
-                  </span>
-                  {project.winner && (
-                    <span className="text-xs font-bold px-2 py-1 rounded bg-yellow-400/20 text-yellow-700 flex items-center gap-1">
-                      <Trophy className="w-3 h-3" /> Winner
-                    </span>
-                  )}
-                </div>
-                <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
-                <p className="text-foreground/70 mb-6">{project.desc}</p>
-
-                <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="w-full gap-2 bg-white/50">
-                    <Play className="w-3 h-3" /> Demo
-                  </Button>
-                  <Button size="sm" variant="outline" className="w-full gap-2 bg-white/50">
-                    <Github className="w-3 h-3" /> Code
-                  </Button>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
-        </section>
 
         <DiscordCTASection />
       </main>
