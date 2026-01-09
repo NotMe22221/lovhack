@@ -59,7 +59,7 @@ const NewHeroSection = () => {
 
       <div
         ref={containerRef}
-        className="w-full max-w-5xl mx-auto text-center relative z-10"
+        className="w-full max-w-5xl mx-auto text-center relative z-10 pt-40" // Increased to pt-40 for significant downward shift
       >
         {/* Animated Badge */}
         <motion.div
@@ -72,7 +72,7 @@ const NewHeroSection = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          Season 2 Coming Late 2026
+          Season 2 Coming Soon
         </motion.div>
 
         {/* Main Headline - Bigger & Bolder */}

@@ -15,14 +15,15 @@ const WinnersSection = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   // Ordered as: 2nd, 1st, 3rd for podium display
+  // Ordered as: 2nd, 1st, 3rd for podium display
   const topWinners = [
     {
       place: "2nd",
       icon: Medal,
-      iconBgColor: "bg-gradient-to-br from-gray-200 to-gray-300",
-      iconColor: "text-gray-600",
+      iconBgColor: "bg-gradient-to-br from-slate-200 to-slate-300",
+      iconColor: "text-slate-600",
       podiumHeight: "h-28 sm:h-32 md:h-40",
-      podiumColor: "bg-gradient-to-t from-gray-300 to-gray-200",
+      podiumColor: "bg-gradient-to-b from-slate-100/90 to-slate-200/80 backdrop-blur-md border-t border-white/60",
       project: "Learn2Vibecode",
       description: "A learning platform that makes education engaging and accessible.",
       link: "https://www.learn2vibecode.dev/",
@@ -30,10 +31,10 @@ const WinnersSection = () => {
     {
       place: "1st",
       icon: Trophy,
-      iconBgColor: "bg-gradient-to-br from-yellow-200 to-amber-300",
-      iconColor: "text-yellow-700",
+      iconBgColor: "bg-gradient-to-br from-amber-100 to-amber-200",
+      iconColor: "text-amber-600",
       podiumHeight: "h-36 sm:h-44 md:h-52",
-      podiumColor: "bg-gradient-to-t from-yellow-400 to-yellow-300",
+      podiumColor: "bg-gradient-to-b from-amber-100/90 to-amber-200/80 backdrop-blur-md border-t border-white/60 shadow-[0_0_30px_rgba(251,191,36,0.2)]",
       project: "Molyn",
       description: "An innovative project that impressed judges with its creativity and execution.",
       link: "http://molyn.lovable.app/",
@@ -41,10 +42,10 @@ const WinnersSection = () => {
     {
       place: "3rd",
       icon: Award,
-      iconBgColor: "bg-gradient-to-br from-orange-200 to-orange-300",
+      iconBgColor: "bg-gradient-to-br from-orange-100 to-orange-200",
       iconColor: "text-orange-700",
       podiumHeight: "h-20 sm:h-24 md:h-32",
-      podiumColor: "bg-gradient-to-t from-orange-400 to-orange-300",
+      podiumColor: "bg-gradient-to-b from-orange-100/90 to-orange-200/80 backdrop-blur-md border-t border-white/60",
       project: "InternHub",
       description: "Connecting interns with opportunities in a seamless way.",
       link: "https://internershiphub.lovable.app/",
