@@ -168,7 +168,7 @@ const WhatIsLovHackSection = () => {
             ref={setTextRef(0)}
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium leading-tight opacity-0"
           >
-            A <span className="text-primary font-semibold">hackathon</span> is a building event where you create a working project in a short time — usually 48 hours.
+            A <span className="text-primary font-semibold">hackathon</span> is a building event where you create a working project in a short time, usually 48 hours.
           </p>
 
           <p

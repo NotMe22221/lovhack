@@ -123,7 +123,7 @@ const Season1PreviewSection = () => {
 
               {/* Highlight */}
               <p className="mt-8 sm:mt-10 md:mt-12 text-center text-sm sm:text-base md:text-lg lg:text-xl text-foreground/70 px-2">
-                Projects ranged from <strong className="text-foreground/90">AI assistants</strong> to <strong className="text-foreground/90">productivity tools</strong> to <strong className="text-foreground/90">games</strong> —
+                Projects ranged from <strong className="text-foreground/90">AI assistants</strong> to <strong className="text-foreground/90">productivity tools</strong> to <strong className="text-foreground/90">games</strong>,
                 all built in just 48 hours.
               </p>
             </div>

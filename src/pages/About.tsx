@@ -14,7 +14,7 @@ const About = () => {
     {
       icon: Rocket,
       title: "Ship Over Slides",
-      description: "We believe in building real, working projects — not just talking about ideas.",
+      description: "We believe in building real, working projects, not just talking about ideas.",
       size: "large", // spans 2 cols on mobile if needed
     },
     {
