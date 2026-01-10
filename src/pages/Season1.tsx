@@ -57,7 +57,7 @@ const Season1 = () => {
                 Time Capsule
               </div>
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground mb-2 tracking-tighter">Season 1</h1>
-              <p className="text-xl text-foreground/60">January 3rd - 5th, 2026</p>
+              <p className="text-xl text-foreground/60">January 2nd - 4th, 2025</p>
             </div>
             <div className="flex flex-wrap gap-3 sm:gap-4">
               {stats.map((stat, idx) => (
