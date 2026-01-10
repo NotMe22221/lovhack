@@ -6,7 +6,7 @@ import GlassCard from "@/components/GlassCard";
 import FAQSection from "@/components/sections/FAQSection";
 import DiscordCTASection from "@/components/sections/DiscordCTASection";
 import { Heart, Rocket, Users, GraduationCap, Target, Clock, Trophy, Send, CheckCircle2 } from "lucide-react";
-import aboutHeroImg from "@/assets/about-hero-abstract.png";
+import aboutHeroImg from "@/assets/about-hero-community.png";
 import { motion } from "framer-motion";
 
 const About = () => {

@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import cardShip from "@/assets/card-ship.png";
-import cardLearn from "@/assets/card-learn.png";
+import cardLearn from "@/assets/card-learn-new.png";
 import cardSkills from "@/assets/card-skills.png";
 
 gsap.registerPlugin(ScrollTrigger);

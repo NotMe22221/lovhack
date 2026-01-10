@@ -31,11 +31,11 @@ const WhoIsForSection = () => {
       // Header animation with creative emphasis
       gsap.fromTo(
         headerRef.current,
-        { opacity: 0, y: 60 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
+          duration: 0.7,
           ease: "power3.out",
           scrollTrigger: {
             trigger: headerRef.current,
@@ -50,13 +50,12 @@ const WhoIsForSection = () => {
         const cards = cardsRef.current.querySelectorAll(".audience-card");
         gsap.fromTo(
           cards,
-          { opacity: 0, y: 80, rotateX: 15 },
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
             y: 0,
-            rotateX: 0,
-            duration: 0.9,
-            stagger: 0.2,
+            duration: 0.6,
+            stagger: 0.15,
             ease: "power3.out",
             scrollTrigger: {
               trigger: cardsRef.current,
@@ -70,13 +69,12 @@ const WhoIsForSection = () => {
       // Bottom message
       gsap.fromTo(
         messageRef.current,
-        { opacity: 0, scale: 0.9, y: 30 },
+        { opacity: 0, y: 20 },
         {
           opacity: 1,
-          scale: 1,
           y: 0,
-          duration: 0.8,
-          ease: "back.out(1.5)",
+          duration: 0.5,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: messageRef.current,
             start: "top 90%",

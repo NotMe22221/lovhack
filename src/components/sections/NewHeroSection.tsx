@@ -59,14 +59,14 @@ const NewHeroSection = () => {
 
       <div
         ref={containerRef}
-        className="w-full max-w-5xl mx-auto text-center relative z-10 pt-40" // Increased to pt-40 for significant downward shift
+        className="w-full max-w-5xl mx-auto text-center relative z-10 pt-56"
       >
         {/* Animated Badge */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-sm mb-6 uppercase tracking-wider shadow-[0_0_15px_rgba(236,72,153,0.3)]"
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold text-sm mb-6 uppercase tracking-wider"
         >
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -94,15 +94,15 @@ const NewHeroSection = () => {
           The <span className="text-foreground decoration-primary/50 underline underline-offset-4">online hackathon</span> where first-time builders ship projects in 48 hours. No experience required.
         </p>
 
-        {/* CTAs */}
+        {/* CTAs - Fixed buttons */}
         <div
           ref={ctaRef}
-          className="flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-center sm:justify-center mb-16 md:mb-24 px-4"
+          className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center mb-16 md:mb-24 px-4"
         >
           <Button
             asChild
             size="lg"
-            className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl px-8 md:px-12 py-7 text-xl font-bold shadow-xl shadow-primary/30 transition-all duration-300 hover:scale-105 hover:shadow-primary/40"
+            className="h-16 sm:h-auto bg-primary hover:bg-primary/90 text-primary-foreground rounded-2xl px-8 md:px-10 py-5 text-lg sm:text-xl font-bold shadow-xl shadow-primary/30 transition-all duration-200 hover:scale-[1.02]"
           >
             <a
               href="https://t.co/qMNpoZoiQZ"
@@ -110,7 +110,7 @@ const NewHeroSection = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-3"
             >
-              <Users className="w-5 h-5 md:w-6 md:h-6" />
+              <Users className="w-5 h-5" />
               Join Discord
             </a>
           </Button>
@@ -118,10 +118,10 @@ const NewHeroSection = () => {
             asChild
             variant="outline"
             size="lg"
-            className="w-full sm:w-auto rounded-2xl px-8 md:px-12 py-7 text-xl font-bold bg-white/40 backdrop-blur-xl border-white/50 hover:bg-white/60 shadow-lg transition-all duration-300 hover:scale-105"
+            className="h-16 sm:h-auto rounded-2xl px-8 md:px-10 py-5 text-lg sm:text-xl font-bold bg-white/60 backdrop-blur-xl border-white/60 hover:bg-white/80 shadow-lg transition-all duration-200 hover:scale-[1.02]"
           >
             <Link to="/season-1" className="flex items-center justify-center gap-3">
-              <Play className="w-5 h-5 md:w-6 md:h-6 fill-current" />
+              <Play className="w-5 h-5" />
               Watch Recap
             </Link>
           </Button>
