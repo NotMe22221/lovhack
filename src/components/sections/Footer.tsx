@@ -29,7 +29,7 @@ const Footer = () => {
               Built for builders, by builders.
             </p>
             <p className="text-sm sm:text-base text-foreground/60 mb-8 sm:mb-10">
-              LovHack — Ship something real.
+              LovHack - Ship something real.
             </p>
 
             {/* Navigation Links */}

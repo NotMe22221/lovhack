@@ -13,7 +13,7 @@ const AboutSection = () => {
           <div className="space-y-6">
             <p className="text-lg sm:text-xl text-foreground/80 leading-relaxed">
               <strong className="text-foreground">LovHack 2026</strong> is a <strong className="text-foreground">48-hour online hackathon</strong> focused 
-              on shipping real web applications. LovHack developers come together to build web apps with AI-assisted workflows — no fluff, no long talks, just building at <strong className="text-foreground">lovhack.dev</strong>.
+              on shipping real web applications. LovHack developers come together to build web apps with AI-assisted workflows. No fluff, no long talks, just building at <strong className="text-foreground">lovhack.dev</strong>.
             </p>
             
             <div className="flex flex-wrap justify-center gap-4 pt-4">

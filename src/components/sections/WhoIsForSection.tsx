@@ -134,7 +134,7 @@ const WhoIsForSection = () => {
                 ))}
               </ul>
               <p className="mt-5 sm:mt-6 md:mt-8 text-xs sm:text-sm md:text-base text-foreground/60 italic border-l-2 border-primary/30 pl-3 sm:pl-4">
-                "I had never coded before LovHack. Now I have a live app!" — Past Participant
+                "I had never coded before LovHack. Now I have a live app!" - Past Participant
               </p>
             </GlassCard>
           </div>
@@ -159,7 +159,7 @@ const WhoIsForSection = () => {
                 ))}
               </ul>
               <p className="mt-5 sm:mt-6 md:mt-8 text-xs sm:text-sm md:text-base text-foreground/60 italic border-l-2 border-primary/30 pl-3 sm:pl-4">
-                "Best hackathon I've done. Great tools, great people." — Past Winner
+                "Best hackathon I've done. Great tools, great people." - Past Winner
               </p>
             </GlassCard>
           </div>

@@ -40,7 +40,7 @@ const HeroSection = () => {
           style={{ animationDelay: '0.4s' }}
         >
           <p className="text-lg text-foreground/60">
-            January 2nd, 8:00 AM — January 4th, 8:00 AM
+            January 2nd, 8:00 AM - January 4th, 8:00 AM
           </p>
           <p className="text-lg font-medium text-foreground/70 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
