@@ -4,19 +4,12 @@ import { supabase } from "@/integrations/supabase/client";
 import GlassCard from "@/components/GlassCard";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { 
   CheckCircle, 
   XCircle, 
   Heart, 
   ArrowLeft, 
   Download,
-  ChevronDown,
   Linkedin,
   Twitter,
 } from "lucide-react";
@@ -28,6 +21,7 @@ interface Certificate {
   hackathon_name: string;
   issuer_name: string;
   issued_at: string;
+  pdf_url: string | null;
 }
 
 const certificateTypeLabels: Record<string, string> = {
@@ -57,14 +51,18 @@ const CertificateVerification = () => {
         setIsLoading(false);
         return;
       }
-      // Use RPC function for public verification (doesn't expose email)
-      const { data, error } = await supabase
-        .rpc("verify_certificate", { p_certificate_id: certificateId });
 
-      if (error || !data || data.length === 0) {
+      // Get certificate data including pdf_url
+      const { data, error } = await supabase
+        .from("certificates")
+        .select("certificate_id, recipient_name, certificate_type, hackathon_name, issuer_name, issued_at, pdf_url")
+        .eq("certificate_id", certificateId)
+        .single();
+
+      if (error || !data) {
         setNotFound(true);
       } else {
-        setCertificate(data[0]);
+        setCertificate(data);
       }
       setIsLoading(false);
     };
@@ -72,85 +70,16 @@ const CertificateVerification = () => {
     fetchCertificate();
   }, [certificateId]);
 
-  const generateCertificateCanvas = (): Promise<HTMLCanvasElement> => {
-    return new Promise((resolve, reject) => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      if (!ctx || !certificate) {
-        reject(new Error("Canvas or certificate not available"));
-        return;
-      }
-
-      const img = new Image();
-      img.crossOrigin = "anonymous";
-      img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        
-        // Draw template
-        ctx.drawImage(img, 0, 0);
-        
-        // Add recipient name in the blank area (around 38% from top)
-        const nameY = img.height * 0.42;
-        const fontSize = Math.min(72, img.width / 12);
-        ctx.font = `bold ${fontSize}px 'Dancing Script', cursive, serif`;
-        ctx.fillStyle = "#8B4513";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(certificate.recipient_name, canvas.width / 2, nameY);
-
-        // Cover the placeholder text with background, then add real URL
-        const urlY = img.height * 0.978;
-        const urlFontSize = Math.min(14, img.width / 70);
-        const urlText = `Certificate Verification URL : https://lovhack.dev/certificate/${certificate.certificate_id}`;
-        
-        // Measure text to create proper background
-        ctx.font = `${urlFontSize}px Arial, sans-serif`;
-        const textWidth = ctx.measureText(urlText).width;
-        
-        // Draw background rectangle to cover placeholder
-        ctx.fillStyle = "#FDF5E6";
-        ctx.fillRect(canvas.width / 2 - textWidth / 2 - 20, urlY - urlFontSize - 2, textWidth + 40, urlFontSize * 2 + 4);
-        
-        // Draw the real URL text
-        ctx.fillStyle = "#333333";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(urlText, canvas.width / 2, urlY);
-
-        resolve(canvas);
-      };
-      img.onerror = () => reject(new Error("Failed to load image"));
-      img.src = "/certificate-template-v2.jpg";
-    });
-  };
-
-  const handleDownload = async (format: "png" | "jpeg" | "pdf") => {
-    if (!certificate) return;
-
-    try {
-      const canvas = await generateCertificateCanvas();
-      const fileName = `LovHack2026-Certificate-${certificate.recipient_name.replace(/\s+/g, "-")}`;
-
-      if (format === "pdf") {
-        const { jsPDF } = await import("jspdf");
-        const imgData = canvas.toDataURL("image/jpeg", 0.95);
-        const pdf = new jsPDF({
-          orientation: "landscape",
-          unit: "px",
-          format: [canvas.width, canvas.height],
-        });
-        pdf.addImage(imgData, "JPEG", 0, 0, canvas.width, canvas.height);
-        pdf.save(`${fileName}.pdf`);
-      } else {
-        const link = document.createElement("a");
-        link.download = `${fileName}.${format}`;
-        link.href = canvas.toDataURL(`image/${format}`, format === "jpeg" ? 0.95 : 1);
-        link.click();
-      }
-    } catch (error) {
-      console.error("Error generating certificate:", error);
-    }
+  const handleDownload = () => {
+    if (!certificate?.pdf_url) return;
+    
+    // Get public URL from storage
+    const { data } = supabase.storage
+      .from("certificates")
+      .getPublicUrl(certificate.pdf_url);
+    
+    // Open PDF in new tab for download
+    window.open(data.publicUrl, "_blank");
   };
 
   const shareUrl = certificate 
@@ -163,7 +92,7 @@ const CertificateVerification = () => {
   };
 
   const shareOnTwitter = () => {
-    const text = `I participated in LovHack 2026 Hackathon! Check out my certificate:`;
+    const text = `I participated in LovHack 2025 Hackathon! Check out my certificate:`;
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
     window.open(url, "_blank");
   };
@@ -206,50 +135,7 @@ const CertificateVerification = () => {
               </p>
             </GlassCard>
           ) : (
-            <div className="w-full max-w-4xl space-y-6">
-              {/* Certificate Display */}
-              <div className="relative bg-white rounded-xl shadow-2xl overflow-hidden">
-                {/* Template Background */}
-                <div className="relative">
-                  <img 
-                    src="/certificate-template-v2.jpg" 
-                    alt="Certificate Template"
-                    className="w-full h-auto"
-                  />
-                  {/* Overlay Name in blank area */}
-                  <div 
-                    className="absolute left-0 right-0 flex items-center justify-center"
-                    style={{ top: "38%" }}
-                  >
-                    <span 
-                      className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-center px-4"
-                      style={{ 
-                        fontFamily: "'Dancing Script', cursive, serif",
-                        color: "#8B4513",
-                      }}
-                    >
-                      {certificate?.recipient_name}
-                    </span>
-                  </div>
-                  {/* Overlay Verification URL at the bottom to cover the placeholder */}
-                  <div 
-                    className="absolute left-0 right-0 flex items-center justify-center"
-                    style={{ bottom: "2.2%" }}
-                  >
-                    <span 
-                      className="text-xs sm:text-sm px-8 py-2"
-                      style={{ 
-                        color: "#333333",
-                        fontFamily: "Arial, sans-serif",
-                        backgroundColor: "#FDF5E6",
-                      }}
-                    >
-                      Certificate Verification URL : https://lovhack.dev/certificate/{certificate?.certificate_id}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
+            <div className="w-full max-w-2xl space-y-6">
               {/* Valid Badge */}
               <div className="flex justify-center">
                 <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-green-500/10 border border-green-500/30 backdrop-blur-sm">
@@ -258,53 +144,9 @@ const CertificateVerification = () => {
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <GlassCard hover={false} className="!p-4">
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button className="flex-1 gap-2">
-                        <Download className="w-4 h-4" />
-                        Download Certificate
-                        <ChevronDown className="w-4 h-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => handleDownload("png")}>
-                        Download as PNG
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleDownload("jpeg")}>
-                        Download as JPEG
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleDownload("pdf")}>
-                        Download as PDF
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  
-                  <Button 
-                    variant="outline"
-                    onClick={shareOnLinkedIn}
-                    className="flex-1 gap-2"
-                  >
-                    <Linkedin className="w-4 h-4" />
-                    Add to LinkedIn
-                  </Button>
-                  
-                  <Button 
-                    variant="outline"
-                    onClick={shareOnTwitter}
-                    className="flex-1 gap-2"
-                  >
-                    <Twitter className="w-4 h-4" />
-                    Share on X
-                  </Button>
-                </div>
-              </GlassCard>
-
               {/* Certificate Details */}
               <GlassCard hover={false}>
-                <div className="flex items-center justify-center gap-2 mb-4">
+                <div className="flex items-center justify-center gap-2 mb-6">
                   <Heart className="w-6 h-6 text-primary fill-primary" />
                   <span className="text-xl font-bold text-foreground">Certificate Details</span>
                 </div>
@@ -343,6 +185,36 @@ const CertificateVerification = () => {
                   <p className="font-mono text-xs text-foreground break-all">
                     {certificate?.certificate_id}
                   </p>
+                </div>
+              </GlassCard>
+
+              {/* Action Buttons */}
+              <GlassCard hover={false} className="!p-4">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  {certificate?.pdf_url && (
+                    <Button onClick={handleDownload} className="flex-1 gap-2">
+                      <Download className="w-4 h-4" />
+                      Download Certificate
+                    </Button>
+                  )}
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={shareOnLinkedIn}
+                    className="flex-1 gap-2"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    Add to LinkedIn
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={shareOnTwitter}
+                    className="flex-1 gap-2"
+                  >
+                    <Twitter className="w-4 h-4" />
+                    Share on X
+                  </Button>
                 </div>
               </GlassCard>
             </div>
