@@ -23,6 +23,7 @@ export type Database = {
           id: string
           issued_at: string | null
           issuer_name: string | null
+          pdf_url: string | null
           recipient_email: string
           recipient_name: string
         }
@@ -34,6 +35,7 @@ export type Database = {
           id?: string
           issued_at?: string | null
           issuer_name?: string | null
+          pdf_url?: string | null
           recipient_email: string
           recipient_name: string
         }
@@ -45,6 +47,7 @@ export type Database = {
           id?: string
           issued_at?: string | null
           issuer_name?: string | null
+          pdf_url?: string | null
           recipient_email?: string
           recipient_name?: string
         }
