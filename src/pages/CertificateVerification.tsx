@@ -158,6 +158,19 @@ const CertificateVerification = () => {
                 </div>
               </div>
 
+              {/* Certificate Image Preview */}
+              {certificate?.image_url && (
+                <GlassCard hover={false} className="!p-4">
+                  <div className="rounded-lg overflow-hidden">
+                    <img 
+                      src={getCertificateImageUrl() || ""} 
+                      alt={`Certificate for ${certificate.recipient_name}`}
+                      className="w-full h-auto object-contain"
+                    />
+                  </div>
+                </GlassCard>
+              )}
+
               {/* Certificate Details */}
               <GlassCard hover={false}>
                 <div className="flex items-center justify-center gap-2 mb-6">
@@ -219,6 +232,15 @@ const CertificateVerification = () => {
                   >
                     <Linkedin className="w-4 h-4" />
                     Add to LinkedIn
+                  </Button>
+                  
+                  <Button 
+                    variant="outline"
+                    onClick={shareOnFacebook}
+                    className="flex-1 gap-2"
+                  >
+                    <Facebook className="w-4 h-4" />
+                    Share on Facebook
                   </Button>
                   
                   <Button 
