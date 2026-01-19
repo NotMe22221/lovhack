@@ -153,12 +153,15 @@ const CertificateVerification = () => {
               {/* Certificate Image Preview */}
               {certificate?.image_url && (
                 <GlassCard hover={false} className="!p-4">
-                  <div className="rounded-lg overflow-hidden">
-                    <img 
-                      src={getCertificateImageUrl() || ""} 
-                      alt={`Certificate for ${certificate.recipient_name}`}
-                      className="w-full h-auto object-contain"
-                    />
+                  <div className="flex justify-center">
+                    <div className="rounded-lg overflow-hidden max-w-md">
+                      <img 
+                        src={getCertificateImageUrl() || ""} 
+                        alt={`Certificate for ${certificate.recipient_name}`}
+                        className="h-full w-auto object-contain"
+                        style={{ aspectRatio: '210/297' }}
+                      />
+                    </div>
                   </div>
                 </GlassCard>
               )}
