@@ -54,17 +54,15 @@ const CertificateVerification = () => {
         return;
       }
 
-      // Get certificate data including pdf_url and image_url
-      const { data, error } = await supabase
-        .from("certificates")
-        .select("certificate_id, recipient_name, certificate_type, hackathon_name, issuer_name, issued_at, pdf_url, image_url")
-        .eq("certificate_id", certificateId)
-        .single();
+      // Use verify_certificate function which bypasses RLS for public access
+      const { data, error } = await supabase.rpc("verify_certificate", {
+        p_certificate_id: certificateId,
+      });
 
-      if (error || !data) {
+      if (error || !data || data.length === 0) {
         setNotFound(true);
       } else {
-        setCertificate(data);
+        setCertificate(data[0]);
       }
       setIsLoading(false);
     };

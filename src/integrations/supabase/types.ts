@@ -25,8 +25,8 @@ export type Database = {
           issued_at: string | null
           issuer_name: string | null
           pdf_url: string | null
-          recipient_email: string
-          recipient_name: string
+          recipient_email: string | null
+          recipient_name: string | null
         }
         Insert: {
           certificate_id: string
@@ -38,8 +38,8 @@ export type Database = {
           issued_at?: string | null
           issuer_name?: string | null
           pdf_url?: string | null
-          recipient_email: string
-          recipient_name: string
+          recipient_email?: string | null
+          recipient_name?: string | null
         }
         Update: {
           certificate_id?: string
@@ -51,8 +51,8 @@ export type Database = {
           issued_at?: string | null
           issuer_name?: string | null
           pdf_url?: string | null
-          recipient_email?: string
-          recipient_name?: string
+          recipient_email?: string | null
+          recipient_name?: string | null
         }
         Relationships: []
       }
@@ -95,8 +95,10 @@ export type Database = {
           certificate_id: string
           certificate_type: string
           hackathon_name: string
+          image_url: string
           issued_at: string
           issuer_name: string
+          pdf_url: string
           recipient_name: string
         }[]
       }
