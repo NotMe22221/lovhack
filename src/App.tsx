@@ -11,7 +11,7 @@ import About from "./pages/About";
 import Sponsors from "./pages/Sponsors";
 import Hackathons from "./pages/Hackathons";
 import NotFound from "./pages/NotFound";
-import CertificateVerification from "./pages/CertificateVerification";
+
 import AdminCertificates from "./pages/AdminCertificates";
 
 const queryClient = new QueryClient();
@@ -30,7 +30,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/hackathons" element={<Hackathons />} />
-            <Route path="/certificate/:certificateId" element={<CertificateVerification />} />
+            
             <Route path="/admin/certificates" element={<AdminCertificates />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
