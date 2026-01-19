@@ -21,6 +21,7 @@ export type Database = {
           created_at: string | null
           hackathon_name: string | null
           id: string
+          image_url: string | null
           issued_at: string | null
           issuer_name: string | null
           pdf_url: string | null
@@ -33,6 +34,7 @@ export type Database = {
           created_at?: string | null
           hackathon_name?: string | null
           id?: string
+          image_url?: string | null
           issued_at?: string | null
           issuer_name?: string | null
           pdf_url?: string | null
@@ -45,6 +47,7 @@ export type Database = {
           created_at?: string | null
           hackathon_name?: string | null
           id?: string
+          image_url?: string | null
           issued_at?: string | null
           issuer_name?: string | null
           pdf_url?: string | null
