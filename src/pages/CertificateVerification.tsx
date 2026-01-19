@@ -75,13 +75,8 @@ const CertificateVerification = () => {
   const handleDownload = () => {
     if (!certificate?.pdf_url) return;
     
-    // Get public URL from storage
-    const { data } = supabase.storage
-      .from("certificates")
-      .getPublicUrl(certificate.pdf_url);
-    
-    // Open PDF in new tab for download
-    window.open(data.publicUrl, "_blank");
+    // Open PDF in new tab for download (using public folder path)
+    window.open(certificate.pdf_url, "_blank");
   };
 
   const shareUrl = certificate 
@@ -107,8 +102,7 @@ const CertificateVerification = () => {
 
   const getCertificateImageUrl = () => {
     if (!certificate?.image_url) return null;
-    const { data } = supabase.storage.from("certificates").getPublicUrl(certificate.image_url);
-    return data.publicUrl;
+    return certificate.image_url;
   };
 
   return (
