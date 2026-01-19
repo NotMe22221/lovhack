@@ -12,6 +12,7 @@ import {
   Download,
   Linkedin,
   Twitter,
+  Facebook,
 } from "lucide-react";
 
 interface Certificate {
@@ -22,6 +23,7 @@ interface Certificate {
   issuer_name: string;
   issued_at: string;
   pdf_url: string | null;
+  image_url: string | null;
 }
 
 const certificateTypeLabels: Record<string, string> = {
@@ -52,10 +54,10 @@ const CertificateVerification = () => {
         return;
       }
 
-      // Get certificate data including pdf_url
+      // Get certificate data including pdf_url and image_url
       const { data, error } = await supabase
         .from("certificates")
-        .select("certificate_id, recipient_name, certificate_type, hackathon_name, issuer_name, issued_at, pdf_url")
+        .select("certificate_id, recipient_name, certificate_type, hackathon_name, issuer_name, issued_at, pdf_url, image_url")
         .eq("certificate_id", certificateId)
         .single();
 
@@ -92,9 +94,21 @@ const CertificateVerification = () => {
   };
 
   const shareOnTwitter = () => {
-    const text = `I participated in LovHack 2025 Hackathon! Check out my certificate:`;
+    const certificateLabel = certificateTypeLabels[certificate?.certificate_type || ""] || "Participant";
+    const text = `I'm a ${certificateLabel} at ${certificate?.hackathon_name || "LovHack 2026"}! Check out my certificate:`;
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`;
     window.open(url, "_blank");
+  };
+
+  const shareOnFacebook = () => {
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
+    window.open(url, "_blank");
+  };
+
+  const getCertificateImageUrl = () => {
+    if (!certificate?.image_url) return null;
+    const { data } = supabase.storage.from("certificates").getPublicUrl(certificate.image_url);
+    return data.publicUrl;
   };
 
   return (
