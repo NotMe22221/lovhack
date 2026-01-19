@@ -157,7 +157,7 @@ const CertificateVerification = () => {
                     <img 
                       src={getCertificateImageUrl() || ""} 
                       alt={`Certificate for ${certificate.recipient_name}`}
-                      className="w-full h-auto object-contain"
+                      className="h-full w-auto object-contain mx-auto"
                     />
                   </div>
                 </GlassCard>
