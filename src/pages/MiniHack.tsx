@@ -117,26 +117,6 @@ const MiniHack = () => {
               Powered By
             </h2>
             <div className="grid sm:grid-cols-2 gap-6">
-              {/* CREAO */}
-              <GlassCard className="text-center">
-                <div className="h-20 flex items-center justify-center mb-4">
-                  <img 
-                    src={creaoLogoV2} 
-                    alt="CREAO" 
-                    className="max-h-full max-w-[180px] object-contain"
-                  />
-                </div>
-                <h3 className="font-bold text-xl text-foreground mb-2">CREAO</h3>
-                <p className="text-foreground/70 text-sm">
-                  Main event partner providing tools and resources for builders.
-                </p>
-                <Button asChild variant="outline" size="sm" className="mt-4 rounded-xl">
-                  <a href="https://creao.ai" target="_blank" rel="noreferrer">
-                    Learn More <ExternalLink className="w-3 h-3 ml-1" />
-                  </a>
-                </Button>
-              </GlassCard>
-
               {/* gen.xyz */}
               <GlassCard className="text-center">
                 <div className="h-20 flex items-center justify-center mb-4">
@@ -152,6 +132,26 @@ const MiniHack = () => {
                 </p>
                 <Button asChild variant="outline" size="sm" className="mt-4 rounded-xl">
                   <a href="https://gen.xyz" target="_blank" rel="noreferrer">
+                    Learn More <ExternalLink className="w-3 h-3 ml-1" />
+                  </a>
+                </Button>
+              </GlassCard>
+
+              {/* CREAO */}
+              <GlassCard className="text-center">
+                <div className="h-20 flex items-center justify-center mb-4">
+                  <img 
+                    src={creaoLogoV2} 
+                    alt="CREAO" 
+                    className="max-h-full max-w-[180px] object-contain"
+                  />
+                </div>
+                <h3 className="font-bold text-xl text-foreground mb-2">CREAO</h3>
+                <p className="text-foreground/70 text-sm">
+                  Main event partner providing tools and resources for builders.
+                </p>
+                <Button asChild variant="outline" size="sm" className="mt-4 rounded-xl">
+                  <a href="https://creao.ai" target="_blank" rel="noreferrer">
                     Learn More <ExternalLink className="w-3 h-3 ml-1" />
                   </a>
                 </Button>
