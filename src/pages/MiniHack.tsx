@@ -123,7 +123,7 @@ const MiniHack = () => {
                   <img 
                     src={genxyzLogo} 
                     alt="gen.xyz" 
-                    className="max-h-full max-w-[180px] object-contain"
+                    className="max-h-full max-w-[180px] object-contain invert"
                   />
                 </div>
                 <h3 className="font-bold text-xl text-foreground mb-2">gen.xyz</h3>
