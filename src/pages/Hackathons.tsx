@@ -15,9 +15,10 @@ const Hackathons = () => {
       status: "Coming Soon",
       statusColor: "text-green-500",
       description: "A smaller, focused hackathon perfect for your first build. Lower pressure.",
-      date: "TBA - Join Discord",
+      date: "Feb 14-15, 2025",
       type: "Beginner Friendly",
       color: "from-green-500/20 to-green-500/5",
+      link: "/mini-hack",
     },
     {
       name: "Season 2",
@@ -27,6 +28,7 @@ const Hackathons = () => {
       date: "Late 2026",
       type: "Global Event",
       color: "from-primary/20 to-primary/5",
+      link: null,
     },
   ];
 
@@ -92,13 +94,8 @@ const Hackathons = () => {
 };
 
 const TicketCard = ({ event, index }: { event: any, index: number }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1 }}
-      className="relative flex flex-col md:flex-row w-full h-auto md:h-64 rounded-3xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300"
-    >
+  const content = (
+    <>
       {/* Background with Gradient */}
       <div className={`absolute inset-0 bg-gradient-to-br ${event.color} backdrop-blur-xl border border-white/30`} />
 
@@ -134,8 +131,6 @@ const TicketCard = ({ event, index }: { event: any, index: number }) => {
           <div className="w-full md:w-[2px] h-[2px] md:h-full border-t-2 md:border-l-2 border-dashed border-foreground/20"></div>
         </div>
         {/* Notches */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-background rounded-full md:block hidden" /> {/* Left Notch (hidden as it would cut content) - actually let's do top/bottom notches on the line */}
-
         <div className="absolute top-[-16px] left-1/2 -translate-x-1/2 w-8 h-8 bg-background rounded-full md:block hidden" />
         <div className="absolute bottom-[-16px] left-1/2 -translate-x-1/2 w-8 h-8 bg-background rounded-full md:block hidden" />
 
@@ -148,16 +143,42 @@ const TicketCard = ({ event, index }: { event: any, index: number }) => {
       <div className="w-full md:w-64 bg-white/10 backdrop-blur-sm p-6 md:p-8 flex flex-col items-center justify-center relative z-10 border-l border-white/10">
         <QrCode className="w-24 h-24 text-foreground/20 mb-4 mix-blend-overlay" />
 
-        <Button
-          asChild
-          className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl font-bold"
-        >
-          <a href="https://t.co/qMNpoZoiQZ" target="_blank" rel="noreferrer">
-            Get Ticket
-          </a>
-        </Button>
+        {event.link ? (
+          <div className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl font-bold py-2 px-4 text-center">
+            Learn More
+          </div>
+        ) : (
+          <Button
+            asChild
+            className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl font-bold"
+          >
+            <a href="https://t.co/qMNpoZoiQZ" target="_blank" rel="noreferrer">
+              Get Ticket
+            </a>
+          </Button>
+        )}
       </div>
+    </>
+  );
 
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1 }}
+    >
+      {event.link ? (
+        <Link
+          to={event.link}
+          className="relative flex flex-col md:flex-row w-full h-auto md:h-64 rounded-3xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300 block"
+        >
+          {content}
+        </Link>
+      ) : (
+        <div className="relative flex flex-col md:flex-row w-full h-auto md:h-64 rounded-3xl overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+          {content}
+        </div>
+      )}
     </motion.div>
   );
 };
