@@ -23,14 +23,14 @@ const SponsorsPreviewSection = () => {
   const ctaRef = useRef<HTMLDivElement>(null);
 
   const sponsors = [
-    { name: "Lovable", logo: lovableLogo, size: "large" },
-    { name: "Creao", logo: creaoLogo, size: "medium" },
-    { name: "Hado", logo: hadoLogo, size: "medium" },
-    { name: "Floot", logo: flootLogo, size: "small" },
-    { name: "Qoder", logo: qoderLogo, size: "small" },
-    { name: "Dualite", logo: dualiteLogo, size: "small" },
-    { name: "Momentum", logo: momentumLogo, size: "small" },
-    { name: "gen.xyz", logo: genxyzLogo, size: "small" },
+    { name: "Lovable", logo: lovableLogo, size: "large", invert: false },
+    { name: "Creao", logo: creaoLogo, size: "medium", invert: false },
+    { name: "Hado", logo: hadoLogo, size: "medium", invert: false },
+    { name: "Floot", logo: flootLogo, size: "small", invert: false },
+    { name: "Qoder", logo: qoderLogo, size: "small", invert: false },
+    { name: "Dualite", logo: dualiteLogo, size: "small", invert: false },
+    { name: "Momentum", logo: momentumLogo, size: "small", invert: false },
+    { name: "gen.xyz", logo: genxyzLogo, size: "small", invert: true },
   ];
 
   useEffect(() => {
@@ -141,7 +141,7 @@ const SponsorsPreviewSection = () => {
                 <img
                   src={sponsor.logo}
                   alt={`${sponsor.name} logo`}
-                  className="max-w-[70%] max-h-[70%] object-contain group-hover:scale-110 transition-transform duration-500"
+                  className={`max-w-[70%] max-h-[70%] object-contain group-hover:scale-110 transition-transform duration-500 ${sponsor.invert ? 'invert' : ''}`}
                 />
               </div>
             </div>
