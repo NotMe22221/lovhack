@@ -10,7 +10,7 @@ import { Calendar, Users, Globe, Sparkles, ArrowLeft, ExternalLink } from "lucid
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import creaoLogo from "@/assets/creao-logo.png";
+import creaoLogoV2 from "@/assets/creao-logo-v2.png";
 import genxyzLogo from "@/assets/genxyz-logo.png";
 
 const MiniHack = () => {
@@ -121,7 +121,7 @@ const MiniHack = () => {
               <GlassCard className="text-center">
                 <div className="h-20 flex items-center justify-center mb-4">
                   <img 
-                    src={creaoLogo} 
+                    src={creaoLogoV2} 
                     alt="CREAO" 
                     className="max-h-full max-w-[180px] object-contain"
                   />
