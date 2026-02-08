@@ -1,98 +1,63 @@
 
-# LovHack Mini-Hack Page Implementation
+
+# Plan: Generate New Card Images for "Why LovHack" Section
 
 ## Overview
-Create a dedicated info page for Mini-Hack (the upcoming hackathon with CREAO), update the Hackathons page to link to it, and add gen.xyz logo to the homepage sponsors section.
+Generate 3 new AI-created images for the "Why LovHack" section cards, replacing the current stock-style images with custom artwork that better represents each concept.
 
----
+## Images to Generate
 
-## Tasks
+### 1. Ship Real Projects
+- **Concept**: A rocket launching from a laptop screen, symbolizing launching/shipping products
+- **Style**: Modern, vibrant, tech-focused illustration with purple/pink accents (matching LovHack brand colors)
 
-### 1. Add Logo Assets
-Copy the uploaded logos to the project:
-- **CREAO logo** → `src/assets/creao-logo.png` (already exists, will verify)
-- **gen.xyz logo** → `src/assets/genxyz-logo.png` (new file from uploaded image)
+### 2. Learn by Doing
+- **Concept**: Hands on keyboard with code/light effects, representing active learning and building
+- **Style**: Dynamic, energetic illustration showing the act of creation and learning
 
-### 2. Create Mini-Hack Info Page (`src/pages/MiniHack.tsx`)
-A dedicated landing page for the Mini-Hack event with:
+### 3. All Skill Levels
+- **Concept**: Diverse group of people/avatars collaborating, representing beginners to experts working together
+- **Style**: Inclusive, welcoming illustration showing teamwork across experience levels
 
-**Header Section:**
-- Event name: "Mini-Hack"
-- Tagline: "Your First Build Starts Here"
-- Dates: **February 14th - 15th, 2025**
-- Status badge: "Coming Soon"
+## Technical Implementation
 
-**Event Details Section:**
-- What is Mini-Hack? (beginner-friendly, lower pressure, 48-hour sprint)
-- Format (online, team or solo)
-- Who should join
+1. **Create Edge Function**: Build an edge function that uses the Lovable AI image generation API (`google/gemini-2.5-flash-image`)
 
-**Sponsors Section:**
-- CREAO as main partner (with logo)
-- gen.xyz offering free domains for winners (with logo)
+2. **Generate Images**: Call the edge function 3 times with appropriate prompts for each card
 
-**Prizes Section:**
-- Free .xyz domains for winners (from gen.xyz)
-- CREAO perks/access
+3. **Save Images**: 
+   - Upload generated images to storage
+   - Update the asset imports in `WhatIsLovHackSection.tsx`
 
-**CTA Section:**
-- "Get Ticket" / "Join Discord" buttons
-- Link back to /hackathons
+4. **Update Component**: Replace the image sources with the new generated images
 
-### 3. Update Hackathons Page (`src/pages/Hackathons.tsx`)
-Modify the Mini-Hack ticket card:
-- Change date from "TBA - Join Discord" to **"Feb 14-15, 2025"**
-- Make the card clickable → links to `/mini-hack`
-- Update description if needed
-
-### 4. Update App Routes (`src/App.tsx`)
-Add route for the new Mini-Hack page:
-```
-/mini-hack → MiniHack component
-```
-
-### 5. Add gen.xyz to Homepage Sponsors (`src/components/sections/SponsorsPreviewSection.tsx`)
-- Import gen.xyz logo
-- Add to sponsors array alongside existing sponsors
-
----
-
-## File Changes Summary
+## Files to Create/Modify
 
 | File | Action |
 |------|--------|
-| `src/assets/genxyz-logo.png` | Copy from upload |
-| `src/pages/MiniHack.tsx` | Create new page |
-| `src/pages/Hackathons.tsx` | Update Mini-Hack card (dates, link) |
-| `src/App.tsx` | Add /mini-hack route |
-| `src/components/sections/SponsorsPreviewSection.tsx` | Add gen.xyz logo |
-
----
+| `supabase/functions/generate-card-image/index.ts` | Create - Edge function for AI image generation |
+| `src/assets/card-ship-new.png` | Create - Generated image for "Ship Real Projects" |
+| `src/assets/card-learn-new-v2.png` | Create - Generated image for "Learn by Doing" |
+| `src/assets/card-skills-new.png` | Create - Generated image for "All Skill Levels" |
+| `src/components/sections/WhatIsLovHackSection.tsx` | Modify - Update image imports |
 
 ## Technical Details
 
-### MiniHack.tsx Structure
+### Edge Function Structure
 ```text
-├── Helmet (SEO meta tags)
-├── AnimatedBackground
-├── Navbar
-├── Main Content
-│   ├── Hero Section (title, dates, status)
-│   ├── About Section (what/who/format)
-│   ├── Sponsors Section (CREAO + gen.xyz logos)
-│   ├── Prizes Section (domains for winners)
-│   └── CTA Section (Get Ticket button)
-└── Footer
+supabase/functions/generate-card-image/
+  - index.ts (main handler)
 ```
 
-### Design Approach
-- Apple Liquid Glass UI style (consistent with existing pages)
-- Green accent color (matching Mini-Hack's current green gradient theme)
-- Glass cards with backdrop blur
-- Motion animations via Framer Motion
+The edge function will:
+- Accept a prompt parameter
+- Call the Lovable AI gateway with image generation model
+- Return the base64 image data
 
-### TicketCard Update
-The Mini-Hack card will gain:
-- A `link` property pointing to `/mini-hack`
-- Wrapped in a `Link` component for navigation
-- "Learn More" action instead of just "Get Ticket"
+### Image Generation Prompts
+Each prompt will specify:
+- Modern, clean illustration style
+- Purple/pink accent colors to match LovHack branding
+- Dark background compatible design
+- Appropriate subject matter for each card
+
