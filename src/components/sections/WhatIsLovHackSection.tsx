@@ -4,9 +4,9 @@ import GlassCard from "@/components/GlassCard";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import cardShip from "@/assets/card-ship.png";
-import cardLearn from "@/assets/card-learn-new.png";
-import cardSkills from "@/assets/card-skills.png";
+import cardShip from "@/assets/card-ship-new.png";
+import cardLearn from "@/assets/card-learn-v2.png";
+import cardSkills from "@/assets/card-skills-new.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
