@@ -1,0 +1,40 @@
+# LovHack
+
+> LovHack is a beginner-friendly online hackathon community where developers, designers, and first-time builders ship real projects together in 48 hours.
+
+## About
+
+LovHack organizes 48-hour online hackathons for builders of all skill levels. No experience required — just bring ideas and enthusiasm. Participants form teams, build real web applications, and compete for prizes.
+
+## Key Facts
+
+- **Website**: https://lovhack.dev
+- **Format**: 48-hour online hackathons
+- **Audience**: Beginners to experienced developers
+- **Community**: 500+ builders across 20+ countries
+- **Discord**: https://t.co/qMNpoZoiQZ
+
+## Pages
+
+- [Home](https://lovhack.dev): Main landing page with upcoming events and community info
+- [About](https://lovhack.dev/about): Mission, values, and how hackathons work
+- [Hackathons](https://lovhack.dev/hackathons): Upcoming and past hackathon events
+- [Mini-Hack](https://lovhack.dev/mini-hack): Beginner-friendly mini hackathon event
+- [Sponsors](https://lovhack.dev/sponsors): Partner companies and sponsor perks
+- [Season 1](https://lovhack.dev/season-1): Archive of the first LovHack hackathon with winners
+
+## Events
+
+### Season 1 (Completed)
+- Date: January 2-4, 2025
+- 100+ builders, 43 projects shipped, 20+ countries
+- $5K+ in prizes
+
+### Mini-Hack (Coming Soon)
+- Date: February 14-15, 2025
+- Beginner-friendly format
+- Sponsors: gen.xyz, CREAO
+
+### Season 2 (Planned)
+- Date: Late 2026
+- Registrations closed

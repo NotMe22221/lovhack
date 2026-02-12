@@ -35,8 +35,16 @@ const Hackathons = () => {
   return (
     <>
       <Helmet>
-        <title>Hackathons | Get Your Ticket</title>
-        <meta name="description" content="Join our upcoming hackathons. Get your ticket to build." />
+        <title>Hackathons | Get Your Ticket | LovHack</title>
+        <meta name="description" content="Join our upcoming LovHack hackathons. From beginner sprints to global championships — get your ticket to build." />
+        <link rel="canonical" href="https://lovhack.dev/hackathons" />
+        <meta property="og:title" content="Hackathons | Get Your Ticket | LovHack" />
+        <meta property="og:description" content="Join our upcoming LovHack hackathons. From beginner sprints to global championships — get your ticket to build." />
+        <meta property="og:url" content="https://lovhack.dev/hackathons" />
+        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta name="twitter:title" content="Hackathons | Get Your Ticket | LovHack" />
+        <meta name="twitter:description" content="Join our upcoming LovHack hackathons. From beginner sprints to global championships — get your ticket to build." />
+        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
       </Helmet>
 
       <AnimatedBackground />

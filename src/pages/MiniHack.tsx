@@ -19,6 +19,14 @@ const MiniHack = () => {
       <Helmet>
         <title>Mini-Hack | Your First Build Starts Here | LovHack</title>
         <meta name="description" content="Mini-Hack is a beginner-friendly 48-hour hackathon. Feb 14-15, 2025. Perfect for your first build with lower pressure and amazing prizes from CREAO and gen.xyz." />
+        <link rel="canonical" href="https://lovhack.dev/mini-hack" />
+        <meta property="og:title" content="Mini-Hack | Your First Build Starts Here | LovHack" />
+        <meta property="og:description" content="Mini-Hack is a beginner-friendly 48-hour hackathon. Feb 14-15, 2025. Perfect for your first build." />
+        <meta property="og:url" content="https://lovhack.dev/mini-hack" />
+        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta name="twitter:title" content="Mini-Hack | Your First Build Starts Here | LovHack" />
+        <meta name="twitter:description" content="Mini-Hack is a beginner-friendly 48-hour hackathon. Feb 14-15, 2025. Perfect for your first build." />
+        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
       </Helmet>
 
       <AnimatedBackground />
