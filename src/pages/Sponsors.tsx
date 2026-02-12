@@ -82,8 +82,16 @@ const Sponsors = () => {
   return (
     <>
       <Helmet>
-        <title>Sponsors | Powered by the Best</title>
+        <title>Sponsors | Powered by the Best | LovHack</title>
         <meta name="description" content="LovHack is powered by amazing tools. See our sponsors and exclusive perks." />
+        <link rel="canonical" href="https://lovhack.dev/sponsors" />
+        <meta property="og:title" content="Sponsors | Powered by the Best | LovHack" />
+        <meta property="og:description" content="LovHack is powered by amazing tools. See our sponsors and exclusive perks." />
+        <meta property="og:url" content="https://lovhack.dev/sponsors" />
+        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta name="twitter:title" content="Sponsors | Powered by the Best | LovHack" />
+        <meta name="twitter:description" content="LovHack is powered by amazing tools. See our sponsors and exclusive perks." />
+        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
       </Helmet>
 
       <AnimatedBackground />
