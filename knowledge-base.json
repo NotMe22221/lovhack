@@ -1,0 +1,105 @@
+{
+  "event_info": {
+    "name": "LovHack 2026",
+    "tagline": "48-Hour Online Hackathon | Build Real Apps",
+    "motto": "No fluff. No filler. Just building.",
+    "description": "LovHack is a 48-hour online hackathon built for one goal: shipping real web apps fast. Participants ideate, design, and build production-ready web applications using modern tools and AI-assisted workflows. Whether you are new to building or an experienced developer, LovHack is designed to help you turn ideas into working products under real time constraints.",
+    "website": "https://lovhack.dev",
+    "luma_page": "https://luma.com/znhtmdf3"
+  },
+  "dates": {
+    "start": "January 2, 2026 at 8:00 AM CST",
+    "end": "January 4, 2026 at 8:00 AM CST",
+    "duration": "48 hours",
+    "status": "Past event (already concluded)"
+  },
+  "format": {
+    "type": "Online / Virtual",
+    "cost": "Free ($0 USD General Admission)",
+    "team_options": "Teams and solo builders are both welcome",
+    "experience_level": "Open to both newcomers and experienced developers",
+    "total_registered": "243 participants"
+  },
+  "judging_criteria": {
+    "criteria": [
+      "Execution quality",
+      "Creativity",
+      "Usability"
+    ],
+    "description": "Teams and solo builders compete to create the most impressive applications based on execution, creativity, and usability."
+  },
+  "prizes": {
+    "description": "Platform credits for top projects, public recognition, and long-term visibility within the Lovable builder community."
+  },
+  "community": {
+    "discord": "https://discord.com/invite/lovhack",
+    "twitter": "https://twitter.com/lovaborhq",
+    "organizer": "Karthik Uppala"
+  },
+  "focus": {
+    "main": "Building production-ready web applications using modern tools and AI-assisted workflows",
+    "category": "AI / Development"
+  },
+  "faq": [
+    {
+      "question": "What is LovHack?",
+      "answer": "LovHack 2026 is a 48-hour online hackathon designed for developers and web app builders. The goal is to ship real web applications using modern tools and AI-assisted workflows. No fluff. No filler. Just building."
+    },
+    {
+      "question": "When did/does LovHack take place?",
+      "answer": "LovHack 2026 ran from January 2, 2026 at 8:00 AM CST to January 4, 2026 at 8:00 AM CST (48 hours total). The event has already concluded."
+    },
+    {
+      "question": "Is LovHack free?",
+      "answer": "Yes! LovHack is completely free to participate. General admission is $0 USD."
+    },
+    {
+      "question": "Can I participate solo or do I need a team?",
+      "answer": "Both! LovHack welcomes solo builders as well as teams. You can participate however you prefer."
+    },
+    {
+      "question": "Is LovHack online or in-person?",
+      "answer": "LovHack is a fully online/virtual hackathon. You can participate from anywhere."
+    },
+    {
+      "question": "Do I need experience to join?",
+      "answer": "No! LovHack is designed for both newcomers and experienced developers. Whether you're just starting out or have years of experience, you're welcome to participate."
+    },
+    {
+      "question": "How are projects judged?",
+      "answer": "Projects are judged on three main criteria: 1) Execution quality, 2) Creativity, and 3) Usability."
+    },
+    {
+      "question": "What are the prizes?",
+      "answer": "Top projects receive platform credits, public recognition, and long-term visibility within the Lovable builder community."
+    },
+    {
+      "question": "What should I build?",
+      "answer": "You should build a production-ready web application using modern tools and AI-assisted workflows. The focus is on shipping real, functional apps."
+    },
+    {
+      "question": "How do I register?",
+      "answer": "Registration was available through the Luma event page at luma.com/znhtmdf3 and the official website lovhack.dev. The event has already concluded with 243 participants registered."
+    },
+    {
+      "question": "Who organized LovHack?",
+      "answer": "LovHack was organized by Karthik Uppala and the LovHack team."
+    },
+    {
+      "question": "Where can I find the community?",
+      "answer": "Join the LovHack Discord community at discord.com/invite/lovhack and follow on Twitter @lovaborhq."
+    },
+    {
+      "question": "How many people participated?",
+      "answer": "LovHack 2026 had 243 registered participants."
+    },
+    {
+      "question": "What tools can I use?",
+      "answer": "LovHack encourages using modern development tools and AI-assisted workflows to build web applications. You're free to use whatever tools help you ship a great product."
+    },
+    {
+      "question": "What is the website?",
+      "answer": "The official LovHack website is https://lovhack.dev"
+    }
+  ]
+}
