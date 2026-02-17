@@ -74,7 +74,7 @@ const MedoHack = () => {
                 size="lg"
                 className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold"
               >
-                <a href="https://t.co/qMNpoZoiQZ" target="_blank" rel="noreferrer">
+                <a href="https://luma.com/q44qpofa" target="_blank" rel="noreferrer">
                   Register Now
                 </a>
               </Button>
@@ -163,7 +163,14 @@ const MedoHack = () => {
                   <Trophy className="w-8 h-8 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Additional Prizes for Top Teams</h3>
-                    <p className="text-sm text-foreground/70">Top 5 teams win one month of Medo free, plus .xyz domains and more</p>
+                    <p className="text-sm text-foreground/70">Top 5 teams win one month of Medo free, top 3 get a free .xyz domain for a year</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4 bg-blue-500/5 rounded-2xl p-5 border border-blue-500/10">
+                  <Users className="w-8 h-8 text-blue-500 shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="font-bold text-foreground mb-1">Referral Program</h3>
+                    <p className="text-sm text-foreground/70">Our referral program is live! Invite friends and we'll track it on Discord</p>
                   </div>
                 </div>
               </div>
@@ -237,10 +244,15 @@ const MedoHack = () => {
                 <div className="bg-white/50 backdrop-blur-md rounded-2xl p-5 border border-white/40">
                   <Trophy className="w-10 h-10 text-blue-500 mx-auto mb-3" />
                   <h3 className="font-bold text-lg text-foreground mb-2">Top 5 Teams</h3>
-                  <p className="text-sm">One month of Medo free + free .xyz domains from gen.xyz</p>
+                  <p className="text-sm">One month of Medo free</p>
+                </div>
+                <div className="bg-white/50 backdrop-blur-md rounded-2xl p-5 border border-white/40">
+                  <Globe className="w-10 h-10 text-blue-500 mx-auto mb-3" />
+                  <h3 className="font-bold text-lg text-foreground mb-2">Top 3 Teams</h3>
+                  <p className="text-sm">Free .xyz domain for a year from gen.xyz</p>
                 </div>
               </div>
-              <p className="text-foreground/60 text-sm mt-6">More prizes and sponsor perks to be announced soon!</p>
+              <p className="text-foreground/60 text-sm mt-6">Judging criteria and additional prize details will be shared closer to when the hackathon starts!</p>
             </GlassCard>
           </motion.div>
         </section>
@@ -317,7 +329,7 @@ const MedoHack = () => {
                 </div>
                 <h3 className="font-bold text-xl text-foreground mb-2">gen.xyz</h3>
                 <p className="text-foreground/70 text-sm">
-                  Providing free .xyz domains for all winners!
+                  Free .xyz domain for a year for top 3 teams!
                 </p>
                 <Button asChild variant="outline" size="sm" className="mt-4 rounded-xl">
                   <a href="https://gen.xyz" target="_blank" rel="noreferrer">
@@ -350,7 +362,7 @@ const MedoHack = () => {
                   size="lg"
                   className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold"
                 >
-                  <a href="https://t.co/qMNpoZoiQZ" target="_blank" rel="noreferrer">
+                <a href="https://luma.com/q44qpofa" target="_blank" rel="noreferrer">
                     Register Now
                   </a>
                 </Button>
