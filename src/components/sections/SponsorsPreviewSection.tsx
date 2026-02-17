@@ -13,6 +13,7 @@ import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 import genxyzLogo from "@/assets/genxyz-logo.png";
+import medoLogo from "@/assets/medo-logo.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -31,6 +32,7 @@ const SponsorsPreviewSection = () => {
     { name: "Dualite", logo: dualiteLogo, size: "small", invert: false },
     { name: "Momentum", logo: momentumLogo, size: "small", invert: false },
     { name: "gen.xyz", logo: genxyzLogo, size: "small", invert: true },
+    { name: "Medo", logo: medoLogo, size: "small", invert: false },
   ];
 
   useEffect(() => {
