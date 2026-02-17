@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Sponsors from "./pages/Sponsors";
 import Hackathons from "./pages/Hackathons";
 import MiniHack from "./pages/MiniHack";
+import MedoHack from "./pages/MedoHack";
 import NotFound from "./pages/NotFound";
 
 import AdminCertificates from "./pages/AdminCertificates";
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/hackathons" element={<Hackathons />} />
             <Route path="/mini-hack" element={<MiniHack />} />
+            <Route path="/medo-hack" element={<MedoHack />} />
             
             <Route path="/admin/certificates" element={<AdminCertificates />} />
             <Route path="*" element={<NotFound />} />

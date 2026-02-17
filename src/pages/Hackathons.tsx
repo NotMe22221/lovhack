@@ -11,6 +11,16 @@ import { motion } from "framer-motion";
 const Hackathons = () => {
   const upcomingEvents = [
     {
+      name: "LovHack Mini x Medo",
+      status: "Free Event",
+      statusColor: "text-blue-500",
+      description: "A free 48-hour hackathon powered by Medo. 300 free credits for all participants.",
+      date: "Feb 28 — Mar 1",
+      type: "Beginner Friendly",
+      color: "from-blue-500/20 to-blue-500/5",
+      link: "/medo-hack",
+    },
+    {
       name: "Mini-Hack",
       status: "Coming Soon",
       statusColor: "text-green-500",

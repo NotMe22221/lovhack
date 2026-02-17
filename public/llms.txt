@@ -35,6 +35,12 @@ LovHack organizes 48-hour online hackathons for builders of all skill levels. No
 - Beginner-friendly format
 - Sponsors: gen.xyz, CREAO
 
+### LovHack Mini x Medo (Coming Soon)
+- Date: February 28 — March 1
+- Free 48-hour online hackathon powered by Medo
+- 300 free Medo credits for all participants
+- Sponsors: Medo, gen.xyz
+
 ### Season 2 (Planned)
 - Date: Late 2026
 - Registrations closed

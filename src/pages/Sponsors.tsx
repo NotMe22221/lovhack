@@ -14,6 +14,7 @@ import flootLogo from "@/assets/floot-logo.png";
 import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
+import medoLogo from "@/assets/medo-logo.png";
 
 const Sponsors = () => {
   const sponsors = [
@@ -76,6 +77,15 @@ const Sponsors = () => {
       offer: "Free conversions",
       website: "https://dualite.com",
       size: "small",
+    },
+    {
+      name: "Medo",
+      logo: medoLogo,
+      description: "Build with AI-powered tools. 300 free credits for all LovHack participants.",
+      offer: "300 free credits",
+      website: "https://medo.ai",
+      size: "small",
+      color: "from-blue-500/20 to-blue-500/5",
     },
   ];
 
