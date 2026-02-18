@@ -32,7 +32,7 @@ const Sponsors = () => {
       logo: momentumLogo,
       description: "AI-powered development platform preventing burnout.",
       offer: "Extended trial",
-      website: "https://momentum.sh",
+      website: "https://momentum.builders/foundations-sprint",
       size: "medium",
       color: "from-rose-500/20 to-pink-500/5",
     },
