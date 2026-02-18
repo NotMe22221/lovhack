@@ -6,7 +6,21 @@ import DiscordCTASection from "@/components/sections/DiscordCTASection";
 import GlassCard from "@/components/GlassCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, Globe, Sparkles, ArrowLeft, ExternalLink, Zap, Trophy, CheckCircle, Lightbulb, Rocket, GraduationCap, Bot } from "lucide-react";
+import {
+  Calendar,
+  Users,
+  Globe,
+  Sparkles,
+  ArrowLeft,
+  ExternalLink,
+  Zap,
+  Trophy,
+  CheckCircle,
+  Lightbulb,
+  Rocket,
+  GraduationCap,
+  Bot,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -18,13 +32,22 @@ const MedoHack = () => {
     <>
       <Helmet>
         <title>LovHack Mini x Medo | End February by Building Something Real | LovHack</title>
-        <meta name="description" content="LovHack Mini x Medo — a free 48-hour online hackathon for builders of all levels. Feb 28 – March 1. 300 free Medo credits, certificates, and prizes for top teams." />
+        <meta
+          name="description"
+          content="LovHack Mini x Medo — a free 48-hour online hackathon for builders of all levels. Feb 28 – March 1. 300 free Medo credits, certificates, and prizes for top teams."
+        />
         <link rel="canonical" href="https://lovhack.dev/medo-hack" />
         <meta property="og:title" content="LovHack Mini x Medo | End February by Building Something Real" />
-        <meta property="og:description" content="A free 48-hour online hackathon for builders of all levels. Feb 28 – March 1. 300 free Medo credits for all participants." />
+        <meta
+          property="og:description"
+          content="A free 48-hour online hackathon for builders of all levels. Feb 28 – March 1. 300 free Medo credits for all participants."
+        />
         <meta property="og:url" content="https://lovhack.dev/medo-hack" />
         <meta name="twitter:title" content="LovHack Mini x Medo | End February by Building Something Real" />
-        <meta name="twitter:description" content="A free 48-hour online hackathon for builders of all levels. Feb 28 – March 1. 300 free Medo credits for all participants." />
+        <meta
+          name="twitter:description"
+          content="A free 48-hour online hackathon for builders of all levels. Feb 28 – March 1. 300 free Medo credits for all participants."
+        />
       </Helmet>
 
       <AnimatedBackground />
@@ -44,16 +67,14 @@ const MedoHack = () => {
 
         {/* Hero Section */}
         <section className="px-4 text-center mb-16 sm:mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <Badge className="mb-4 bg-blue-500/20 text-blue-600 border-blue-500/30 hover:bg-blue-500/30">
               Free Event
             </Badge>
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-foreground mb-4">
-              End February by Building<br />Something <span className="text-blue-500">Real</span>
+              End February by Building
+              <br />
+              Something <span className="text-blue-500">Real</span>
             </h1>
             <p className="text-xl sm:text-2xl text-foreground/70 mb-6 max-w-2xl mx-auto">
               LovHack Mini x Medo — a free 48-hour online hackathon for builders of all levels
@@ -69,21 +90,12 @@ const MedoHack = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                asChild
-                size="lg"
-                className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold"
-              >
+              <Button asChild size="lg" className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold">
                 <a href="https://luma.com/q44qpofa" target="_blank" rel="noreferrer">
                   Register Now
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="rounded-xl"
-              >
+              <Button asChild variant="outline" size="lg" className="rounded-xl">
                 <a href="https://discord.gg/lovhack" target="_blank" rel="noreferrer">
                   Join the Discord
                 </a>
@@ -105,10 +117,13 @@ const MedoHack = () => {
               </h2>
               <div className="space-y-4 text-foreground/80">
                 <p className="text-lg">
-                  A <strong>free online hackathon powered by Medo</strong>, where builders design, prototype, and ship working applications in 48 hours. Whether you're a first-timer or a seasoned developer, this is your chance to build something real — fast.
+                  A <strong>free online hackathon powered by Medo</strong>, where builders design, prototype, and ship
+                  working applications in 48 hours. Whether you're a first-timer or a seasoned developer, this is your
+                  chance to build something real — fast.
                 </p>
                 <p>
-                  Our mission is simple: lower the barrier to building. With free credits, a supportive community, and beginner-friendly resources, there's nothing stopping you from shipping your next idea.
+                  Our mission is simple: lower the barrier to building. With free credits, a supportive community, and
+                  beginner-friendly resources, there's nothing stopping you from shipping your next idea.
                 </p>
               </div>
 
@@ -149,28 +164,36 @@ const MedoHack = () => {
                   <Zap className="w-8 h-8 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">300 Free Medo Credits</h3>
-                    <p className="text-sm text-foreground/70">Build with AI-powered tools at no cost during the entire event</p>
+                    <p className="text-sm text-foreground/70">
+                      Build with AI-powered tools at no cost during the entire event
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 bg-blue-500/5 rounded-2xl p-5 border border-blue-500/10">
                   <CheckCircle className="w-8 h-8 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Certificate of Completion</h3>
-                    <p className="text-sm text-foreground/70">Every participant who submits a project receives an official LovHack certificate</p>
+                    <p className="text-sm text-foreground/70">
+                      Every participant who submits a project receives an official LovHack certificate
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 bg-blue-500/5 rounded-2xl p-5 border border-blue-500/10">
                   <Trophy className="w-8 h-8 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Additional Prizes for Top Teams</h3>
-                    <p className="text-sm text-foreground/70">Top 5 teams win one month of Medo free, top 3 get a free .xyz domain for a year</p>
+                    <p className="text-sm text-foreground/70">
+                      Top 5 teams win one month of Medo free, top 3 get a free .xyz domain for a year
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 bg-blue-500/5 rounded-2xl p-5 border border-blue-500/10">
                   <Users className="w-8 h-8 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Referral Program</h3>
-                    <p className="text-sm text-foreground/70">Our referral program is live! Invite friends and we'll track it on Discord</p>
+                    <p className="text-sm text-foreground/70">
+                      Our referral program is live! Invite friends and we'll track it on Discord
+                    </p>
                   </div>
                 </div>
               </div>
@@ -202,7 +225,9 @@ const MedoHack = () => {
                   <GraduationCap className="w-6 h-6 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Student Life</h3>
-                    <p className="text-sm text-foreground/70">Apps that solve real problems for students and learners</p>
+                    <p className="text-sm text-foreground/70">
+                      Apps that solve real problems for students and learners
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-blue-500/5 rounded-2xl p-5 border border-blue-500/10">
@@ -216,7 +241,9 @@ const MedoHack = () => {
                   <Bot className="w-6 h-6 text-blue-500 shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Agent Innovation</h3>
-                    <p className="text-sm text-foreground/70">AI agents that automate workflows and solve complex tasks</p>
+                    <p className="text-sm text-foreground/70">
+                      AI agents that automate workflows and solve complex tasks
+                    </p>
                   </div>
                 </div>
               </div>
@@ -232,9 +259,7 @@ const MedoHack = () => {
             transition={{ duration: 0.6, delay: 0.25 }}
           >
             <GlassCard className="text-center bg-gradient-to-br from-blue-500/10 to-blue-500/5">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
-                🏆 Prizes
-              </h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">🏆 Prizes</h2>
               <div className="space-y-4 text-foreground/80 max-w-xl mx-auto">
                 <div className="bg-white/50 backdrop-blur-md rounded-2xl p-5 border border-white/40">
                   <CheckCircle className="w-10 h-10 text-blue-500 mx-auto mb-3" />
@@ -252,7 +277,9 @@ const MedoHack = () => {
                   <p className="text-sm">Free .xyz domain for a year from gen.xyz</p>
                 </div>
               </div>
-              <p className="text-foreground/60 text-sm mt-6">Judging criteria and additional prize details will be shared closer to when the hackathon starts!</p>
+              <p className="text-foreground/60 text-sm mt-6">
+                Judging criteria and additional prize details will be shared closer to when the hackathon starts!
+              </p>
             </GlassCard>
           </motion.div>
         </section>
@@ -271,7 +298,12 @@ const MedoHack = () => {
               {[
                 { step: "1", title: "Join Discord", desc: "Sign up and join our community server", icon: Users },
                 { step: "2", title: "Build for 48 Hours", desc: "Design, code, and ship your project", icon: Zap },
-                { step: "3", title: "Submit Your Project", desc: "Share your creation with the community", icon: Rocket },
+                {
+                  step: "3",
+                  title: "Submit Your Project",
+                  desc: "Share your creation with the community",
+                  icon: Rocket,
+                },
                 { step: "4", title: "Get Judged", desc: "Receive feedback and compete for prizes", icon: Trophy },
               ].map((item) => (
                 <GlassCard key={item.step} className="text-center !p-6">
@@ -294,25 +326,19 @@ const MedoHack = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
           >
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground">
-              Powered By
-            </h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground">Powered By</h2>
             <div className="grid sm:grid-cols-2 gap-6">
               {/* Medo */}
               <GlassCard className="text-center">
                 <div className="h-20 flex items-center justify-center mb-4">
-                  <img
-                    src={medoLogo}
-                    alt="Medo"
-                    className="max-h-full max-w-[180px] object-contain"
-                  />
+                  <img src={medoLogo} alt="Medo" className="max-h-full max-w-[180px] object-contain" />
                 </div>
                 <h3 className="font-bold text-xl text-foreground mb-2">Medo</h3>
                 <p className="text-foreground/70 text-sm">
                   Build with AI-powered tools. 300 free credits for all participants!
                 </p>
                 <Button asChild variant="outline" size="sm" className="mt-4 rounded-xl">
-                  <a href="https://medo.ai" target="_blank" rel="noreferrer">
+                  <a href="https://medo.dev" target="_blank" rel="noreferrer">
                     Learn More <ExternalLink className="w-3 h-3 ml-1" />
                   </a>
                 </Button>
@@ -321,16 +347,10 @@ const MedoHack = () => {
               {/* gen.xyz */}
               <GlassCard className="text-center">
                 <div className="h-20 flex items-center justify-center mb-4">
-                  <img
-                    src={genxyzLogo}
-                    alt="gen.xyz"
-                    className="max-h-full max-w-[180px] object-contain invert"
-                  />
+                  <img src={genxyzLogo} alt="gen.xyz" className="max-h-full max-w-[180px] object-contain invert" />
                 </div>
                 <h3 className="font-bold text-xl text-foreground mb-2">gen.xyz</h3>
-                <p className="text-foreground/70 text-sm">
-                  Free .xyz domain for a year for top 3 teams!
-                </p>
+                <p className="text-foreground/70 text-sm">Free .xyz domain for a year for top 3 teams!</p>
                 <Button asChild variant="outline" size="sm" className="mt-4 rounded-xl">
                   <a href="https://gen.xyz" target="_blank" rel="noreferrer">
                     Learn More <ExternalLink className="w-3 h-3 ml-1" />
@@ -350,28 +370,17 @@ const MedoHack = () => {
             className="text-center"
           >
             <GlassCard className="!p-8 sm:!p-12">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-foreground">
-                Ready to Build?
-              </h2>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-foreground">Ready to Build?</h2>
               <p className="text-foreground/70 mb-8 max-w-md mx-auto">
                 Join LovHack Mini x Medo on February 28 — March 1 and ship something real in 48 hours.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold"
-                >
-                <a href="https://luma.com/q44qpofa" target="_blank" rel="noreferrer">
+                <Button asChild size="lg" className="bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-bold">
+                  <a href="https://luma.com/q44qpofa" target="_blank" rel="noreferrer">
                     Register Now
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="rounded-xl"
-                >
+                <Button asChild variant="outline" size="lg" className="rounded-xl">
                   <a href="https://discord.gg/lovhack" target="_blank" rel="noreferrer">
                     Join Discord
                   </a>
