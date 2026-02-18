@@ -83,7 +83,7 @@ const Sponsors = () => {
       logo: medoLogo,
       description: "Build with AI-powered tools. 300 free credits for all LovHack participants.",
       offer: "300 free credits",
-      website: "https://medo.ai",
+      website: "https://medo.dev",
       size: "small",
       color: "from-blue-500/20 to-blue-500/5",
     },
@@ -96,12 +96,24 @@ const Sponsors = () => {
         <meta name="description" content="LovHack is powered by amazing tools. See our sponsors and exclusive perks." />
         <link rel="canonical" href="https://lovhack.dev/sponsors" />
         <meta property="og:title" content="Sponsors | Powered by the Best | LovHack" />
-        <meta property="og:description" content="LovHack is powered by amazing tools. See our sponsors and exclusive perks." />
+        <meta
+          property="og:description"
+          content="LovHack is powered by amazing tools. See our sponsors and exclusive perks."
+        />
         <meta property="og:url" content="https://lovhack.dev/sponsors" />
-        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta
+          property="og:image"
+          content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png"
+        />
         <meta name="twitter:title" content="Sponsors | Powered by the Best | LovHack" />
-        <meta name="twitter:description" content="LovHack is powered by amazing tools. See our sponsors and exclusive perks." />
-        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta
+          name="twitter:description"
+          content="LovHack is powered by amazing tools. See our sponsors and exclusive perks."
+        />
+        <meta
+          name="twitter:image"
+          content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png"
+        />
       </Helmet>
 
       <AnimatedBackground />
@@ -109,10 +121,7 @@ const Sponsors = () => {
 
       <main className="pt-32 pb-20">
         <section className="px-4 text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
               Powered by <span className="text-primary">Giants</span>
             </h1>
@@ -154,7 +163,7 @@ const Sponsors = () => {
   );
 };
 
-const BentoCard = ({ sponsor, index }: { sponsor: any, index: number }) => {
+const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
   // Determine spans based on size - simpler logic for 3 cols
   const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
 
@@ -187,9 +196,7 @@ const BentoCard = ({ sponsor, index }: { sponsor: any, index: number }) => {
 
       <div>
         <h3 className="text-3xl font-bold text-foreground mb-2">{sponsor.name}</h3>
-        <p className="text-base text-foreground/70 mb-6 line-clamp-2">
-          {sponsor.description}
-        </p>
+        <p className="text-base text-foreground/70 mb-6 line-clamp-2">{sponsor.description}</p>
 
         <a
           href={sponsor.website}
@@ -202,6 +209,6 @@ const BentoCard = ({ sponsor, index }: { sponsor: any, index: number }) => {
       </div>
     </motion.div>
   );
-}
+};
 
 export default Sponsors;
