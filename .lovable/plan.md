@@ -1,37 +1,25 @@
 
 
-## Update Medo Hackathon Page with Latest Details
+## Update Landing Page Hero for Medo x LovHack Hackathon
 
-Small targeted updates to `src/pages/MedoHack.tsx` based on the new announcement info.
-
----
-
-### Changes
-
-**1. Fix Registration Link**
-- Change the "Register Now" button URL from `https://t.co/qMNpoZoiQZ` to `https://luma.com/q44qpofa` (appears twice: hero CTA and final CTA)
-
-**2. Update gen.xyz Prize Details**
-- Top 3 teams get a free .xyz domain **for a year** (currently just says "free .xyz domains")
-- Update the Prizes section and the gen.xyz sponsor card to reflect this
-
-**3. Add Referral Program Mention**
-- Add a note in the "What You Get" or "How It Works" section that the referral program is live and tracked via Discord
-
-**4. Clarify Prize Timing**
-- Update the "More prizes" note to say judging criteria and additional prize details will be shared closer to the hackathon start
+Two small changes to `src/components/sections/NewHeroSection.tsx` to point visitors to the upcoming Medo hackathon.
 
 ---
 
-### Technical Details
+### Change 1: Update the badge text
 
-Only one file changes: `src/pages/MedoHack.tsx`
+Change **"Season 2 Coming Soon"** (line 75) to **"Next Hackathon: Feb 28"** so visitors immediately see there's an upcoming event.
 
-- Line 77: Update hero Register Now href to `https://luma.com/q44qpofa`
-- Line 240: Update Top 5 prize text to mention top 3 getting free .xyz domain for a year
-- Line 243: Update "more prizes" note about judging criteria coming soon
-- Line ~355: Update final CTA Register Now href to `https://luma.com/q44qpofa`
-- Add a small referral program callout (e.g., a new row in the "What You Get" section or a note in "How It Works")
+### Change 2: Replace "Watch Recap" with "Join Our Next Hackathon"
 
-No new files or dependencies needed.
+Replace the second CTA button (lines 117-127):
+- **Old**: "Watch Recap" linking to `/season-1` with a `Play` icon
+- **New**: "Join Our Next Hackathon" linking to `/medo-hack` with an `ArrowRight` icon
+- Same outline styling preserved
+
+---
+
+### File Modified
+
+`src/components/sections/NewHeroSection.tsx` only -- two small edits, no new files or dependencies.
 
