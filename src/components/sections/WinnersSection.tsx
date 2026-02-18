@@ -260,6 +260,32 @@ const WinnersSection = () => {
           ))}
         </div>
 
+        {/* Full Leaderboard */}
+        <div className="text-center mb-10 sm:mb-12 md:mb-16 px-4">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6">
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary" />
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground">Full Leaderboard</h3>
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-primary" />
+          </div>
+          <div className="max-w-4xl mx-auto rounded-2xl overflow-hidden border border-white/40 shadow-lg bg-white/60 backdrop-blur-md">
+            <iframe
+              src="https://lovhack.floot.app/"
+              title="LovHack Season 1 Leaderboard"
+              className="w-full h-[500px] sm:h-[600px]"
+              loading="lazy"
+            />
+          </div>
+          <a
+            href="https://lovhack.floot.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 mt-4 text-sm text-primary hover:text-primary/80 transition-colors"
+          >
+            Open leaderboard in new tab
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+
         {/* CTA */}
         <div ref={ctaRef} className="text-center opacity-0 px-4">
           <p className="text-sm sm:text-base md:text-lg text-foreground/60 mb-4 sm:mb-6">

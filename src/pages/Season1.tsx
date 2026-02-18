@@ -13,7 +13,7 @@ import creaoLogo from "@/assets/creao-logo.png";
 import hadoLogo from "@/assets/hado-logo-v3.png";
 import flootLogo from "@/assets/floot-logo.png";
 import qoderLogo from "@/assets/qoder-logo.png";
-import dualiteLogo from "@/assets/dualite-logo.png";
+
 import momentumLogo from "@/assets/momentum-logo.png";
 
 const Season1 = () => {
@@ -31,7 +31,7 @@ const Season1 = () => {
     { name: "Hado", logo: hadoLogo, url: "https://hado.dev" },
     { name: "Floot", logo: flootLogo, url: "https://floot.io" },
     { name: "Qoder", logo: qoderLogo, url: "https://qoder.ai" },
-    { name: "Dualite", logo: dualiteLogo, url: "https://dualite.com" },
+    
   ];
 
   return (
@@ -92,7 +92,7 @@ const Season1 = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-4 sm:gap-6">
+          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
             {sponsors.map((sponsor, index) => (
               <motion.a
                 key={index}
