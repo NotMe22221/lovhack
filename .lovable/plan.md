@@ -1,25 +1,32 @@
 
 
-## Update Landing Page Hero for Medo x LovHack Hackathon
+## Update Season 1 Page
 
-Two small changes to `src/components/sections/NewHeroSection.tsx` to point visitors to the upcoming Medo hackathon.
-
----
-
-### Change 1: Update the badge text
-
-Change **"Season 2 Coming Soon"** (line 75) to **"Next Hackathon: Feb 28"** so visitors immediately see there's an upcoming event.
-
-### Change 2: Replace "Watch Recap" with "Join Our Next Hackathon"
-
-Replace the second CTA button (lines 117-127):
-- **Old**: "Watch Recap" linking to `/season-1` with a `Play` icon
-- **New**: "Join Our Next Hackathon" linking to `/medo-hack` with an `ArrowRight` icon
-- Same outline styling preserved
+Two changes to the `/season-1` page:
 
 ---
 
-### File Modified
+### 1. Remove Dualite from sponsors
 
-`src/components/sections/NewHeroSection.tsx` only -- two small edits, no new files or dependencies.
+In `src/pages/Season1.tsx`, remove the Dualite entry from the `sponsors` array (line 34) and the `dualiteLogo` import (line 16). Update the sponsor grid from 7 columns to 6 (`lg:grid-cols-6`).
+
+### 2. Add Floot Leaderboard embed after Runners Up
+
+In `src/components/sections/WinnersSection.tsx`, add a new section between the Runners Up grid (ends line 261) and the CTA (line 263). This will include:
+
+- A heading like "Full Leaderboard"
+- An iframe embedding `https://lovhack.floot.app/` with responsive sizing
+- A fallback link below the iframe so users can open it directly
+
+---
+
+### Technical Details
+
+**File: `src/pages/Season1.tsx`**
+- Remove line 16 (`dualiteLogo` import)
+- Remove line 34 (Dualite sponsor entry)
+- Change `lg:grid-cols-7` to `lg:grid-cols-6` on line 95
+
+**File: `src/components/sections/WinnersSection.tsx`**
+- Insert after line 261 (after runners up grid, before CTA): a new div with a heading and an iframe (`src="https://lovhack.floot.app/"`) styled with rounded corners, border, and responsive height (~500-600px)
 
