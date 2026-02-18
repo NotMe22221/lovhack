@@ -30,7 +30,7 @@ const Sponsors = () => {
     {
       name: "Momentum",
       logo: momentumLogo,
-      description: "Sprints to help you from 0 to 1!",
+      description: "Sprints to help you go from 0 to 1!",
       offer: "Extended trial",
       website: "https://momentum.builders/foundations-sprint",
       size: "medium",
