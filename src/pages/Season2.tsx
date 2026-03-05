@@ -31,6 +31,7 @@ import genxyzLogo from "@/assets/genxyz-logo.png";
 import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import featherlessLogo from "@/assets/featherless-logo.png";
 import relayLogo from "@/assets/relay-logo.png";
+import codecraftersLogo from "@/assets/codecrafters-logo.png";
 import mobbinLogo from "@/assets/mobbin-logo.svg";
 import ideavoLogo from "@/assets/ideavo-logo.png";
 
@@ -43,7 +44,7 @@ const sponsors = [
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true, invert: true },
   { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
-  { name: "CodeShifters", logo: null, url: null, hasLogo: false },
+  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, invert: true },
 ];
 
 const Season2 = () => {
