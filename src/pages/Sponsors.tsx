@@ -18,6 +18,7 @@ import medoLogo from "@/assets/medo-logo.png";
 import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import miroLogo from "@/assets/miro-logo.webp";
 import n8nLogo from "@/assets/n8n-logo.webp";
+import featherlessLogo from "@/assets/featherless-logo.png";
 
 const Sponsors = () => {
   const sponsors = [
@@ -112,6 +113,15 @@ const Sponsors = () => {
       website: "https://n8n.io",
       size: "small",
       color: "from-pink-500/20 to-pink-500/5",
+    },
+    {
+      name: "Featherless",
+      logo: featherlessLogo,
+      description: "AI inference provider with access to 26,300+ open source models.",
+      offer: "Free inference credits",
+      website: "https://featherless.ai",
+      size: "small",
+      color: "from-yellow-500/20 to-amber-500/5",
     },
   ];
 
