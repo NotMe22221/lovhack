@@ -234,7 +234,7 @@ const Season2 = () => {
                       <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">🔥 HOT</Badge>
                     </div>
                     <p className="text-sm text-foreground/70">
-                      AI agents that automate workflows and solve complex tasks. Maybe start learning n8n 😉
+                      AI agents that automate workflows and solve complex tasks
                     </p>
                   </div>
                 </div>
