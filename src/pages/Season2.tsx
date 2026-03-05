@@ -32,6 +32,7 @@ import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import featherlessLogo from "@/assets/featherless-logo.png";
 import relayLogo from "@/assets/relay-logo.png";
 import mobbinLogo from "@/assets/mobbin-logo.svg";
+import ideavoLogo from "@/assets/ideavo-logo.png";
 
 const sponsors = [
   { name: "n8n", logo: n8nLogo, url: "https://n8n.io", hasLogo: true },
@@ -39,7 +40,7 @@ const sponsors = [
   { name: "Gen.xyz", logo: genxyzLogo, url: "https://gen.xyz", hasLogo: true, invert: true },
   { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", hasLogo: true },
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true, invert: true },
-  { name: "Ideavo", logo: null, url: null, hasLogo: false },
+  { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true, invert: true },
   { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
   { name: "CodeShifters", logo: null, url: null, hasLogo: false },
@@ -259,7 +260,7 @@ const Season2 = () => {
                       <img
                         src={sponsor.logo}
                         alt={sponsor.name}
-                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert" : ""}`}
+                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`}
                       />
                     ) : (
                       <span className="text-2xl font-black text-foreground/70">{sponsor.name}</span>
