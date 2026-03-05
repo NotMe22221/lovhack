@@ -42,7 +42,7 @@ const sponsors = [
   { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", hasLogo: true },
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true, invert: true },
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true, blendMultiply: true },
-  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true, blendMultiply: true },
+  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
   { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, blendMultiply: true },
 ];
