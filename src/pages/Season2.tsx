@@ -40,9 +40,9 @@ const sponsors = [
   { name: "Miro", logo: miroLogo, url: "https://miro.com", hasLogo: true },
   { name: "Gen.xyz", logo: genxyzLogo, url: "https://gen.xyz", hasLogo: true, invert: true },
   { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", hasLogo: true },
-  { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true, invert: true },
+  { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true },
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true, blendMultiply: true },
-  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
+  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true, blendMultiply: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
   { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, blendMultiply: true },
 ];
