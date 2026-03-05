@@ -41,7 +41,7 @@ const sponsors = [
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true, invert: true },
   { name: "Ideavo", logo: null, url: null, hasLogo: false },
   { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
-  { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true, invert: true },
+  { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
   { name: "CodeShifters", logo: null, url: null, hasLogo: false },
 ];
 
