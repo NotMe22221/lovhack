@@ -13,7 +13,7 @@ const HeroSection = () => {
           aria-label="Event date"
         >
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" aria-hidden="true" />
-          <span className="text-sm font-medium text-foreground/80">January 2026</span>
+          <span className="text-sm font-medium text-foreground/80">March 21, 2026</span>
         </div>
         
         {/* Main Title */}
@@ -39,8 +39,8 @@ const HeroSection = () => {
           className="space-y-2 mb-8 opacity-0 animate-fade-in"
           style={{ animationDelay: '0.4s' }}
         >
-          <p className="text-lg text-foreground/60">
-            January 2nd, 8:00 AM - January 4th, 8:00 AM
+           <p className="text-lg text-foreground/60">
+            March 21st, 8:00 AM - March 23rd, 8:00 AM
           </p>
           <p className="text-lg font-medium text-foreground/70 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />

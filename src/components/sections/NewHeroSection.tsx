@@ -72,7 +72,7 @@ const NewHeroSection = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          Next Hackathon: Feb 28
+          Season 2: March 21
         </motion.div>
 
         {/* Main Headline - Bigger & Bolder */}
@@ -80,9 +80,9 @@ const NewHeroSection = () => {
           ref={headlineRef}
           className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-foreground mb-6 leading-[0.9] -tracking-[0.04em] opacity-0 px-2 drop-shadow-sm"
         >
-          Build Something <br className="hidden sm:block" />
+          LovHack <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-rose-400">
-            Real.
+            Season 2
           </span>
         </h1>
 
@@ -91,7 +91,7 @@ const NewHeroSection = () => {
           ref={subheadRef}
           className="text-lg sm:text-xl md:text-2xl text-foreground/70 max-w-2xl mx-auto mb-10 md:mb-14 px-4 opacity-0 leading-relaxed font-medium"
         >
-          The <span className="text-foreground decoration-primary/50 underline underline-offset-4">online hackathon</span> where first-time builders ship projects in 48 hours. No experience required.
+          The <span className="text-foreground decoration-primary/50 underline underline-offset-4">biggest online hackathon</span> is back. March 21st — join 500+ builders and ship something real.
         </p>
 
         {/* CTAs - Fixed buttons */}
