@@ -44,7 +44,7 @@ const sponsors = [
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true },
   { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
-  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true },
+  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, invert: true },
 ];
 
 const Season2 = () => {
