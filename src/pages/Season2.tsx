@@ -41,10 +41,10 @@ const sponsors = [
   { name: "Gen.xyz", logo: genxyzLogo, url: "https://gen.xyz", hasLogo: true, invert: true },
   { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", hasLogo: true },
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true },
-  { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true, blendMultiply: true },
-  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true, blendMultiply: true },
+  { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true },
+  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
-  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, blendMultiply: true },
+  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true },
 ];
 
 const Season2 = () => {
@@ -261,7 +261,7 @@ const Season2 = () => {
                       <img
                         src={sponsor.logo}
                         alt={sponsor.name}
-                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""} ${sponsor.blendMultiply ? "mix-blend-multiply" : ""}`}
+                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`}
                       />
                     ) : (
                       <span className="text-2xl font-black text-foreground/70">{sponsor.name}</span>
