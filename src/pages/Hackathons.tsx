@@ -32,13 +32,13 @@ const Hackathons = () => {
     },
     {
       name: "Season 2",
-      status: "Registrations Closed",
+      status: "Registrations Open",
       statusColor: "text-primary",
       description: "Our largest event yet. Bigger prizes, more sponsors, global participation.",
-      date: "Late 2026",
+      date: "March 21, 2026",
       type: "Global Event",
       color: "from-primary/20 to-primary/5",
-      link: null,
+      link: "/season-2",
     },
   ];
 
