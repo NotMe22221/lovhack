@@ -209,11 +209,14 @@ const Season2 = () => {
                     <p className="text-sm text-foreground/70">Apps that solve real problems for students, educators, and learners</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 bg-primary/5 rounded-2xl p-5 border border-primary/10">
+                <div className="relative flex items-start gap-3 bg-primary/10 rounded-2xl p-5 border-2 border-primary/30">
                   <Rocket className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-foreground mb-1">Productivity & Workflows</h3>
-                    <p className="text-sm text-foreground/70">Tools that help people get more done with less effort</p>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-foreground">Productivity & Workflows</h3>
+                      <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">⚡ n8n</Badge>
+                    </div>
+                    <p className="text-sm text-foreground/70">Tools that help people get more done with less effort — powered by n8n</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-primary/5 rounded-2xl p-5 border border-primary/10">
