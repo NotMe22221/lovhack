@@ -203,31 +203,31 @@ const Season2 = () => {
               <p className="text-foreground/70 mb-6">Build anything you want, or explore one of these focus areas:</p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="flex items-start gap-3 bg-primary/5 rounded-2xl p-5 border border-primary/10">
-                  <Rocket className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                  <GraduationCap className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-foreground mb-1">Productivity</h3>
-                    <p className="text-sm text-foreground/70">Tools that help people get more done with less effort</p>
+                    <h3 className="font-bold text-foreground mb-1">Education & Student Life</h3>
+                    <p className="text-sm text-foreground/70">Apps that solve real problems for students, educators, and learners</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-primary/5 rounded-2xl p-5 border border-primary/10">
-                  <GraduationCap className="w-6 h-6 text-primary shrink-0 mt-0.5" />
+                  <Rocket className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-foreground mb-1">Student Life</h3>
-                    <p className="text-sm text-foreground/70">Apps that solve real problems for students and learners</p>
+                    <h3 className="font-bold text-foreground mb-1">Productivity & Workflows</h3>
+                    <p className="text-sm text-foreground/70">Tools that help people get more done with less effort</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-primary/5 rounded-2xl p-5 border border-primary/10">
                   <Lightbulb className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-bold text-foreground mb-1">Creators</h3>
-                    <p className="text-sm text-foreground/70">Platforms and tools for content creators and artists</p>
+                    <h3 className="font-bold text-foreground mb-1">Creators & Digital Communities</h3>
+                    <p className="text-sm text-foreground/70">Platforms and tools for content creators, artists, and community builders</p>
                   </div>
                 </div>
                 <div className="relative flex items-start gap-3 bg-primary/10 rounded-2xl p-5 border-2 border-primary/30">
                   <Bot className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-bold text-foreground">Agent Innovation</h3>
+                      <h3 className="font-bold text-foreground">AI Frontier</h3>
                       <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">🔥 HOT</Badge>
                     </div>
                     <p className="text-sm text-foreground/70">
