@@ -34,6 +34,7 @@ import relayLogo from "@/assets/relay-logo.png";
 import codecraftersLogo from "@/assets/codecrafters-logo.png";
 import mobbinLogo from "@/assets/mobbin-logo.svg";
 import ideavoLogo from "@/assets/ideavo-logo.png";
+import momentumLogo from "@/assets/momentum-logo.png";
 
 const sponsors = [
   { name: "n8n", logo: n8nLogo, url: "https://n8n.io", hasLogo: true },
@@ -45,6 +46,7 @@ const sponsors = [
   { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
   { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, invert: true },
+  { name: "Momentum", logo: momentumLogo, url: "https://niklasmey.com/momentum-builders", hasLogo: true },
 ];
 
 const Season2 = () => {
