@@ -11,26 +11,6 @@ import { motion } from "framer-motion";
 const Hackathons = () => {
   const upcomingEvents = [
     {
-      name: "LovHack Mini x Medo",
-      status: "Free Event",
-      statusColor: "text-blue-500",
-      description: "A free 48-hour hackathon powered by Medo. 300 free credits for all participants.",
-      date: "Feb 28 — Mar 1",
-      type: "Beginner Friendly",
-      color: "from-blue-500/20 to-blue-500/5",
-      link: "/medo-hack",
-    },
-    {
-      name: "Mini-Hack",
-      status: "Coming Soon",
-      statusColor: "text-green-500",
-      description: "A smaller, focused hackathon perfect for your first build. Lower pressure.",
-      date: "Feb 14-15, 2025",
-      type: "Beginner Friendly",
-      color: "from-green-500/20 to-green-500/5",
-      link: "/mini-hack",
-    },
-    {
       name: "Season 2",
       status: "Registrations Open",
       statusColor: "text-primary",
@@ -88,6 +68,30 @@ const Hackathons = () => {
         <section className="px-4 max-w-4xl mx-auto mb-20">
           <h2 className="text-3xl font-bold mb-8 text-center sm:text-left">Past Archive</h2>
           <div className="space-y-4">
+            <div className="group relative overflow-hidden bg-white/40 backdrop-blur-md border border-white/50 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 transition-all hover:bg-white/60">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center font-bold text-blue-400">MH</div>
+                <div>
+                  <h3 className="text-xl font-bold">LovHack Mini x Medo</h3>
+                  <p className="text-sm text-foreground/60">Feb 28 — Mar 1 • Free Event</p>
+                </div>
+              </div>
+              <Button asChild variant="outline" className="rounded-xl">
+                <Link to="/medo-hack">View Recap <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </div>
+            <div className="group relative overflow-hidden bg-white/40 backdrop-blur-md border border-white/50 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 transition-all hover:bg-white/60">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center font-bold text-green-400">MH</div>
+                <div>
+                  <h3 className="text-xl font-bold">Mini-Hack</h3>
+                  <p className="text-sm text-foreground/60">Feb 14-15, 2025 • Beginner Friendly</p>
+                </div>
+              </div>
+              <Button asChild variant="outline" className="rounded-xl">
+                <Link to="/mini-hack">View Recap <ArrowRight className="w-4 h-4 ml-2" /></Link>
+              </Button>
+            </div>
             <div className="group relative overflow-hidden bg-white/40 backdrop-blur-md border border-white/50 p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4 transition-all hover:bg-white/60">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center font-bold text-gray-400">S1</div>
