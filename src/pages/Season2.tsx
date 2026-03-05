@@ -30,6 +30,7 @@ import miroLogo from "@/assets/miro-logo.webp";
 import genxyzLogo from "@/assets/genxyz-logo.png";
 import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import featherlessLogo from "@/assets/featherless-logo.png";
+import relayLogo from "@/assets/relay-logo.png";
 
 const sponsors = [
   { name: "n8n", logo: n8nLogo, url: "https://n8n.io", hasLogo: true },
@@ -38,7 +39,7 @@ const sponsors = [
   { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", hasLogo: true },
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true, invert: true },
   { name: "Ideavo", logo: null, url: null, hasLogo: false },
-  { name: "Relay", logo: null, url: null, hasLogo: false },
+  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
   { name: "Mobbin", logo: null, url: null, hasLogo: false },
   { name: "CodeShifters", logo: null, url: null, hasLogo: false },
 ];
