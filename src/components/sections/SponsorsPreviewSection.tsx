@@ -14,6 +14,9 @@ import dualiteLogo from "@/assets/dualite-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 import genxyzLogo from "@/assets/genxyz-logo.png";
 import medoLogo from "@/assets/medo-logo.png";
+import nodebaseLogo from "@/assets/nodebase-logo.webp";
+import miroLogo from "@/assets/miro-logo.webp";
+import n8nLogo from "@/assets/n8n-logo.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,6 +36,9 @@ const SponsorsPreviewSection = () => {
     { name: "Momentum", logo: momentumLogo, size: "small", invert: false },
     { name: "gen.xyz", logo: genxyzLogo, size: "small", invert: true },
     { name: "Medo", logo: medoLogo, size: "small", invert: false },
+    { name: "Nodebase", logo: nodebaseLogo, size: "small", invert: false },
+    { name: "Miro", logo: miroLogo, size: "small", invert: false },
+    { name: "n8n", logo: n8nLogo, size: "small", invert: false },
   ];
 
   useEffect(() => {
