@@ -260,7 +260,7 @@ const Season2 = () => {
                       <img
                         src={sponsor.logo}
                         alt={sponsor.name}
-                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`}
+                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""} ${sponsor.name === "Relay" ? "mix-blend-multiply" : ""}`}
                       />
                     ) : (
                       <span className="text-2xl font-black text-foreground/70">{sponsor.name}</span>
