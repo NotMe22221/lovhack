@@ -6,6 +6,9 @@ import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 import medoLogo from "@/assets/medo-logo.png";
+import nodebaseLogo from "@/assets/nodebase-logo.webp";
+import miroLogo from "@/assets/miro-logo.webp";
+import n8nLogo from "@/assets/n8n-logo.webp";
 
 const SponsorsSection = () => {
   return (
@@ -125,6 +128,51 @@ const SponsorsSection = () => {
             <img
               src={medoLogo}
               alt="Medo - AI-powered building platform"
+              className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+
+          {/* Nodebase Sponsor */}
+          <a
+            href="https://nodebase.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-foreground/5 to-foreground/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img
+              src={nodebaseLogo}
+              alt="Nodebase - Backend infrastructure"
+              className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+
+          {/* Miro Sponsor */}
+          <a
+            href="https://miro.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-yellow-500/10 to-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img
+              src={miroLogo}
+              alt="Miro - Visual collaboration platform"
+              className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </a>
+
+          {/* n8n Sponsor */}
+          <a
+            href="https://n8n.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-500/10 to-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img
+              src={n8nLogo}
+              alt="n8n - Workflow automation"
               className="h-12 md:h-16 w-auto relative z-10"
             />
           </a>

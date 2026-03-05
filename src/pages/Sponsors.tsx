@@ -15,6 +15,9 @@ import qoderLogo from "@/assets/qoder-logo.png";
 import dualiteLogo from "@/assets/dualite-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 import medoLogo from "@/assets/medo-logo.png";
+import nodebaseLogo from "@/assets/nodebase-logo.webp";
+import miroLogo from "@/assets/miro-logo.webp";
+import n8nLogo from "@/assets/n8n-logo.webp";
 
 const Sponsors = () => {
   const sponsors = [
@@ -86,6 +89,29 @@ const Sponsors = () => {
       website: "https://medo.dev",
       size: "small",
       color: "from-blue-500/20 to-blue-500/5",
+    },
+    {
+      name: "Nodebase",
+      logo: nodebaseLogo,
+      description: "Backend infrastructure for modern apps.",
+      website: "https://nodebase.io",
+      size: "small",
+    },
+    {
+      name: "Miro",
+      logo: miroLogo,
+      description: "Visual collaboration platform for teams.",
+      website: "https://miro.com",
+      size: "small",
+      color: "from-yellow-500/20 to-yellow-500/5",
+    },
+    {
+      name: "n8n",
+      logo: n8nLogo,
+      description: "Workflow automation for technical teams.",
+      website: "https://n8n.io",
+      size: "small",
+      color: "from-pink-500/20 to-pink-500/5",
     },
   ];
 
