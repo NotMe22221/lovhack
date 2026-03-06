@@ -1,15 +1,17 @@
 
 
-## Plan: Move Mini Hackathons to Past Events Section
+## Plan: Clean up Season 2 sponsor grid
 
-Move the two LovHack Mini hackathon cards ("Mini-Hack" and "LovHack Mini x Medo") from the upcoming events grid into the "Past Archive" section, keeping only "Season 2" as an upcoming event.
+### Changes (all in `src/pages/Season2.tsx`)
 
-### Changes in `src/pages/Hackathons.tsx`
+**1. Reorder sponsors array** to put strongest/most recognizable logos first:
+```
+Row 1: Miro, n8n, Gen.xyz, Mobbin
+Row 2: Relay, Nodebase, Featherless, Ideavo
+Row 3: Momentum, CodeCrafters
+```
 
-1. **Remove both Mini hackathons from `upcomingEvents` array** (lines 13-32) — only keep the Season 2 entry.
+**2. Make entire card clickable** — wrap each `GlassCard` in an `<a>` tag with `target="_blank"` and add a hover effect (scale + subtle glow).
 
-2. **Add both to the "Past Archive" section** (lines 88-104) as archive cards matching the existing Season 1 style:
-   - "LovHack Mini x Medo" — Feb 28 — Mar 1 • link to `/medo-hack`
-   - "Mini-Hack" — Feb 14-15, 2025 • link to `/mini-hack`
-   - Each with a "View Recap" button, similar to the Season 1 card
+**3. Remove "Visit" link and sponsor name text** below the logo — only show the logo inside the card. The card itself handles the click.
 
