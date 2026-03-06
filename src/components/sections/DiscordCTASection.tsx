@@ -19,7 +19,7 @@ const DiscordCTASection = ({ variant = "default" }: DiscordCTASectionProps) => {
     { icon: Bell, text: "Early access" },
     { icon: Handshake, text: "Find teammates" },
     { icon: HelpCircle, text: "Get support" },
-    { icon: Users, text: "500+ builders" },
+    { icon: Users, text: "350+ builders" },
   ];
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const DiscordCTASection = ({ variant = "default" }: DiscordCTASectionProps) => {
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-foreground/70 max-w-md mx-auto mb-6 sm:mb-8 px-2">
               Our Discord is where it all happens: early access, team formation,
-              and a community of 500+ builders ready to help.
+              and a community of 350+ builders ready to help.
             </p>
 
             {/* Benefits - Compact inline */}
