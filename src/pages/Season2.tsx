@@ -284,34 +284,13 @@ const Season2 = () => {
             {/* Community Sponsors */}
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">Community Sponsors</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {communitySponsors.slice(0, 8).map((sponsor) => (
+              {communitySponsors.map((sponsor) => (
                 <a
                   key={sponsor.name}
                   href={sponsor.url}
                   target="_blank"
                   rel="noreferrer"
                   className="block transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
-                >
-                  <GlassCard className="!p-5 h-full flex items-center justify-center" hover={false}>
-                    <div className="h-14 flex items-center justify-center">
-                      <img
-                        src={sponsor.logo}
-                        alt={sponsor.name}
-                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`}
-                      />
-                    </div>
-                  </GlassCard>
-                </a>
-              ))}
-            </div>
-            <div className="flex justify-center gap-4 mt-4">
-              {communitySponsors.slice(8).map((sponsor) => (
-                <a
-                  key={sponsor.name}
-                  href={sponsor.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block w-[calc(25%-0.75rem)] transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
                 >
                   <GlassCard className="!p-5 h-full flex items-center justify-center" hover={false}>
                     <div className="h-14 flex items-center justify-center">
