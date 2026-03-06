@@ -380,7 +380,7 @@ const Season2 = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold">
                   <a href="https://luma.com/95fwomd5" target="_blank" rel="noreferrer">
-                    Register on Luma <ExternalLink className="w-4 h-4 ml-2" />
+                    Register on Luma
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-xl">
