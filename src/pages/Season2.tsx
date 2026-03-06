@@ -257,15 +257,37 @@ const Season2 = () => {
         {/* Sponsors */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}>
-            <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground">Powered By</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-center text-foreground">Our Sponsors</h2>
+            <p className="text-sm text-muted-foreground text-center mb-8">Supported by tools used by thousands of builders</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {sponsors.map((sponsor) => (
+              {sponsors.slice(0, 8).map((sponsor) => (
                 <a
                   key={sponsor.name}
                   href={sponsor.url}
                   target="_blank"
                   rel="noreferrer"
                   className="block transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
+                >
+                  <GlassCard className="!p-5 h-full flex items-center justify-center" hover={false}>
+                    <div className="h-14 flex items-center justify-center">
+                      <img
+                        src={sponsor.logo}
+                        alt={sponsor.name}
+                        className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`}
+                      />
+                    </div>
+                  </GlassCard>
+                </a>
+              ))}
+            </div>
+            <div className="flex justify-center gap-4 mt-4">
+              {sponsors.slice(8).map((sponsor) => (
+                <a
+                  key={sponsor.name}
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block w-[calc(25%-0.75rem)] transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
                 >
                   <GlassCard className="!p-5 h-full flex items-center justify-center" hover={false}>
                     <div className="h-14 flex items-center justify-center">
