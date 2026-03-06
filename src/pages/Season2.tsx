@@ -297,7 +297,7 @@ const Season2 = () => {
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
                 { step: "1", title: "Join Discord", desc: "Sign up and join our community server", icon: Users },
-                { step: "2", title: "Build for 48 Hours", desc: "Design, code, and ship your project", icon: Zap },
+                { step: "2", title: "Build for 1 Week", desc: "Design, code, and ship your project", icon: Zap },
                 { step: "3", title: "Submit Your Project", desc: "Share your creation with the community", icon: Rocket },
                 { step: "4", title: "Get Judged", desc: "Receive feedback and compete for prizes", icon: Trophy },
               ].map((item) => (
