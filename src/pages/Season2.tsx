@@ -36,6 +36,7 @@ import ideavoLogo from "@/assets/ideavo-logo-v2.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
 import momenLogo from "@/assets/momen-logo.png";
+import devswarmLogo from "@/assets/devswarm-logo.png";
 
 const communitySponsors = [
   // Row 1
@@ -45,10 +46,11 @@ const communitySponsors = [
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", invert: false },
   // Row 2
   { name: "Relay", logo: relayLogo, url: "https://relay.app", invert: false },
-  { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", invert: false },
+  { name: "Devswarm", logo: devswarmLogo, url: "https://devswarm.com", invert: false },
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", invert: false },
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", invert: false },
   // Row 3
+  { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", invert: false },
   { name: "Momen", logo: momenLogo, url: "https://momen.app", invert: false },
   { name: "Momentum", logo: momentumLogo, url: "https://niklasmey.com/momentum-builders", invert: false },
   { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", invert: true },
