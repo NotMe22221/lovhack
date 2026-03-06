@@ -1,17 +1,12 @@
 
 
-## Plan: Clean up Season 2 sponsor grid
+## Plan: Polish sponsor section
 
 ### Changes (all in `src/pages/Season2.tsx`)
 
-**1. Reorder sponsors array** to put strongest/most recognizable logos first:
-```
-Row 1: Miro, n8n, Gen.xyz, Mobbin
-Row 2: Relay, Nodebase, Featherless, Ideavo
-Row 3: Momentum, CodeCrafters
-```
+**1. Rename title** from "Powered By" to "Our Sponsors"
 
-**2. Make entire card clickable** — wrap each `GlassCard` in an `<a>` tag with `target="_blank"` and add a hover effect (scale + subtle glow).
+**2. Add subtitle** below the heading: *"Supported by tools used by thousands of builders"* in muted text.
 
-**3. Remove "Visit" link and sponsor name text** below the logo — only show the logo inside the card. The card itself handles the click.
+**3. Center the last row** — The grid is 4 columns with 10 items, so the last row has 2 cards left-aligned. Fix by rendering the first 8 sponsors in the 4-col grid, then the last 2 in a separate `flex justify-center` row with fixed-width cards matching the grid card size.
 
