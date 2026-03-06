@@ -37,16 +37,19 @@ import ideavoLogo from "@/assets/ideavo-logo.png";
 import momentumLogo from "@/assets/momentum-logo.png";
 
 const sponsors = [
-  { name: "n8n", logo: n8nLogo, url: "https://n8n.io", hasLogo: true },
-  { name: "Miro", logo: miroLogo, url: "https://miro.com", hasLogo: true },
-  { name: "Gen.xyz", logo: genxyzLogo, url: "https://gen.xyz", hasLogo: true, invert: true },
-  { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", hasLogo: true },
-  { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", hasLogo: true },
-  { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", hasLogo: true },
-  { name: "Relay", logo: relayLogo, url: "https://relay.app", hasLogo: true },
-  { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", hasLogo: true },
-  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", hasLogo: true, invert: true },
-  { name: "Momentum", logo: momentumLogo, url: "https://niklasmey.com/momentum-builders", hasLogo: true },
+  // Row 1
+  { name: "Miro", logo: miroLogo, url: "https://miro.com", invert: false },
+  { name: "n8n", logo: n8nLogo, url: "https://n8n.io", invert: false },
+  { name: "Gen.xyz", logo: genxyzLogo, url: "https://gen.xyz", invert: true },
+  { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", invert: false },
+  // Row 2
+  { name: "Relay", logo: relayLogo, url: "https://relay.app", invert: false },
+  { name: "Nodebase", logo: nodebaseLogo, url: "https://nodebase.dev", invert: false },
+  { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", invert: false },
+  { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", invert: false },
+  // Row 3
+  { name: "Momentum", logo: momentumLogo, url: "https://niklasmey.com/momentum-builders", invert: false },
+  { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", invert: true },
 ];
 
 const Season2 = () => {
@@ -257,32 +260,23 @@ const Season2 = () => {
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground">Powered By</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {sponsors.map((sponsor) => (
-                <GlassCard key={sponsor.name} className="text-center !p-5">
-                  <div className="h-14 flex items-center justify-center mb-3">
-                    {sponsor.hasLogo && sponsor.logo ? (
+                <a
+                  key={sponsor.name}
+                  href={sponsor.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
+                >
+                  <GlassCard className="!p-5 h-full flex items-center justify-center" hover={false}>
+                    <div className="h-14 flex items-center justify-center">
                       <img
                         src={sponsor.logo}
                         alt={sponsor.name}
                         className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`}
                       />
-                    ) : (
-                      <span className="text-2xl font-black text-foreground/70">{sponsor.name}</span>
-                    )}
-                  </div>
-                  {sponsor.hasLogo && (
-                    <p className="text-sm font-semibold text-foreground/60">{sponsor.name}</p>
-                  )}
-                  {sponsor.url && (
-                    <a
-                      href={sponsor.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
-                    >
-                      Visit <ExternalLink className="w-3 h-3" />
-                    </a>
-                  )}
-                </GlassCard>
+                    </div>
+                  </GlassCard>
+                </a>
               ))}
             </div>
           </motion.div>
