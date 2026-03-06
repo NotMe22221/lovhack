@@ -1,18 +1,12 @@
 
 
-## Plan: Add Devswarm to community sponsors
+## Plan: Polish sponsor section
 
-### Changes in `src/pages/Season2.tsx`
+### Changes (all in `src/pages/Season2.tsx`)
 
-**1. Copy uploaded logo**
-- Copy `user-uploads://image-33.png` → `src/assets/devswarm-logo.png`
-- Add import for the new logo
+**1. Rename title** from "Powered By" to "Our Sponsors"
 
-**2. Reorder community sponsors array**
-- Row 1: Miro, n8n, Gen.xyz, Mobbin (unchanged)
-- Row 2: Relay, **Devswarm** (new), Featherless, Ideavo
-- Row 3: **Nodebase** (moved down), Momen, Momentum, CodeCrafters
+**2. Add subtitle** below the heading: *"Supported by tools used by thousands of builders"* in muted text.
 
-**3. Simplify grid rendering**
-With 12 sponsors total, we get a perfect 4×3 grid — no need for the separate centered row. Replace the `slice(0,8)` grid + `slice(8)` flex with a single 12-item grid.
+**3. Center the last row** — The grid is 4 columns with 10 items, so the last row has 2 cards left-aligned. Fix by rendering the first 8 sponsors in the 4-col grid, then the last 2 in a separate `flex justify-center` row with fixed-width cards matching the grid card size.
 
