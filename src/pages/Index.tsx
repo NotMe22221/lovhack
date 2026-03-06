@@ -25,7 +25,7 @@ const Index = () => {
         <meta property="og:url" content="https://lovhack.dev" />
         <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
         <meta name="twitter:title" content="LovHack | Build Something Real. No Experience Required." />
-        <meta name="twitter:description" content="Join the beginner-friendly online hackathon where 500+ builders ship real projects in 48 hours." />
+        <meta name="twitter:description" content="Join the beginner-friendly online hackathon where 350+ builders ship real projects in 48 hours." />
         <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
       </Helmet>
 
