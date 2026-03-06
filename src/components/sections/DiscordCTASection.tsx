@@ -19,7 +19,7 @@ const DiscordCTASection = ({ variant = "default" }: DiscordCTASectionProps) => {
     { icon: Bell, text: "Early access" },
     { icon: Handshake, text: "Find teammates" },
     { icon: HelpCircle, text: "Get support" },
-    { icon: Users, text: "500+ builders" },
+    { icon: Users, text: "350+ builders" },
   ];
 
   useEffect(() => {
