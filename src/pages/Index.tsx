@@ -17,7 +17,7 @@ const Index = () => {
     <>
       <Helmet>
         <title>LovHack | Build Something Real. No Experience Required.</title>
-        <meta name="description" content="LovHack is a beginner-friendly online hackathon where developers, designers, and first-time builders ship real projects together in 48 hours. <meta name="description" content="LovHack is a beginner-friendly online hackathon where developers, designers, and first-time builders ship real projects together in 48 hours. Join 350+ builders today." />
+        <meta name="description" content="LovHack is a beginner-friendly online hackathon where developers, designers, and first-time builders ship real projects together in 48 hours. Join 350+ builders today." />
         <meta name="keywords" content="LovHack, hackathon, beginner hackathon, online hackathon, AI hackathon, vibe coding, build projects, learn to code, coding competition, web development" />
         <link rel="canonical" href="https://lovhack.dev" />
         <meta property="og:title" content="LovHack | Build Something Real. No Experience Required." />
