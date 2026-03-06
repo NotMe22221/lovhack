@@ -33,10 +33,12 @@ import featherlessLogo from "@/assets/featherless-logo.png";
 import relayLogo from "@/assets/relay-logo.png";
 import codecraftersLogo from "@/assets/codecrafters-logo.png";
 import mobbinLogo from "@/assets/mobbin-logo.svg";
-import ideavoLogo from "@/assets/ideavo-logo.png";
+import ideavoLogo from "@/assets/ideavo-logo-v2.png";
 import momentumLogo from "@/assets/momentum-logo.png";
+import creaoLogo from "@/assets/creao-logo.png";
+import momenLogo from "@/assets/momen-logo.png";
 
-const sponsors = [
+const communitySponsors = [
   // Row 1
   { name: "Miro", logo: miroLogo, url: "https://miro.com", invert: false },
   { name: "n8n", logo: n8nLogo, url: "https://n8n.io", invert: false },
@@ -48,6 +50,7 @@ const sponsors = [
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", invert: false },
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", invert: false },
   // Row 3
+  { name: "Momen", logo: momenLogo, url: "https://momen.app", invert: false },
   { name: "Momentum", logo: momentumLogo, url: "https://niklasmey.com/momentum-builders", invert: false },
   { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", invert: true },
 ];
