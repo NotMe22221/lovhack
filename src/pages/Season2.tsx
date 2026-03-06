@@ -12,7 +12,6 @@ import {
   Globe,
   Sparkles,
   ArrowLeft,
-  ExternalLink,
   Zap,
   Trophy,
   CheckCircle,
@@ -33,10 +32,12 @@ import featherlessLogo from "@/assets/featherless-logo.png";
 import relayLogo from "@/assets/relay-logo.png";
 import codecraftersLogo from "@/assets/codecrafters-logo.png";
 import mobbinLogo from "@/assets/mobbin-logo.svg";
-import ideavoLogo from "@/assets/ideavo-logo.png";
+import ideavoLogo from "@/assets/ideavo-logo-v2.png";
 import momentumLogo from "@/assets/momentum-logo.png";
+import creaoLogo from "@/assets/creao-logo.png";
+import momenLogo from "@/assets/momen-logo.png";
 
-const sponsors = [
+const communitySponsors = [
   // Row 1
   { name: "Miro", logo: miroLogo, url: "https://miro.com", invert: false },
   { name: "n8n", logo: n8nLogo, url: "https://n8n.io", invert: false },
@@ -48,6 +49,7 @@ const sponsors = [
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", invert: false },
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", invert: false },
   // Row 3
+  { name: "Momen", logo: momenLogo, url: "https://momen.app", invert: false },
   { name: "Momentum", logo: momentumLogo, url: "https://niklasmey.com/momentum-builders", invert: false },
   { name: "CodeCrafters", logo: codecraftersLogo, url: "https://codecrafters.io", invert: true },
 ];
@@ -258,9 +260,29 @@ const Season2 = () => {
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}>
             <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-center text-foreground">Our Sponsors</h2>
-            <p className="text-sm text-muted-foreground text-center mb-8">Supported by tools used by thousands of builders</p>
+            <p className="text-sm text-muted-foreground text-center mb-10">Supported by tools used by thousands of builders</p>
+
+            {/* Cash Sponsor */}
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">Cash Sponsor</p>
+            <div className="flex justify-center mb-10">
+              <a
+                href="https://creao.ai"
+                target="_blank"
+                rel="noreferrer"
+                className="block w-48 sm:w-56 transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
+              >
+                <GlassCard className="!p-6 h-full flex items-center justify-center border-2 border-primary/30" hover={false}>
+                  <div className="h-16 flex items-center justify-center">
+                    <img src={creaoLogo} alt="Creao" className="max-h-full max-w-[140px] object-contain" />
+                  </div>
+                </GlassCard>
+              </a>
+            </div>
+
+            {/* Community Sponsors */}
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">Community Sponsors</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {sponsors.slice(0, 8).map((sponsor) => (
+              {communitySponsors.slice(0, 8).map((sponsor) => (
                 <a
                   key={sponsor.name}
                   href={sponsor.url}
@@ -281,7 +303,7 @@ const Season2 = () => {
               ))}
             </div>
             <div className="flex justify-center gap-4 mt-4">
-              {sponsors.slice(8).map((sponsor) => (
+              {communitySponsors.slice(8).map((sponsor) => (
                 <a
                   key={sponsor.name}
                   href={sponsor.url}
@@ -358,7 +380,7 @@ const Season2 = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold">
                   <a href="https://luma.com/95fwomd5" target="_blank" rel="noreferrer">
-                    Register on Luma <ExternalLink className="w-4 h-4 ml-2" />
+                    Register on Luma
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="lg" className="rounded-xl">
