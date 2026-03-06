@@ -102,7 +102,7 @@ const UpcomingEventsSection = () => {
             >
               <GlassCard className="p-6 sm:p-8 md:p-10 relative overflow-hidden h-full backdrop-blur-2xl">
                 <div className="absolute top-4 right-4 sm:top-5 sm:right-5 px-3 py-1.5 rounded-full bg-indigo-100 text-indigo-700 text-sm font-medium">
-                  500+ Members
+                  350+ Members
                 </div>
 
                 <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6 mt-8 sm:mt-4">
