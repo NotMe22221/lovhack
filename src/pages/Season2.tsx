@@ -12,7 +12,6 @@ import {
   Globe,
   Sparkles,
   ArrowLeft,
-  ExternalLink,
   Zap,
   Trophy,
   CheckCircle,
