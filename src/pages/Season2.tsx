@@ -46,7 +46,7 @@ const communitySponsors = [
   { name: "Mobbin", logo: mobbinLogo, url: "https://mobbin.com", invert: false },
   // Row 2
   { name: "Relay", logo: relayLogo, url: "https://relay.app", invert: false },
-  { name: "Devswarm", logo: devswarmLogo, url: "https://devswarm.ai", invert: true },
+  { name: "Devswarm", logo: devswarmLogo, url: "https://devswarm.com", invert: false },
   { name: "Featherless", logo: featherlessLogo, url: "https://featherless.ai", invert: false },
   { name: "Ideavo", logo: ideavoLogo, url: "https://ideavo.ai", invert: false },
   // Row 3
