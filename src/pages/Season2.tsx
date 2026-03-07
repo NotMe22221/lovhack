@@ -67,10 +67,16 @@ const Season2 = () => {
         />
         <link rel="canonical" href="https://lovhack.dev/season-2" />
         <meta property="og:title" content="LovHack Season 2 | Our Biggest Event Yet" />
-        <meta property="og:description" content="Our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026." />
+        <meta
+          property="og:description"
+          content="Our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026."
+        />
         <meta property="og:url" content="https://lovhack.dev/season-2" />
         <meta name="twitter:title" content="LovHack Season 2 | Our Biggest Event Yet" />
-        <meta name="twitter:description" content="Our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026." />
+        <meta
+          name="twitter:description"
+          content="Our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026."
+        />
       </Helmet>
 
       <AnimatedBackground />
@@ -99,11 +105,9 @@ const Season2 = () => {
               <br />
               Season <span className="text-primary">2</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-foreground/70 mb-2 max-w-2xl mx-auto">
-              Our Biggest Event Yet
-            </p>
+            <p className="text-xl sm:text-2xl text-foreground/70 mb-2 max-w-2xl mx-auto">Our Biggest Event Yet</p>
             <p className="text-lg text-foreground/50 mb-6 max-w-xl mx-auto">
-              8 sponsors. Global participation. Amazing prizes.
+              13 sponsors. Global participation. Amazing prizes.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-foreground/60 font-medium mb-8">
               <div className="flex items-center gap-2 bg-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/40">
@@ -116,7 +120,11 @@ const Season2 = () => {
               </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold">
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold"
+              >
                 <a href="https://luma.com/95fwomd5" target="_blank" rel="noreferrer">
                   Register Now
                 </a>
@@ -132,17 +140,24 @@ const Season2 = () => {
 
         {/* What is it */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <GlassCard>
               <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
                 What is <span className="text-primary">LovHack Season 2</span>?
               </h2>
               <div className="space-y-4 text-foreground/80">
                 <p className="text-lg">
-                  After months of hosting LovHack Minis, it's time for the <strong>big stuff</strong>. Season 2 is our largest event yet — backed by <strong>8 sponsors</strong>, with builders from around the world competing to ship real projects.
+                  After months of hosting LovHack Minis, it's time for the <strong>big stuff</strong>. Season 2 is our
+                  largest event yet — backed by <strong>8 sponsors</strong>, with builders from around the world
+                  competing to ship real projects.
                 </p>
                 <p>
-                  Whether you're a first-time builder or a seasoned developer, this is your chance to build something incredible, learn new tools, and compete for amazing prizes.
+                  Whether you're a first-time builder or a seasoned developer, this is your chance to build something
+                  incredible, learn new tools, and compete for amazing prizes.
                 </p>
               </div>
 
@@ -169,7 +184,11 @@ const Season2 = () => {
 
         {/* What You Get */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+          >
             <GlassCard>
               <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
                 What You Get as a <span className="text-primary">Participant</span>
@@ -179,14 +198,18 @@ const Season2 = () => {
                   <CheckCircle className="w-8 h-8 text-primary shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Certificate of Completion</h3>
-                    <p className="text-sm text-foreground/70">Every participant who submits a project receives an official LovHack certificate</p>
+                    <p className="text-sm text-foreground/70">
+                      Every participant who submits a project receives an official LovHack certificate
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 bg-primary/5 rounded-2xl p-5 border border-primary/10">
                   <Trophy className="w-8 h-8 text-primary shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Amazing Prizes</h3>
-                    <p className="text-sm text-foreground/70">Prize details will be announced soon — stay tuned on Discord!</p>
+                    <p className="text-sm text-foreground/70">
+                      Prize details will be announced soon — stay tuned on Discord!
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4 bg-primary/5 rounded-2xl p-5 border border-primary/10">
@@ -200,7 +223,9 @@ const Season2 = () => {
                   <Users className="w-8 h-8 text-primary shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Global Community</h3>
-                    <p className="text-sm text-foreground/70">Connect with builders from 20+ countries and grow your network</p>
+                    <p className="text-sm text-foreground/70">
+                      Connect with builders from 20+ countries and grow your network
+                    </p>
                   </div>
                 </div>
               </div>
@@ -210,7 +235,11 @@ const Season2 = () => {
 
         {/* Tracks */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <GlassCard>
               <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-foreground">
                 Suggested <span className="text-primary">Tracks</span>
@@ -221,7 +250,9 @@ const Season2 = () => {
                   <GraduationCap className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Education & Student Life</h3>
-                    <p className="text-sm text-foreground/70">Apps that solve real problems for students, educators, and learners</p>
+                    <p className="text-sm text-foreground/70">
+                      Apps that solve real problems for students, educators, and learners
+                    </p>
                   </div>
                 </div>
                 <div className="relative flex items-start gap-3 bg-primary/10 rounded-2xl p-5 border-2 border-primary/30">
@@ -229,16 +260,22 @@ const Season2 = () => {
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-bold text-foreground">Productivity & Workflows</h3>
-                      <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">⚡ n8n</Badge>
+                      <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">
+                        ⚡ n8n
+                      </Badge>
                     </div>
-                    <p className="text-sm text-foreground/70">Tools that help people get more done with less effort — powered by n8n</p>
+                    <p className="text-sm text-foreground/70">
+                      Tools that help people get more done with less effort — powered by n8n
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 bg-primary/5 rounded-2xl p-5 border border-primary/10">
                   <Lightbulb className="w-6 h-6 text-primary shrink-0 mt-0.5" />
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Creators & Digital Communities</h3>
-                    <p className="text-sm text-foreground/70">Platforms and tools for content creators, artists, and community builders</p>
+                    <p className="text-sm text-foreground/70">
+                      Platforms and tools for content creators, artists, and community builders
+                    </p>
                   </div>
                 </div>
                 <div className="relative flex items-start gap-3 bg-primary/10 rounded-2xl p-5 border-2 border-primary/30">
@@ -246,7 +283,9 @@ const Season2 = () => {
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="font-bold text-foreground">AI Frontier</h3>
-                      <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">🔥 HOT</Badge>
+                      <Badge className="bg-primary/20 text-primary border-primary/30 text-[10px] px-1.5 py-0">
+                        🔥 HOT
+                      </Badge>
                     </div>
                     <p className="text-sm text-foreground/70">
                       AI agents that automate workflows and solve complex tasks
@@ -260,12 +299,20 @@ const Season2 = () => {
 
         {/* Sponsors */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
+          >
             <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-center text-foreground">Our Sponsors</h2>
-            <p className="text-sm text-muted-foreground text-center mb-10">Supported by tools used by thousands of builders</p>
+            <p className="text-sm text-muted-foreground text-center mb-10">
+              Supported by tools used by thousands of builders
+            </p>
 
             {/* Cash Sponsor */}
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">Cash Sponsor</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">
+              Cash Sponsor
+            </p>
             <div className="flex justify-center mb-10">
               <a
                 href="https://creao.ai"
@@ -273,7 +320,10 @@ const Season2 = () => {
                 rel="noreferrer"
                 className="block w-48 sm:w-56 transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl"
               >
-                <GlassCard className="!p-6 h-full flex items-center justify-center border-2 border-primary/30" hover={false}>
+                <GlassCard
+                  className="!p-6 h-full flex items-center justify-center border-2 border-primary/30"
+                  hover={false}
+                >
                   <div className="h-16 flex items-center justify-center">
                     <img src={creaoLogo} alt="Creao" className="max-h-full max-w-[140px] object-contain" />
                   </div>
@@ -282,7 +332,9 @@ const Season2 = () => {
             </div>
 
             {/* Community Sponsors */}
-            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">Community Sponsors</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground text-center mb-4">
+              Community Sponsors
+            </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {communitySponsors.map((sponsor) => (
                 <a
@@ -309,7 +361,11 @@ const Season2 = () => {
 
         {/* How It Works */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-foreground">
               How It <span className="text-primary">Works</span>
             </h2>
@@ -317,7 +373,12 @@ const Season2 = () => {
               {[
                 { step: "1", title: "Join Discord", desc: "Sign up and join our community server", icon: Users },
                 { step: "2", title: "Build for 1 Week", desc: "Design, code, and ship your project", icon: Zap },
-                { step: "3", title: "Submit Your Project", desc: "Share your creation with the community", icon: Rocket },
+                {
+                  step: "3",
+                  title: "Submit Your Project",
+                  desc: "Share your creation with the community",
+                  icon: Rocket,
+                },
                 { step: "4", title: "Get Judged", desc: "Receive feedback and compete for prizes", icon: Trophy },
               ].map((item) => (
                 <GlassCard key={item.step} className="text-center !p-6">
@@ -335,14 +396,19 @@ const Season2 = () => {
 
         {/* Important Note */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.35 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+          >
             <GlassCard className="border-amber-500/30 bg-amber-500/5">
               <div className="flex items-start gap-4">
                 <AlertTriangle className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
                 <div>
                   <h3 className="font-bold text-foreground mb-1">Important Note</h3>
                   <p className="text-foreground/70">
-                    Agents built before March 21st won't be accepted for the hackathon. Make sure to start fresh when the event begins!
+                    Agents built before March 21st won't be accepted for the hackathon. Make sure to start fresh when
+                    the event begins!
                   </p>
                 </div>
               </div>
@@ -352,14 +418,22 @@ const Season2 = () => {
 
         {/* Final CTA */}
         <section className="px-4 max-w-4xl mx-auto mb-16 sm:mb-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <GlassCard className="text-center bg-gradient-to-br from-primary/10 to-primary/5">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-foreground">Ready to Build?</h2>
               <p className="text-foreground/70 mb-8 max-w-md mx-auto">
                 Register now and join hundreds of builders from around the world for our biggest event yet.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl font-bold"
+                >
                   <a href="https://luma.com/95fwomd5" target="_blank" rel="noreferrer">
                     Register on Luma
                   </a>
