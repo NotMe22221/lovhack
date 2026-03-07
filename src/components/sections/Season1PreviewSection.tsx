@@ -14,10 +14,10 @@ const Season1PreviewSection = () => {
   const statsRef = useRef<HTMLDivElement>(null);
 
   const stats = [
-    { icon: Users, value: "100+", label: "Builders" },
-    { icon: Rocket, value: "40+", label: "Projects Shipped" },
-    { icon: Globe, value: "20+", label: "Countries" },
-    { icon: Trophy, value: "$5K+", label: "In Prizes" },
+    { icon: Users, value: "350+", label: "Builders" },
+    { icon: Rocket, value: "100+", label: "Projects Shipped" },
+    { icon: Globe, value: "65+", label: "Countries" },
+    { icon: Trophy, value: "$10K+", label: "In Prizes" },
   ];
 
   useEffect(() => {
