@@ -117,7 +117,6 @@ const Sponsors = () => {
       size: "small",
       color: "from-pink-500/20 to-pink-500/5",
     },
-    },
     {
       name: "Featherless",
       logo: featherlessLogo,
