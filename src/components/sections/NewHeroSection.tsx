@@ -91,7 +91,7 @@ const NewHeroSection = () => {
           ref={subheadRef}
           className="text-lg sm:text-xl md:text-2xl text-foreground/70 max-w-2xl mx-auto mb-10 md:mb-14 px-4 opacity-0 leading-relaxed font-medium"
         >
-          The <span className="text-foreground decoration-primary/50 underline underline-offset-4">biggest online hackathon</span> is back. March 21st — The <span className="text-foreground decoration-primary/50 underline underline-offset-4">biggest online hackathon</span> is back. March 21st — join 350+ builders and ship something real. and ship something real.
+          The <span className="text-foreground decoration-primary/50 underline underline-offset-4">biggest online hackathon</span> is back. March 21st — join 350+ builders and ship something real.
         </p>
 
         {/* CTAs - Fixed buttons */}
