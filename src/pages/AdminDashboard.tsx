@@ -151,6 +151,12 @@ const AdminDashboard = () => {
     toast({ title: `Project marked as ${status}` });
   };
 
+  const toggleFeatured = async (id: string, current: boolean) => {
+    await supabase.from("projects").update({ featured: !current } as any).eq("id", id);
+    loadAll();
+    toast({ title: current ? "Removed from Staff Picks" : "Added to Staff Picks" });
+  };
+
   const filteredProjects = projects.filter((p) => {
     const matchSearch = !projectSearch || p.title.toLowerCase().includes(projectSearch.toLowerCase());
     const matchStatus = projectStatusFilter === "all" || p.status === projectStatusFilter;
