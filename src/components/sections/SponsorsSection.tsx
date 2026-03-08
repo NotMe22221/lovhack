@@ -16,6 +16,8 @@ import n8nLogo from "@/assets/n8n-logo.webp";
 import brandoyeLogo from "@/assets/brandoye-logo.png";
 
 const SponsorsSection = () => {
+  const [brandOyeModalOpen, setBrandOyeModalOpen] = useState(false);
+
   return (
     <section className="relative py-24 px-4">
       <div className="max-w-4xl mx-auto">
