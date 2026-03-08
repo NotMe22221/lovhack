@@ -26,6 +26,7 @@ import SubmitProject from "./pages/SubmitProject";
 import Winners from "./pages/Winners";
 import Mentoring from "./pages/Mentoring";
 import Support from "./pages/Support";
+import EditProject from "./pages/EditProject";
 
 const queryClient = new QueryClient();
 
