@@ -242,12 +242,54 @@ export type Database = {
           },
         ]
       }
+      project_media: {
+        Row: {
+          file_name: string
+          file_type: string
+          file_url: string
+          id: string
+          media_role: string
+          project_id: string
+          sort_order: number
+          uploaded_at: string
+        }
+        Insert: {
+          file_name: string
+          file_type: string
+          file_url: string
+          id?: string
+          media_role?: string
+          project_id: string
+          sort_order?: number
+          uploaded_at?: string
+        }
+        Update: {
+          file_name?: string
+          file_type?: string
+          file_url?: string
+          id?: string
+          media_role?: string
+          project_id?: string
+          sort_order?: number
+          uploaded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_media_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           ai_summary: string | null
           created_at: string
           demo_link: string | null
           demo_video_link: string | null
+          demo_video_url: string | null
           description: string | null
           github_link: string | null
           hackathon_id: string | null
@@ -261,6 +303,7 @@ export type Database = {
           tagline: string | null
           team_id: string | null
           tech_stack: Json | null
+          tech_video_url: string | null
           thumbnail_url: string | null
           title: string
           track_id: string | null
@@ -273,6 +316,7 @@ export type Database = {
           created_at?: string
           demo_link?: string | null
           demo_video_link?: string | null
+          demo_video_url?: string | null
           description?: string | null
           github_link?: string | null
           hackathon_id?: string | null
@@ -286,6 +330,7 @@ export type Database = {
           tagline?: string | null
           team_id?: string | null
           tech_stack?: Json | null
+          tech_video_url?: string | null
           thumbnail_url?: string | null
           title: string
           track_id?: string | null
@@ -298,6 +343,7 @@ export type Database = {
           created_at?: string
           demo_link?: string | null
           demo_video_link?: string | null
+          demo_video_url?: string | null
           description?: string | null
           github_link?: string | null
           hackathon_id?: string | null
@@ -311,6 +357,7 @@ export type Database = {
           tagline?: string | null
           team_id?: string | null
           tech_stack?: Json | null
+          tech_video_url?: string | null
           thumbnail_url?: string | null
           title?: string
           track_id?: string | null

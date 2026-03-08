@@ -4,15 +4,19 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { Eye, Heart, Search, ChevronDown } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Eye, Heart, Search, ChevronDown, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import SubmitProjectModal from "@/components/SubmitProjectModal";
 
 const ITEMS_PER_PAGE = 12;
 
 const Projects = () => {
+  const { user } = useAuth();
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -76,10 +80,27 @@ const Projects = () => {
       <main className="pt-28 pb-16 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">Projects</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-6">
             Explore amazing projects built by the LovHack community
           </p>
+          {user && (
+            <Button className="rounded-xl" onClick={() => setSubmitModalOpen(true)}>
+              <Plus className="w-4 h-4 mr-2" /> Submit Project
+            </Button>
+          )}
         </div>
+        <SubmitProjectModal
+          open={submitModalOpen}
+          onOpenChange={setSubmitModalOpen}
+          onSuccess={() => {
+            // Refetch projects
+            const refetch = async () => {
+              const { data } = await supabase.from("projects").select("*, tracks(name), hackathons(name, season)").in("status", ["approved", "winner"]).order("created_at", { ascending: false });
+              setProjects(data || []);
+            };
+            refetch();
+          }}
+        />
 
         {/* Search + Filters */}
         <div className="flex flex-col sm:flex-row items-center gap-3 max-w-3xl mx-auto mb-10">

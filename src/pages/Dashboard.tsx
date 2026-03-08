@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, MessageSquare, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SubmitProjectModal from "@/components/SubmitProjectModal";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
@@ -25,6 +26,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("profile");
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
   // Profile state
   const [profile, setProfile] = useState<any>(null);
@@ -227,10 +229,17 @@ const Dashboard = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold">My Projects</h2>
-                  <Button asChild className="rounded-xl" size="sm">
-                    <Link to="/submit">Submit New</Link>
+                  <Button className="rounded-xl" size="sm" onClick={() => setSubmitModalOpen(true)}>
+                    Submit New
                   </Button>
                 </div>
+                <SubmitProjectModal
+                  open={submitModalOpen}
+                  onOpenChange={setSubmitModalOpen}
+                  onSuccess={() => {
+                    supabase.from("projects").select("*, tracks(name)").eq("user_id", user!.id).order("created_at", { ascending: false }).then(({ data }) => setMyProjects(data || []));
+                  }}
+                />
                 {projectsLoading ? (
                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
                 ) : myProjects.length === 0 ? (
