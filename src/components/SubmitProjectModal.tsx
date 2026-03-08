@@ -479,9 +479,15 @@ const SubmitProjectModal = ({ open, onOpenChange, onSuccess }: SubmitProjectModa
                   {hackathons.length > 0 && (
                     <div>
                       <Label>Hackathon</Label>
-                      <select name="hackathon_id" value={form.hackathon_id} onChange={handleChange} className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm mt-1">
-                        {hackathons.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
-                      </select>
+                      {hackathons.length === 1 ? (
+                        <div className="w-full rounded-xl border border-input bg-muted/50 px-3 py-2 text-sm mt-1 text-foreground">
+                          {hackathons[0].name}
+                        </div>
+                      ) : (
+                        <select name="hackathon_id" value={form.hackathon_id} onChange={handleChange} className="w-full rounded-xl border border-input bg-background px-3 py-2 text-sm mt-1">
+                          {hackathons.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
+                        </select>
+                      )}
                     </div>
                   )}
                   {tracks.length > 0 && (
