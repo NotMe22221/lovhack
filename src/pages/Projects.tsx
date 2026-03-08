@@ -15,6 +15,8 @@ import SubmitProjectModal from "@/components/SubmitProjectModal";
 const ITEMS_PER_PAGE = 12;
 
 const Projects = () => {
+  const { user } = useAuth();
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
