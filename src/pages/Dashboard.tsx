@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { User, FolderOpen, Award, MessageSquare, Key, FileText, Upload, ExternalLink, Trash2 } from "lucide-react";
+import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, MessageSquare, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
