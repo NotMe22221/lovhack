@@ -128,6 +128,14 @@ const Sponsors = () => {
       size: "small",
       color: "from-yellow-500/20 to-amber-500/5",
     },
+    {
+      name: "BrandOye",
+      logo: brandoyeLogo,
+      description: "AI-powered marketing platform to automate social media content creation, scheduling, and analytics.",
+      website: "__modal__",
+      size: "small",
+      color: "from-orange-500/20 to-amber-500/5",
+    },
   ];
 
   return (
