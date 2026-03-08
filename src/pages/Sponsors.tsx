@@ -252,6 +252,15 @@ const BrandOyeModal = ({ open, onClose }: { open: boolean; onClose: () => void }
 
 const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: number; onBrandOyeClick?: () => void }) => {
   const [expanded, setExpanded] = useState(false);
+  const [isClamped, setIsClamped] = useState(false);
+  const textRef = React.useRef<HTMLParagraphElement>(null);
+
+  React.useEffect(() => {
+    const el = textRef.current;
+    if (el) {
+      setIsClamped(el.scrollHeight > el.clientHeight + 2);
+    }
+  }, [sponsor.description]);
   const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
   const bgGradient = sponsor.color || "from-pink-500/5 to-transparent";
 
