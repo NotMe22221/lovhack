@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
 import hadoLogo from "@/assets/hado-logo-v3.png";
@@ -9,8 +13,11 @@ import medoLogo from "@/assets/medo-logo.png";
 import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import miroLogo from "@/assets/miro-logo.webp";
 import n8nLogo from "@/assets/n8n-logo.webp";
+import brandoyeLogo from "@/assets/brandoye-logo.png";
 
 const SponsorsSection = () => {
+  const [brandOyeModalOpen, setBrandOyeModalOpen] = useState(false);
+
   return (
     <section className="relative py-24 px-4">
       <div className="max-w-4xl mx-auto">
@@ -176,7 +183,54 @@ const SponsorsSection = () => {
               className="h-12 md:h-16 w-auto relative z-10"
             />
           </a>
+          {/* BrandOye Sponsor */}
+          <button
+            onClick={() => setBrandOyeModalOpen(true)}
+            className="group relative flex items-center justify-center p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+          >
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-orange-500/10 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <img
+              src={brandoyeLogo}
+              alt="BrandOye - AI-powered marketing platform"
+              className="h-12 md:h-16 w-auto relative z-10"
+            />
+          </button>
         </div>
+
+        {/* BrandOye Modal */}
+        <AnimatePresence>
+          {brandOyeModalOpen && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setBrandOyeModalOpen(false)} />
+              <motion.div
+                className="relative z-10 w-full max-w-md rounded-3xl bg-card border border-border p-8 text-center shadow-2xl"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ type: "spring", duration: 0.4 }}
+              >
+                <button
+                  onClick={() => setBrandOyeModalOpen(false)}
+                  className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+                <h3 className="text-2xl font-bold text-foreground mb-3">🚀 Coming Soon</h3>
+                <p className="text-foreground/70 text-base mb-6">
+                  BrandOye will launch on 9 March. Stay tuned.
+                </p>
+                <Button onClick={() => setBrandOyeModalOpen(false)} className="rounded-full px-8">
+                  Got it
+                </Button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <p className="text-center text-muted-foreground mt-16 text-sm">
           Interested in sponsoring LovHack?{" "}

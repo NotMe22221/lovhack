@@ -3,9 +3,10 @@ import Navbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Footer from "@/components/sections/Footer";
 import DiscordCTASection from "@/components/sections/DiscordCTASection";
-import { ExternalLink, Gift, Handshake } from "lucide-react";
+import { ExternalLink, Gift, Handshake, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
@@ -19,8 +20,10 @@ import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import miroLogo from "@/assets/miro-logo.webp";
 import n8nLogo from "@/assets/n8n-logo.webp";
 import featherlessLogo from "@/assets/featherless-logo.png";
+import brandoyeLogo from "@/assets/brandoye-logo.png";
 
 const Sponsors = () => {
+  const [brandOyeModalOpen, setBrandOyeModalOpen] = useState(false);
   const sponsors = [
     {
       name: "Lovable",
@@ -126,6 +129,14 @@ const Sponsors = () => {
       size: "small",
       color: "from-yellow-500/20 to-amber-500/5",
     },
+    {
+      name: "BrandOye",
+      logo: brandoyeLogo,
+      description: "AI-powered marketing platform to automate social media content creation, scheduling, and analytics.",
+      website: "__modal__",
+      size: "small",
+      color: "from-orange-500/20 to-amber-500/5",
+    },
   ];
 
   return (
@@ -175,9 +186,10 @@ const Sponsors = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
             {/* SPONSOR CARDS */}
             {sponsors.map((sponsor, index) => (
-              <BentoCard key={index} sponsor={sponsor} index={index} />
+              <BentoCard key={index} sponsor={sponsor} index={index} onBrandOyeClick={() => setBrandOyeModalOpen(true)} />
             ))}
 
+            <BrandOyeModal open={brandOyeModalOpen} onClose={() => setBrandOyeModalOpen(false)} />
             {/* CTA CARD */}
             <div className="sm:col-span-2 lg:col-span-1 row-span-1 rounded-3xl bg-primary/90 relative overflow-hidden group flex flex-col items-center justify-center text-center p-8 transition-transform hover:-translate-y-1 duration-300">
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
@@ -202,12 +214,52 @@ const Sponsors = () => {
   );
 };
 
-const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
-  // Determine spans based on size - simpler logic for 3 cols
-  const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
+const BrandOyeModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => (
+  <AnimatePresence>
+    {open && (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+        <motion.div
+          className="relative z-10 w-full max-w-md rounded-3xl bg-card border border-border p-8 text-center shadow-2xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ type: "spring", duration: 0.4 }}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <h3 className="text-2xl font-bold text-foreground mb-3">🚀 Coming Soon</h3>
+          <p className="text-foreground/70 text-base mb-6">
+            BrandOye will launch on 9 March. Stay tuned.
+          </p>
+          <Button onClick={onClose} className="rounded-full px-8">
+            Got it
+          </Button>
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
 
-  // Pink gradients fallback
+const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: number; onBrandOyeClick?: () => void }) => {
+  const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
   const bgGradient = sponsor.color || "from-pink-500/5 to-transparent";
+
+  const handleWebsiteClick = (e: React.MouseEvent) => {
+    if (sponsor.website === "__modal__") {
+      e.preventDefault();
+      onBrandOyeClick?.();
+    }
+  };
 
   return (
     <motion.div
@@ -217,11 +269,9 @@ const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
       viewport={{ once: true }}
       className={`${colSpan} group relative rounded-3xl overflow-hidden border border-white/20 bg-gradient-to-br ${bgGradient} backdrop-blur-xl p-8 flex flex-col justify-between hover:border-primary/40 transition-colors duration-500`}
     >
-      {/* Hover Glow - Pinkier */}
       <div className="absolute inset-0 bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10" />
 
       <div className="flex items-start justify-between mb-4">
-        {/* BIGGER LOGO CONTAINER */}
         <div className="w-20 h-20 bg-white/90 rounded-2xl p-4 flex items-center justify-center shadow-sm">
           <img src={sponsor.logo} alt={sponsor.name} className="w-full h-full object-contain" />
         </div>
@@ -238,9 +288,10 @@ const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
         <p className="text-base text-foreground/70 mb-6 line-clamp-2">{sponsor.description}</p>
 
         <a
-          href={sponsor.website}
-          target="_blank"
+          href={sponsor.website === "__modal__" ? "#" : sponsor.website}
+          target={sponsor.website === "__modal__" ? undefined : "_blank"}
           rel="noreferrer"
+          onClick={handleWebsiteClick}
           className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
         >
           View Website <ExternalLink className="w-4 h-4" />
