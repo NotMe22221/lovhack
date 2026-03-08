@@ -67,6 +67,10 @@ const ProjectDetail = () => {
         }
       }
 
+      // Fetch project media
+      const { data: media } = await supabase.from("project_media" as any).select("*").eq("project_id", id).order("sort_order", { ascending: true });
+      setProjectMedia(media || []);
+
       setLoading(false);
     };
     fetchProject();
