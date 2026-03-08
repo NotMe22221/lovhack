@@ -73,19 +73,20 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               {user ? (
                 <>
-                  <Button
-                    asChild
-                    size="sm"
-                    variant="outline"
-                    className="hidden md:inline-flex rounded-full px-4"
-                  >
+                  {isAdmin && (
+                    <Button asChild size="sm" variant="outline" className="hidden md:inline-flex rounded-full px-4">
+                      <Link to="/admin" className="flex items-center gap-1"><ShieldCheck className="w-4 h-4" />Admin</Link>
+                    </Button>
+                  )}
+                  {isJudge && (
+                    <Button asChild size="sm" variant="outline" className="hidden md:inline-flex rounded-full px-4">
+                      <Link to="/judge" className="flex items-center gap-1"><Star className="w-4 h-4" />Judge</Link>
+                    </Button>
+                  )}
+                  <Button asChild size="sm" variant="outline" className="hidden md:inline-flex rounded-full px-4">
                     <Link to="/submit">Submit Project</Link>
                   </Button>
-                  <Button
-                    asChild
-                    size="sm"
-                    className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4"
-                  >
+                  <Button asChild size="sm" className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4">
                     <Link to="/dashboard" className="flex items-center gap-2">
                       <User className="w-4 h-4" />
                       Dashboard
