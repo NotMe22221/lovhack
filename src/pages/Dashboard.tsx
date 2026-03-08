@@ -15,8 +15,10 @@ import { useToast } from "@/hooks/use-toast";
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
   { id: "projects", label: "My Projects", icon: FolderOpen },
+  { id: "contributions", label: "Contributions", icon: Users },
   { id: "credits", label: "API Credits", icon: Key },
   { id: "certificates", label: "Certificates", icon: FileText },
+  { id: "messages", label: "Messages", icon: MessageSquare },
 ];
 
 const Dashboard = () => {
