@@ -151,14 +151,14 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold text-foreground mb-8">Dashboard</h1>
 
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Sidebar */}
+          {/* Sidebar — horizontal scroll on mobile */}
           <div className="md:w-64 shrink-0">
-            <div className="bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl p-2 space-y-1">
+            <div className="bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl p-2 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
                     activeTab === tab.id ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >

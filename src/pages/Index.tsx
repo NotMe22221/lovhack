@@ -39,6 +39,7 @@ const Index = () => {
         <WhoIsForSection />
         <Season1PreviewSection />
         <WinnersSection />
+        <StatsSection />
         <UpcomingEventsSection />
         <SponsorsPreviewSection />
         <FAQSection />
