@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { User, FolderOpen, Award, MessageSquare, Key, FileText, Upload, ExternalLink, Trash2 } from "lucide-react";
+import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, MessageSquare, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -15,8 +15,10 @@ import { useToast } from "@/hooks/use-toast";
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
   { id: "projects", label: "My Projects", icon: FolderOpen },
+  { id: "contributions", label: "Contributions", icon: Users },
   { id: "credits", label: "API Credits", icon: Key },
   { id: "certificates", label: "Certificates", icon: FileText },
+  { id: "messages", label: "Messages", icon: MessageSquare },
 ];
 
 const Dashboard = () => {
@@ -44,6 +46,10 @@ const Dashboard = () => {
   const [certificates, setCertificates] = useState<any[]>([]);
   const [certsLoading, setCertsLoading] = useState(true);
 
+  // Contributions state
+  const [contributions, setContributions] = useState<any[]>([]);
+  const [contribLoading, setContribLoading] = useState(true);
+
   useEffect(() => {
     if (!user) return;
     // Load profile
@@ -69,6 +75,19 @@ const Dashboard = () => {
     supabase.from("certificates" as any).select("*").eq("recipient_email", user.email).then(({ data }: any) => {
       setCertificates(data || []);
       setCertsLoading(false);
+    });
+    // Load contributions (teams the user belongs to)
+    supabase.from("team_members").select("*, teams(name, id)").eq("user_id", user.id).then(async ({ data }) => {
+      if (data && data.length > 0) {
+        const teamIds = data.map((tm: any) => tm.team_id);
+        const { data: projects } = await supabase.from("projects").select("id, title, status, thumbnail_url, team_id").in("team_id", teamIds);
+        const enriched = data.map((tm: any) => ({
+          ...tm,
+          projects: (projects || []).filter((p: any) => p.team_id === tm.team_id),
+        }));
+        setContributions(enriched);
+      }
+      setContribLoading(false);
     });
   }, [user]);
 
@@ -223,6 +242,9 @@ const Dashboard = () => {
                           <p className="text-xs text-muted-foreground truncate">{p.tagline}</p>
                         </div>
                         <Badge className={`text-xs ${statusColor[p.status] || ""}`}>{p.status}</Badge>
+                        <Link to={`/dashboard/projects/${p.id}/edit`} className="text-muted-foreground hover:text-primary">
+                          <Edit className="w-4 h-4" />
+                        </Link>
                         <button onClick={() => handleDeleteProject(p.id)} className="text-muted-foreground hover:text-destructive">
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -252,6 +274,42 @@ const Dashboard = () => {
                           <code className="block mt-2 bg-background px-2 py-1 rounded text-xs font-mono text-primary">{c.claim_code}</code>
                         )}
                         {c.instructions && <p className="text-xs text-muted-foreground mt-2">{c.instructions}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* CONTRIBUTIONS TAB */}
+            {activeTab === "contributions" && (
+              <div>
+                <h2 className="text-xl font-semibold mb-6">My Contributions</h2>
+                {contribLoading ? (
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+                ) : contributions.length === 0 ? (
+                  <p className="text-muted-foreground">You haven't joined any teams yet.</p>
+                ) : (
+                  <div className="space-y-3">
+                    {contributions.map((c: any) => (
+                      <div key={c.id} className="rounded-xl border border-border/50 p-4 bg-muted/30">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-semibold text-foreground">{c.teams?.name || "Unnamed Team"}</h3>
+                          <Badge variant="outline" className="text-xs capitalize">{c.role}</Badge>
+                        </div>
+                        {c.projects?.length > 0 ? (
+                          <div className="space-y-1">
+                            {c.projects.map((p: any) => (
+                              <Link key={p.id} to={`/projects/${p.id}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                                <FolderOpen className="w-3 h-3" />
+                                {p.title}
+                                <Badge className={`text-[10px] ml-auto ${statusColor[p.status] || ""}`}>{p.status}</Badge>
+                              </Link>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">No projects linked to this team yet.</p>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -293,6 +351,18 @@ const Dashboard = () => {
                     ))}
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* MESSAGES TAB */}
+            {activeTab === "messages" && (
+              <div>
+                <h2 className="text-xl font-semibold mb-6">Messages</h2>
+                <div className="text-center py-12">
+                  <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                  <p className="text-muted-foreground">No messages yet.</p>
+                  <p className="text-xs text-muted-foreground/70 mt-1">Announcements and notifications will appear here.</p>
+                </div>
               </div>
             )}
           </div>
