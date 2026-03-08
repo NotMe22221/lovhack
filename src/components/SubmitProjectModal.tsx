@@ -366,6 +366,25 @@ const SubmitProjectModal = ({ open, onOpenChange, onSuccess }: SubmitProjectModa
     </div>
   );
 
+  // Guard: no active hackathons = submissions closed
+  if (open && hackathons.length === 0 && tracks.length >= 0) {
+    return (
+      <Dialog open={open} onOpenChange={onOpenChange}>
+        <DialogContent className="max-w-md bg-card border-border/50 rounded-3xl">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-foreground">Submissions Closed</DialogTitle>
+          </DialogHeader>
+          <div className="py-8 text-center">
+            <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+              <AlertCircle className="w-8 h-8 text-muted-foreground" />
+            </div>
+            <p className="text-muted-foreground">Submissions are currently closed. Check back when the next hackathon begins!</p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-3xl h-[90vh] p-0 bg-card border-border/50 rounded-3xl overflow-hidden">
