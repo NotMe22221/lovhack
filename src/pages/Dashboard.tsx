@@ -46,6 +46,10 @@ const Dashboard = () => {
   const [certificates, setCertificates] = useState<any[]>([]);
   const [certsLoading, setCertsLoading] = useState(true);
 
+  // Contributions state
+  const [contributions, setContributions] = useState<any[]>([]);
+  const [contribLoading, setContribLoading] = useState(true);
+
   useEffect(() => {
     if (!user) return;
     // Load profile
