@@ -169,7 +169,7 @@ const JudgeDashboard = () => {
                           <div>
                             <div className="flex items-center gap-2">
                               <p className="font-semibold">{p.title}</p>
-                              {existing && <CheckCircle className="w-4 h-4 text-green-600" />}
+                              {existing && <CheckCircle className="w-4 h-4 text-primary" />}
                             </div>
                             <p className="text-sm text-muted-foreground">{p.tagline}</p>
                           </div>

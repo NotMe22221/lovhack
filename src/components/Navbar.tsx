@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, MessageSquare, LogIn, User, LogOut } from "lucide-react";
+import { Menu, X, MessageSquare, LogIn, User, LogOut, ShieldCheck, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import lovhackLogo from "@/assets/lovhack-logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isJudge, setIsJudge] = useState(false);
+
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); setIsJudge(false); return; }
+    Promise.all([
+      supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }),
+      supabase.rpc("has_role", { _user_id: user.id, _role: "judge" }),
+    ]).then(([a, j]) => {
+      setIsAdmin(a.data === true);
+      setIsJudge(j.data === true);
+    });
+  }, [user]);
 
   const navLinks = [
     { to: "/", label: "Home" },
