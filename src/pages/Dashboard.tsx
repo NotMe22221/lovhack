@@ -50,6 +50,10 @@ const Dashboard = () => {
   const [contributions, setContributions] = useState<any[]>([]);
   const [contribLoading, setContribLoading] = useState(true);
 
+  // Announcements state
+  const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [announcementsLoading, setAnnouncementsLoading] = useState(true);
+
   useEffect(() => {
     if (!user) return;
     // Load profile
@@ -88,6 +92,11 @@ const Dashboard = () => {
         setContributions(enriched);
       }
       setContribLoading(false);
+    });
+    // Load announcements
+    supabase.from("announcements").select("*").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => {
+      setAnnouncements(data || []);
+      setAnnouncementsLoading(false);
     });
   }, [user]);
 
@@ -142,14 +151,14 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold text-foreground mb-8">Dashboard</h1>
 
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Sidebar */}
+          {/* Sidebar — horizontal scroll on mobile */}
           <div className="md:w-64 shrink-0">
-            <div className="bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl p-2 space-y-1">
+            <div className="bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl p-2 flex md:flex-col gap-1 overflow-x-auto md:overflow-visible">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium transition-all whitespace-nowrap ${
                     activeTab === tab.id ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   }`}
                 >
@@ -357,12 +366,28 @@ const Dashboard = () => {
             {/* MESSAGES TAB */}
             {activeTab === "messages" && (
               <div>
-                <h2 className="text-xl font-semibold mb-6">Messages</h2>
-                <div className="text-center py-12">
-                  <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-                  <p className="text-muted-foreground">No messages yet.</p>
-                  <p className="text-xs text-muted-foreground/70 mt-1">Announcements and notifications will appear here.</p>
-                </div>
+                <h2 className="text-xl font-semibold mb-6">Announcements</h2>
+                {announcementsLoading ? (
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+                ) : announcements.length === 0 ? (
+                  <div className="text-center py-12">
+                    <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                    <p className="text-muted-foreground">No announcements yet.</p>
+                    <p className="text-xs text-muted-foreground/70 mt-1">Stay tuned for updates from the LovHack team.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {announcements.map((a: any) => (
+                      <div key={a.id} className="rounded-xl border border-border/50 p-4 bg-muted/30">
+                        <h3 className="font-semibold text-foreground">{a.title}</h3>
+                        <p className="text-sm text-muted-foreground mt-1">{a.message}</p>
+                        <p className="text-xs text-muted-foreground/60 mt-2">
+                          {new Date(a.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>

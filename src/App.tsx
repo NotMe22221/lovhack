@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ScrollToTop from "@/components/ScrollToTop";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Season1 from "./pages/Season1";
@@ -36,37 +37,39 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <AuthProvider>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/season-1" element={<Season1 />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/sponsors" element={<Sponsors />} />
-              <Route path="/hackathons" element={<Hackathons />} />
-              <Route path="/mini-hack" element={<MiniHack />} />
-              <Route path="/medo-hack" element={<MedoHack />} />
-              <Route path="/season-2" element={<Season2 />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/projects/:id" element={<ProjectDetail />} />
-              <Route path="/winners" element={<Winners />} />
-              <Route path="/mentoring" element={<Mentoring />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/submit" element={<ProtectedRoute><SubmitProject /></ProtectedRoute>} />
-              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/dashboard/projects/:id/edit" element={<ProtectedRoute><EditProject /></ProtectedRoute>} />
-              <Route path="/admin/certificates" element={<AdminCertificates />} />
-              <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-              <Route path="/judge" element={<ProtectedRoute><JudgeDashboard /></ProtectedRoute>} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </AuthProvider>
-        </BrowserRouter>
+        <ErrorBoundary>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <AuthProvider>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/season-1" element={<Season1 />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/sponsors" element={<Sponsors />} />
+                <Route path="/hackathons" element={<Hackathons />} />
+                <Route path="/mini-hack" element={<MiniHack />} />
+                <Route path="/medo-hack" element={<MedoHack />} />
+                <Route path="/season-2" element={<Season2 />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects/:id" element={<ProjectDetail />} />
+                <Route path="/winners" element={<Winners />} />
+                <Route path="/mentoring" element={<Mentoring />} />
+                <Route path="/support" element={<Support />} />
+                <Route path="/submit" element={<ProtectedRoute><SubmitProject /></ProtectedRoute>} />
+                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+                <Route path="/dashboard/projects/:id/edit" element={<ProtectedRoute><EditProject /></ProtectedRoute>} />
+                <Route path="/admin/certificates" element={<AdminCertificates />} />
+                <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+                <Route path="/judge" element={<ProtectedRoute><JudgeDashboard /></ProtectedRoute>} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AuthProvider>
+          </BrowserRouter>
+        </ErrorBoundary>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>

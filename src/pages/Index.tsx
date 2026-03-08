@@ -10,6 +10,7 @@ import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import DiscordCTASection from "@/components/sections/DiscordCTASection";
 import SponsorsPreviewSection from "@/components/sections/SponsorsPreviewSection";
 import FAQSection from "@/components/sections/FAQSection";
+import StatsSection from "@/components/sections/StatsSection";
 import Footer from "@/components/sections/Footer";
 
 const Index = () => {
@@ -38,6 +39,7 @@ const Index = () => {
         <WhoIsForSection />
         <Season1PreviewSection />
         <WinnersSection />
+        <StatsSection />
         <UpcomingEventsSection />
         <SponsorsPreviewSection />
         <FAQSection />

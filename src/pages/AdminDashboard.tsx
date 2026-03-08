@@ -14,7 +14,8 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
-import { ShieldCheck, Plus, Search, Trash2, UserPlus } from "lucide-react";
+import { ShieldCheck, Plus, Search, Trash2, UserPlus, Megaphone, BarChart3 } from "lucide-react";
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const statusColors: Record<string, string> = {
   draft: "bg-muted text-muted-foreground",
@@ -67,6 +68,12 @@ const AdminDashboard = () => {
   const [roleEmail, setRoleEmail] = useState("");
   const [roleToAssign, setRoleToAssign] = useState("admin");
 
+  // Announcements
+  const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [annForm, setAnnForm] = useState({ title: "", message: "", published: false });
+  const [annDialogOpen, setAnnDialogOpen] = useState(false);
+  const [editingAnnId, setEditingAnnId] = useState<string | null>(null);
+
   useEffect(() => {
     if (!user) return;
     supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }).then(({ data }) => {
@@ -76,7 +83,7 @@ const AdminDashboard = () => {
   }, [user]);
 
   const loadAll = async () => {
-    const [h, p, t, j, tk, pr, ur] = await Promise.all([
+    const [h, p, t, j, tk, pr, ur, ann] = await Promise.all([
       supabase.from("hackathons").select("*").order("season", { ascending: false }),
       supabase.from("projects").select("*, hackathons(name), tracks(name)").order("created_at", { ascending: false }),
       supabase.from("support_tickets").select("*").order("created_at", { ascending: false }),
@@ -84,6 +91,7 @@ const AdminDashboard = () => {
       supabase.from("tracks").select("*, hackathons(name)").order("name"),
       supabase.from("profiles").select("*").order("name"),
       supabase.from("user_roles").select("*"),
+      supabase.from("announcements").select("*").order("created_at", { ascending: false }),
     ]);
     if (h.data) setHackathons(h.data);
     if (p.data) setProjects(p.data);
@@ -92,6 +100,7 @@ const AdminDashboard = () => {
     if (tk.data) setTracks(tk.data);
     if (pr.data) setProfiles(pr.data);
     if (ur.data) setUserRoles(ur.data);
+    if (ann.data) setAnnouncements(ann.data);
   };
 
   // ---- Hackathon CRUD ----
@@ -196,6 +205,34 @@ const AdminDashboard = () => {
     toast({ title: "Role removed" });
   };
 
+  // ---- Announcements ----
+  const saveAnnouncement = async () => {
+    const payload = { title: annForm.title, message: annForm.message, published: annForm.published };
+    if (editingAnnId) {
+      await supabase.from("announcements").update(payload).eq("id", editingAnnId);
+    } else {
+      await supabase.from("announcements").insert(payload);
+    }
+    setAnnDialogOpen(false);
+    setEditingAnnId(null);
+    setAnnForm({ title: "", message: "", published: false });
+    loadAll();
+    toast({ title: editingAnnId ? "Announcement updated" : "Announcement created" });
+  };
+
+  const deleteAnnouncement = async (id: string) => {
+    await supabase.from("announcements").delete().eq("id", id);
+    loadAll();
+    toast({ title: "Announcement deleted" });
+  };
+
+  // Analytics data
+  const statusCounts = ["pending", "approved", "rejected", "winner"].map((s) => ({
+    status: s.charAt(0).toUpperCase() + s.slice(1),
+    count: projects.filter((p) => p.status === s).length,
+  }));
+  const PIE_COLORS = ["hsl(var(--primary))", "hsl(120, 60%, 50%)", "hsl(0, 70%, 55%)", "hsl(270, 60%, 55%)"];
+
   if (isAdmin === null) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -228,12 +265,14 @@ const AdminDashboard = () => {
           <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
           <Tabs defaultValue="hackathons">
-            <TabsList className="mb-6 flex flex-wrap gap-1">
+            <TabsList className="mb-6 flex flex-wrap gap-1 overflow-x-auto">
               <TabsTrigger value="hackathons">Hackathons</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>
               <TabsTrigger value="judges">Judges</TabsTrigger>
               <TabsTrigger value="tickets">Support</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
+              <TabsTrigger value="announcements">Announcements</TabsTrigger>
+              <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
 
             {/* ===== HACKATHONS ===== */}
@@ -483,6 +522,135 @@ const AdminDashboard = () => {
                       </div>
                     );
                   })}
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* ===== ANNOUNCEMENTS ===== */}
+            <TabsContent value="announcements" className="space-y-6">
+              <div className="flex justify-between items-center">
+                <h2 className="text-xl font-semibold">Announcements</h2>
+                <Dialog open={annDialogOpen} onOpenChange={setAnnDialogOpen}>
+                  <DialogTrigger asChild>
+                    <Button size="sm" onClick={() => { setEditingAnnId(null); setAnnForm({ title: "", message: "", published: false }); }}>
+                      <Plus className="w-4 h-4 mr-1" /> New
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader><DialogTitle>{editingAnnId ? "Edit" : "Create"} Announcement</DialogTitle></DialogHeader>
+                    <div className="space-y-4">
+                      <div><Label>Title</Label><Input value={annForm.title} onChange={(e) => setAnnForm({ ...annForm, title: e.target.value })} /></div>
+                      <div><Label>Message</Label><Textarea value={annForm.message} onChange={(e) => setAnnForm({ ...annForm, message: e.target.value })} rows={4} /></div>
+                      <div className="flex items-center gap-2">
+                        <input type="checkbox" id="ann-published" checked={annForm.published} onChange={(e) => setAnnForm({ ...annForm, published: e.target.checked })} className="rounded border-input" />
+                        <Label htmlFor="ann-published">Published</Label>
+                      </div>
+                      <Button onClick={saveAnnouncement} className="w-full">{editingAnnId ? "Update" : "Create"}</Button>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </div>
+
+              <div className="space-y-3">
+                {announcements.map((a: any) => (
+                  <div key={a.id} className="border border-border rounded-xl p-4 bg-card flex items-start justify-between gap-4">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <Megaphone className="w-4 h-4 text-primary shrink-0" />
+                        <p className="font-semibold truncate">{a.title}</p>
+                        <Badge variant={a.published ? "default" : "secondary"} className="text-xs">
+                          {a.published ? "Published" : "Draft"}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{a.message}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{new Date(a.created_at).toLocaleDateString()}</p>
+                    </div>
+                    <div className="flex gap-2 shrink-0">
+                      <Button size="sm" variant="outline" onClick={() => {
+                        setEditingAnnId(a.id);
+                        setAnnForm({ title: a.title, message: a.message, published: a.published });
+                        setAnnDialogOpen(true);
+                      }}>Edit</Button>
+                      <Button size="sm" variant="destructive" onClick={() => deleteAnnouncement(a.id)}><Trash2 className="w-4 h-4" /></Button>
+                    </div>
+                  </div>
+                ))}
+                {announcements.length === 0 && <p className="text-muted-foreground text-center py-8">No announcements yet.</p>}
+              </div>
+            </TabsContent>
+
+            {/* ===== ANALYTICS ===== */}
+            <TabsContent value="analytics" className="space-y-8">
+              <h2 className="text-xl font-semibold">Analytics Overview</h2>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="border border-border rounded-xl p-4 bg-card text-center">
+                  <p className="text-3xl font-bold text-foreground">{projects.length}</p>
+                  <p className="text-sm text-muted-foreground">Total Projects</p>
+                </div>
+                <div className="border border-border rounded-xl p-4 bg-card text-center">
+                  <p className="text-3xl font-bold text-foreground">{profiles.length}</p>
+                  <p className="text-sm text-muted-foreground">Registered Users</p>
+                </div>
+                <div className="border border-border rounded-xl p-4 bg-card text-center">
+                  <p className="text-3xl font-bold text-foreground">{hackathons.length}</p>
+                  <p className="text-sm text-muted-foreground">Hackathons</p>
+                </div>
+                <div className="border border-border rounded-xl p-4 bg-card text-center">
+                  <p className="text-3xl font-bold text-foreground">{projects.filter((p) => p.status === "winner").length}</p>
+                  <p className="text-sm text-muted-foreground">Winners</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Bar Chart: Projects by Status */}
+                <div className="border border-border rounded-xl p-6 bg-card">
+                  <h3 className="font-semibold mb-4">Projects by Status</h3>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <BarChart data={statusCounts}>
+                      <XAxis dataKey="status" tick={{ fontSize: 12 }} />
+                      <YAxis allowDecimals={false} />
+                      <Tooltip />
+                      <Bar dataKey="count" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* Pie Chart: Status Distribution */}
+                <div className="border border-border rounded-xl p-6 bg-card">
+                  <h3 className="font-semibold mb-4">Status Distribution</h3>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <PieChart>
+                      <Pie data={statusCounts.filter((s) => s.count > 0)} dataKey="count" nameKey="status" cx="50%" cy="50%" outerRadius={80} label>
+                        {statusCounts.filter((s) => s.count > 0).map((_, i) => (
+                          <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              {/* Top Projects by Likes */}
+              <div className="border border-border rounded-xl p-6 bg-card">
+                <h3 className="font-semibold mb-4">Top Projects by Likes</h3>
+                <div className="space-y-2">
+                  {[...projects].sort((a, b) => b.likes - a.likes).slice(0, 5).map((p, i) => (
+                    <div key={p.id} className="flex items-center justify-between py-2 border-b border-border/50 last:border-0">
+                      <div className="flex items-center gap-3">
+                        <span className="text-lg font-bold text-muted-foreground w-6">{i + 1}</span>
+                        <div>
+                          <p className="font-medium text-sm">{p.title}</p>
+                          <p className="text-xs text-muted-foreground">{(p.hackathons as any)?.name}</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-4 text-sm text-muted-foreground">
+                        <span>❤️ {p.likes}</span>
+                        <span>👁 {p.views}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </TabsContent>
