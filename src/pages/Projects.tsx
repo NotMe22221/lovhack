@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
-import { Eye, Heart, Search, ChevronDown, Plus } from "lucide-react";
+import { Eye, Heart, Search, ChevronDown, Plus, MessageCircle, Star, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ const ITEMS_PER_PAGE = 12;
 
 const Projects = () => {
   const { user } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,10 @@ const Projects = () => {
   const [selectedSeason, setSelectedSeason] = useState("");
   const [sortBy, setSortBy] = useState<"newest" | "trending" | "winners">("newest");
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
+  const [commentCounts, setCommentCounts] = useState<Record<string, number>>({});
+  const [teamAvatars, setTeamAvatars] = useState<Record<string, any[]>>({});
+  const [allTechTags, setAllTechTags] = useState<string[]>([]);
+  const [selectedTech, setSelectedTech] = useState(searchParams.get("tech") || "");
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -55,20 +60,86 @@ const Projects = () => {
       query = query.order(orderCol, { ascending: false });
 
       const { data } = await query;
-      setProjects(data || []);
+      const allProjects = data || [];
+      setProjects(allProjects);
       setVisibleCount(ITEMS_PER_PAGE);
+
+      // Extract all unique tech tags
+      const tags = new Set<string>();
+      allProjects.forEach((p) => {
+        if (Array.isArray(p.tech_stack)) {
+          p.tech_stack.forEach((t: string) => tags.add(t));
+        }
+      });
+      setAllTechTags([...tags].sort());
+
+      // Fetch comment counts
+      if (allProjects.length > 0) {
+        const projectIds = allProjects.map((p) => p.id);
+        const { data: comments } = await supabase
+          .from("project_comments" as any)
+          .select("project_id")
+          .in("project_id", projectIds);
+        const counts: Record<string, number> = {};
+        (comments || []).forEach((c: any) => {
+          counts[c.project_id] = (counts[c.project_id] || 0) + 1;
+        });
+        setCommentCounts(counts);
+      }
+
+      // Fetch team avatars for projects that have teams
+      const teamProjects = allProjects.filter((p) => p.team_id);
+      if (teamProjects.length > 0) {
+        const teamIds = [...new Set(teamProjects.map((p) => p.team_id))];
+        const { data: members } = await supabase
+          .from("team_members")
+          .select("team_id, user_id")
+          .in("team_id", teamIds);
+        if (members?.length) {
+          const userIds = [...new Set(members.map((m) => m.user_id))];
+          const { data: profiles } = await supabase
+            .from("profiles")
+            .select("user_id, name, avatar_url")
+            .in("user_id", userIds);
+          const avatarMap: Record<string, any[]> = {};
+          teamProjects.forEach((p) => {
+            const teamMembers = members.filter((m) => m.team_id === p.team_id);
+            avatarMap[p.id] = teamMembers
+              .map((m) => profiles?.find((pr) => pr.user_id === m.user_id))
+              .filter(Boolean)
+              .slice(0, 3);
+          });
+          setTeamAvatars(avatarMap);
+        }
+      }
+
       setLoading(false);
     };
     fetchProjects();
   }, [selectedTrack, selectedSeason, sortBy]);
 
-  const filtered = projects.filter(
-    (p) =>
-      p.title?.toLowerCase().includes(search.toLowerCase()) ||
-      p.tagline?.toLowerCase().includes(search.toLowerCase())
-  );
+  // Filter by tech tag from URL params
+  useEffect(() => {
+    const tech = searchParams.get("tech");
+    if (tech) setSelectedTech(tech);
+  }, [searchParams]);
 
-  const visible = filtered.slice(0, visibleCount);
+  const filtered = projects.filter((p) => {
+    const matchSearch =
+      p.title?.toLowerCase().includes(search.toLowerCase()) ||
+      p.tagline?.toLowerCase().includes(search.toLowerCase());
+    const matchTech = !selectedTech || (Array.isArray(p.tech_stack) && p.tech_stack.includes(selectedTech));
+    return matchSearch && matchTech;
+  });
+
+  const featuredProjects = filtered.filter((p) => p.featured);
+  const regularProjects = filtered;
+  const visible = regularProjects.slice(0, visibleCount);
+
+  const clearTechFilter = () => {
+    setSelectedTech("");
+    setSearchParams({});
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,7 +164,6 @@ const Projects = () => {
           open={submitModalOpen}
           onOpenChange={setSubmitModalOpen}
           onSuccess={() => {
-            // Refetch projects
             const refetch = async () => {
               const { data } = await supabase.from("projects").select("*, tracks(name), hackathons(name, season)").in("status", ["approved", "winner"]).order("created_at", { ascending: false });
               setProjects(data || []);
@@ -103,7 +173,7 @@ const Projects = () => {
         />
 
         {/* Search + Filters */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 max-w-3xl mx-auto mb-10">
+        <div className="flex flex-col sm:flex-row items-center gap-3 max-w-4xl mx-auto mb-6">
           <div className="relative flex-1 w-full">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
@@ -127,6 +197,38 @@ const Projects = () => {
             <option value="winners">Winners</option>
           </select>
         </div>
+
+        {/* Tech Stack Filter */}
+        {(selectedTech || allTechTags.length > 0) && (
+          <div className="max-w-4xl mx-auto mb-6">
+            {selectedTech ? (
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">Built with:</span>
+                <Badge variant="secondary" className="gap-1">
+                  {selectedTech}
+                  <button onClick={clearTechFilter}><X className="w-3 h-3" /></button>
+                </Badge>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                <span className="text-sm text-muted-foreground py-1">Built with:</span>
+                {allTechTags.slice(0, 15).map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant="outline"
+                    className="cursor-pointer hover:bg-primary/20 transition-colors"
+                    onClick={() => { setSelectedTech(tag); setSearchParams({ tech: tag }); }}
+                  >
+                    {tag}
+                  </Badge>
+                ))}
+                {allTechTags.length > 15 && (
+                  <Badge variant="outline" className="text-muted-foreground">+{allTechTags.length - 15} more</Badge>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -153,48 +255,34 @@ const Projects = () => {
           </div>
         ) : (
           <>
+            {/* Featured / Staff Picks */}
+            {featuredProjects.length > 0 && !selectedTech && (
+              <div className="mb-10">
+                <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+                  <Star className="w-5 h-5 text-primary" /> Staff Picks
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {featuredProjects.slice(0, 3).map((project) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      commentCount={commentCounts[project.id] || 0}
+                      teamAvatars={teamAvatars[project.id] || []}
+                      featured
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {visible.map((project) => (
-                <Link
+                <ProjectCard
                   key={project.id}
-                  to={`/projects/${project.id}`}
-                  className="group bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/20 transition-all duration-300"
-                >
-                  <div className="aspect-video bg-muted relative overflow-hidden">
-                    {project.thumbnail_url ? (
-                      <img
-                        src={project.thumbnail_url}
-                        alt={project.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-                        <FolderIcon className="w-12 h-12 opacity-30" />
-                      </div>
-                    )}
-                    {project.status === "winner" && (
-                      <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground">🏆 Winner</Badge>
-                    )}
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{project.tagline}</p>
-                    <div className="flex items-center gap-4 mt-4 text-xs text-muted-foreground">
-                      {project.tracks?.name && (
-                        <Badge variant="secondary" className="text-xs">{project.tracks.name}</Badge>
-                      )}
-                      <span className="flex items-center gap-1">
-                        <Eye className="w-3 h-3" /> {project.views}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Heart className="w-3 h-3" /> {project.likes}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
+                  project={project}
+                  commentCount={commentCounts[project.id] || 0}
+                  teamAvatars={teamAvatars[project.id] || []}
+                />
               ))}
             </div>
             {visibleCount < filtered.length && (
@@ -211,6 +299,88 @@ const Projects = () => {
     </div>
   );
 };
+
+const ProjectCard = ({
+  project,
+  commentCount,
+  teamAvatars,
+  featured,
+}: {
+  project: any;
+  commentCount: number;
+  teamAvatars: any[];
+  featured?: boolean;
+}) => (
+  <Link
+    to={`/projects/${project.id}`}
+    className={`group bg-card/80 backdrop-blur-xl border rounded-2xl overflow-hidden hover:shadow-xl hover:border-primary/20 transition-all duration-300 ${featured ? "border-primary/30 ring-1 ring-primary/10" : "border-border/50"}`}
+  >
+    <div className="aspect-video bg-muted relative overflow-hidden">
+      {project.thumbnail_url ? (
+        <img
+          src={project.thumbnail_url}
+          alt={project.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+          <FolderIcon className="w-12 h-12 opacity-30" />
+        </div>
+      )}
+      {project.status === "winner" && (
+        <Badge className="absolute top-3 right-3 bg-primary text-primary-foreground">🏆 Winner</Badge>
+      )}
+      {featured && (
+        <Badge className="absolute top-3 left-3 bg-accent text-accent-foreground border border-primary/30">
+          <Star className="w-3 h-3 mr-1" /> Staff Pick
+        </Badge>
+      )}
+    </div>
+    <div className="p-5">
+      <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+        {project.title}
+      </h3>
+      <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{project.tagline}</p>
+      <div className="flex items-center justify-between mt-4">
+        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          {project.tracks?.name && (
+            <Badge variant="secondary" className="text-xs">{project.tracks.name}</Badge>
+          )}
+          <span className="flex items-center gap-1">
+            <Eye className="w-3 h-3" /> {project.views}
+          </span>
+          <span className="flex items-center gap-1">
+            <Heart className="w-3 h-3" /> {project.likes}
+          </span>
+          {commentCount > 0 && (
+            <span className="flex items-center gap-1">
+              <MessageCircle className="w-3 h-3" /> {commentCount}
+            </span>
+          )}
+        </div>
+        {/* Team avatars */}
+        {teamAvatars.length > 0 && (
+          <div className="flex -space-x-2">
+            {teamAvatars.map((member, i) => (
+              <div
+                key={i}
+                className="w-6 h-6 rounded-full border-2 border-card bg-primary/20 flex items-center justify-center text-[10px] font-medium text-primary overflow-hidden"
+                title={member?.name}
+              >
+                {member?.avatar_url ? (
+                  <img src={member.avatar_url} alt="" className="w-full h-full object-cover" />
+                ) : (
+                  member?.name?.[0]?.toUpperCase() || "?"
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  </Link>
+);
 
 const FolderIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
