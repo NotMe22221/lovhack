@@ -27,6 +27,8 @@ import Winners from "./pages/Winners";
 import Mentoring from "./pages/Mentoring";
 import Support from "./pages/Support";
 import EditProject from "./pages/EditProject";
+import AdminDashboard from "./pages/AdminDashboard";
+import JudgeDashboard from "./pages/JudgeDashboard";
 
 const queryClient = new QueryClient();
 
