@@ -17,7 +17,7 @@ const ProjectDetail = () => {
     const fetchProject = async () => {
       if (!id) return;
       // Increment views
-      await supabase.rpc("increment_views" as any, { p_project_id: id }).catch(() => {});
+      try { await supabase.rpc("increment_views" as any, { p_project_id: id }); } catch {}
       
       const { data } = await supabase
         .from("projects")
