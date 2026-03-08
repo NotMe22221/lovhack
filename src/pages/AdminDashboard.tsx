@@ -130,6 +130,32 @@ const AdminDashboard = () => {
     toast({ title: "Hackathon deleted" });
   };
 
+  const generateCertificates = async (hackathonId: string, hackathonName: string) => {
+    if (!confirm(`Generate certificates for all participants in ${hackathonName}? This will create certificates for all approved and winner projects.`)) return;
+    
+    toast({ title: "Generating certificates...", description: "This may take a few moments." });
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-certificates', {
+        body: { hackathon_id: hackathonId }
+      });
+      
+      if (error) throw error;
+      
+      toast({ 
+        title: "Certificates generated!", 
+        description: data.message 
+      });
+      loadAll();
+    } catch (err: any) {
+      toast({ 
+        title: "Failed to generate certificates", 
+        description: err.message, 
+        variant: "destructive" 
+      });
+    }
+  };
+
   // ---- Track CRUD ----
   const addTrack = async () => {
     if (!selectedHackForTracks || !trackForm.name) return;
