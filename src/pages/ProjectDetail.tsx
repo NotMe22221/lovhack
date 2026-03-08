@@ -244,14 +244,44 @@ const ProjectDetail = () => {
           )}
 
           {screenshots.length > 0 && (
-            <section>
+            <section className="mb-8">
               <h2 className="text-xl font-semibold text-foreground mb-3">Screenshots</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {screenshots.map((url: string, i: number) => (
-                  <img key={i} src={url} alt={`Screenshot ${i + 1}`} className="rounded-xl border border-border/50 w-full" loading="lazy" />
+                  <img key={i} src={url} alt={`Screenshot ${i + 1}`} className="rounded-xl border border-border/50 w-full cursor-pointer hover:opacity-90 transition-opacity" loading="lazy" onClick={() => setFullscreenImage(url)} />
                 ))}
               </div>
             </section>
+          )}
+
+          {/* Media Gallery */}
+          {projectMedia.filter((m: any) => m.media_role === "gallery").length > 0 && (
+            <section className="mb-8">
+              <h2 className="text-xl font-semibold text-foreground mb-3">Media Gallery</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {projectMedia.filter((m: any) => m.media_role === "gallery").map((m: any) => (
+                  <div key={m.id} className="rounded-xl border border-border/50 overflow-hidden bg-muted/30">
+                    {m.file_type === "image" ? (
+                      <img src={m.file_url} alt={m.file_name} className="w-full aspect-video object-cover cursor-pointer hover:opacity-90 transition-opacity" onClick={() => setFullscreenImage(m.file_url)} />
+                    ) : m.file_type === "video" ? (
+                      <video src={m.file_url} controls className="w-full aspect-video" />
+                    ) : (
+                      <a href={m.file_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 hover:bg-muted/50 transition-colors">
+                        <Badge variant="secondary" className="text-xs uppercase">{m.file_type}</Badge>
+                        <span className="text-sm text-foreground truncate">{m.file_name}</span>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Fullscreen image viewer */}
+          {fullscreenImage && (
+            <div className="fixed inset-0 z-50 bg-background/90 backdrop-blur-sm flex items-center justify-center p-4" onClick={() => setFullscreenImage(null)}>
+              <img src={fullscreenImage} alt="Fullscreen" className="max-w-full max-h-full rounded-2xl" />
+            </div>
           )}
         </div>
       </main>
