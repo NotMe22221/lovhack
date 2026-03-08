@@ -301,14 +301,17 @@ const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: n
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden mb-1"
         >
-          <p className="text-base text-foreground/70">{sponsor.description}</p>
+          <p ref={textRef} className="text-base text-foreground/70">{sponsor.description}</p>
         </motion.div>
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="text-xs font-medium text-primary/70 hover:text-primary transition-colors mb-4"
-        >
-          {expanded ? "Show less" : "Read more"}
-        </button>
+        {(isClamped || expanded) && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-xs font-medium text-primary/70 hover:text-primary transition-colors mb-4"
+          >
+            {expanded ? "Show less" : "Read more"}
+          </button>
+        )}
+        {!isClamped && !expanded && <div className="mb-4" />}
 
         <div>
           <a
