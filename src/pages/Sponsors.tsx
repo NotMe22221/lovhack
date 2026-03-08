@@ -212,12 +212,52 @@ const Sponsors = () => {
   );
 };
 
-const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
-  // Determine spans based on size - simpler logic for 3 cols
-  const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
+const BrandOyeModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => (
+  <AnimatePresence>
+    {open && (
+      <motion.div
+        className="fixed inset-0 z-50 flex items-center justify-center p-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
+        <motion.div
+          className="relative z-10 w-full max-w-md rounded-3xl bg-card border border-border p-8 text-center shadow-2xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ type: "spring", duration: 0.4 }}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <h3 className="text-2xl font-bold text-foreground mb-3">🚀 Coming Soon</h3>
+          <p className="text-foreground/70 text-base mb-6">
+            BrandOye will launch on 9 March. Stay tuned.
+          </p>
+          <Button onClick={onClose} className="rounded-full px-8">
+            Got it
+          </Button>
+        </motion.div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+);
 
-  // Pink gradients fallback
+const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: number; onBrandOyeClick?: () => void }) => {
+  const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
   const bgGradient = sponsor.color || "from-pink-500/5 to-transparent";
+
+  const handleWebsiteClick = (e: React.MouseEvent) => {
+    if (sponsor.website === "__modal__") {
+      e.preventDefault();
+      onBrandOyeClick?.();
+    }
+  };
 
   return (
     <motion.div
@@ -227,11 +267,9 @@ const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
       viewport={{ once: true }}
       className={`${colSpan} group relative rounded-3xl overflow-hidden border border-white/20 bg-gradient-to-br ${bgGradient} backdrop-blur-xl p-8 flex flex-col justify-between hover:border-primary/40 transition-colors duration-500`}
     >
-      {/* Hover Glow - Pinkier */}
       <div className="absolute inset-0 bg-primary/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10" />
 
       <div className="flex items-start justify-between mb-4">
-        {/* BIGGER LOGO CONTAINER */}
         <div className="w-20 h-20 bg-white/90 rounded-2xl p-4 flex items-center justify-center shadow-sm">
           <img src={sponsor.logo} alt={sponsor.name} className="w-full h-full object-contain" />
         </div>
@@ -248,9 +286,10 @@ const BentoCard = ({ sponsor, index }: { sponsor: any; index: number }) => {
         <p className="text-base text-foreground/70 mb-6 line-clamp-2">{sponsor.description}</p>
 
         <a
-          href={sponsor.website}
-          target="_blank"
+          href={sponsor.website === "__modal__" ? "#" : sponsor.website}
+          target={sponsor.website === "__modal__" ? undefined : "_blank"}
           rel="noreferrer"
+          onClick={handleWebsiteClick}
           className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
         >
           View Website <ExternalLink className="w-4 h-4" />
