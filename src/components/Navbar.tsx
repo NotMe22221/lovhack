@@ -163,6 +163,15 @@ const Navbar = () => {
                     {isActive(link.to) && <div className="w-2 h-2 rounded-full bg-primary" />}
                   </Link>
                 ))}
+                <a
+                  href="https://discord.gg/lovable-dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="px-4 py-3 rounded-2xl text-base font-medium text-white bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center gap-2"
+                >
+                  <MessageSquare className="w-5 h-5" /> Discord
+                </a>
                 <div className="h-px bg-black/5 my-2" />
                 {user ? (
                   <>
