@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, MessageSquare, LogIn, User, LogOut } from "lucide-react";
+import { Menu, X, MessageSquare, LogIn, User, LogOut, ShieldCheck, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import lovhackLogo from "@/assets/lovhack-logo.png";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isJudge, setIsJudge] = useState(false);
+
+  useEffect(() => {
+    if (!user) { setIsAdmin(false); setIsJudge(false); return; }
+    Promise.all([
+      supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }),
+      supabase.rpc("has_role", { _user_id: user.id, _role: "judge" }),
+    ]).then(([a, j]) => {
+      setIsAdmin(a.data === true);
+      setIsJudge(j.data === true);
+    });
+  }, [user]);
 
   const navLinks = [
     { to: "/", label: "Home" },
@@ -59,19 +73,20 @@ const Navbar = () => {
             <div className="flex items-center gap-2">
               {user ? (
                 <>
-                  <Button
-                    asChild
-                    size="sm"
-                    variant="outline"
-                    className="hidden md:inline-flex rounded-full px-4"
-                  >
+                  {isAdmin && (
+                    <Button asChild size="sm" variant="outline" className="hidden md:inline-flex rounded-full px-4">
+                      <Link to="/admin" className="flex items-center gap-1"><ShieldCheck className="w-4 h-4" />Admin</Link>
+                    </Button>
+                  )}
+                  {isJudge && (
+                    <Button asChild size="sm" variant="outline" className="hidden md:inline-flex rounded-full px-4">
+                      <Link to="/judge" className="flex items-center gap-1"><Star className="w-4 h-4" />Judge</Link>
+                    </Button>
+                  )}
+                  <Button asChild size="sm" variant="outline" className="hidden md:inline-flex rounded-full px-4">
                     <Link to="/submit">Submit Project</Link>
                   </Button>
-                  <Button
-                    asChild
-                    size="sm"
-                    className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4"
-                  >
+                  <Button asChild size="sm" className="hidden md:inline-flex bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-4">
                     <Link to="/dashboard" className="flex items-center gap-2">
                       <User className="w-4 h-4" />
                       Dashboard
@@ -132,27 +147,24 @@ const Navbar = () => {
                 <div className="h-px bg-black/5 my-2" />
                 {user ? (
                   <>
-                    <Link
-                      to="/submit"
-                      onClick={() => setIsOpen(false)}
-                      className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5"
-                    >
+                    {isAdmin && (
+                      <Link to="/admin" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5 flex items-center gap-2">
+                        <ShieldCheck className="w-5 h-5" /> Admin
+                      </Link>
+                    )}
+                    {isJudge && (
+                      <Link to="/judge" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5 flex items-center gap-2">
+                        <Star className="w-5 h-5" /> Judge
+                      </Link>
+                    )}
+                    <Link to="/submit" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5">
                       Submit Project
                     </Link>
-                    <Link
-                      to="/dashboard"
-                      onClick={() => setIsOpen(false)}
-                      className="px-4 py-3 rounded-2xl bg-primary/10 text-primary font-semibold flex items-center justify-center gap-2"
-                    >
-                      <User className="w-5 h-5" />
-                      Dashboard
+                    <Link to="/dashboard" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl bg-primary/10 text-primary font-semibold flex items-center justify-center gap-2">
+                      <User className="w-5 h-5" /> Dashboard
                     </Link>
-                    <button
-                      onClick={() => { signOut(); setIsOpen(false); }}
-                      className="px-4 py-3 rounded-2xl text-sm text-muted-foreground hover:bg-black/5 flex items-center justify-center gap-2"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Sign Out
+                    <button onClick={() => { signOut(); setIsOpen(false); }} className="px-4 py-3 rounded-2xl text-sm text-muted-foreground hover:bg-black/5 flex items-center justify-center gap-2">
+                      <LogOut className="w-4 h-4" /> Sign Out
                     </button>
                   </>
                 ) : (

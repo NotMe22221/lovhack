@@ -27,6 +27,8 @@ import Winners from "./pages/Winners";
 import Mentoring from "./pages/Mentoring";
 import Support from "./pages/Support";
 import EditProject from "./pages/EditProject";
+import AdminDashboard from "./pages/AdminDashboard";
+import JudgeDashboard from "./pages/JudgeDashboard";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +61,8 @@ const App = () => (
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/dashboard/projects/:id/edit" element={<ProtectedRoute><EditProject /></ProtectedRoute>} />
               <Route path="/admin/certificates" element={<AdminCertificates />} />
+              <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/judge" element={<ProtectedRoute><JudgeDashboard /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AuthProvider>
