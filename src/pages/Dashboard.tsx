@@ -94,10 +94,9 @@ const Dashboard = () => {
       }
       setContribLoading(false);
     });
-    // Load announcements
-    supabase.from("announcements").select("*").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => {
-      setAnnouncements(data || []);
-      setAnnouncementsLoading(false);
+    // Check if there's an active hackathon
+    supabase.from("hackathons").select("id").eq("status", "active").limit(1).then(({ data }) => {
+      setHasActiveHackathon((data || []).length > 0);
     });
   }, [user]);
 
