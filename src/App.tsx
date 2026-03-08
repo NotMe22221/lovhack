@@ -30,6 +30,7 @@ import Support from "./pages/Support";
 import EditProject from "./pages/EditProject";
 import AdminDashboard from "./pages/AdminDashboard";
 import JudgeDashboard from "./pages/JudgeDashboard";
+import PublicProfile from "./pages/PublicProfile";
 
 const queryClient = new QueryClient();
 
