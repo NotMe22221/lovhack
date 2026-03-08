@@ -6,7 +6,7 @@ import DiscordCTASection from "@/components/sections/DiscordCTASection";
 import { ExternalLink, Gift, Handshake, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
