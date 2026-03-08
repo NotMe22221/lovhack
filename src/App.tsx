@@ -66,6 +66,7 @@ const App = () => (
                 <Route path="/admin/certificates" element={<AdminCertificates />} />
                 <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
                 <Route path="/judge" element={<ProtectedRoute><JudgeDashboard /></ProtectedRoute>} />
+                <Route path="/profile/:userId" element={<PublicProfile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AuthProvider>
