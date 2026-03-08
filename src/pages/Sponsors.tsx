@@ -251,6 +251,7 @@ const BrandOyeModal = ({ open, onClose }: { open: boolean; onClose: () => void }
 );
 
 const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: number; onBrandOyeClick?: () => void }) => {
+  const [expanded, setExpanded] = useState(false);
   const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
   const bgGradient = sponsor.color || "from-pink-500/5 to-transparent";
 
@@ -285,17 +286,32 @@ const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: n
 
       <div>
         <h3 className="text-3xl font-bold text-foreground mb-2">{sponsor.name}</h3>
-        <p className="text-base text-foreground/70 mb-6 line-clamp-2">{sponsor.description}</p>
-
-        <a
-          href={sponsor.website === "__modal__" ? "#" : sponsor.website}
-          target={sponsor.website === "__modal__" ? undefined : "_blank"}
-          rel="noreferrer"
-          onClick={handleWebsiteClick}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+        <motion.div
+          initial={false}
+          animate={{ height: expanded ? "auto" : "3.2em" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="overflow-hidden mb-1"
         >
-          View Website <ExternalLink className="w-4 h-4" />
-        </a>
+          <p className="text-base text-foreground/70">{sponsor.description}</p>
+        </motion.div>
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="text-xs font-medium text-primary/70 hover:text-primary transition-colors mb-4"
+        >
+          {expanded ? "Show less" : "Read more"}
+        </button>
+
+        <div>
+          <a
+            href={sponsor.website === "__modal__" ? "#" : sponsor.website}
+            target={sponsor.website === "__modal__" ? undefined : "_blank"}
+            rel="noreferrer"
+            onClick={handleWebsiteClick}
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+          >
+            View Website <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
       </div>
     </motion.div>
   );
