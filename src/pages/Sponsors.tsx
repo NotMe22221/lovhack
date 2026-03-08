@@ -186,9 +186,10 @@ const Sponsors = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-[300px]">
             {/* SPONSOR CARDS */}
             {sponsors.map((sponsor, index) => (
-              <BentoCard key={index} sponsor={sponsor} index={index} />
+              <BentoCard key={index} sponsor={sponsor} index={index} onBrandOyeClick={() => setBrandOyeModalOpen(true)} />
             ))}
 
+            <BrandOyeModal open={brandOyeModalOpen} onClose={() => setBrandOyeModalOpen(false)} />
             {/* CTA CARD */}
             <div className="sm:col-span-2 lg:col-span-1 row-span-1 rounded-3xl bg-primary/90 relative overflow-hidden group flex flex-col items-center justify-center text-center p-8 transition-transform hover:-translate-y-1 duration-300">
               <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
