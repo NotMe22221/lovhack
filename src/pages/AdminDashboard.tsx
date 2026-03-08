@@ -351,6 +351,11 @@ const AdminDashboard = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge className={statusColors[h.status]}>{h.status}</Badge>
+                      {h.status === 'completed' && (
+                        <Button size="sm" variant="secondary" onClick={() => generateCertificates(h.id, h.name)}>
+                          <FileText className="w-4 h-4 mr-1" /> Generate Certificates
+                        </Button>
+                      )}
                       <Button size="sm" variant="outline" onClick={() => { setEditingHackId(h.id); setHackForm({ name: h.name, season: h.season, status: h.status, start_date: h.start_date?.slice(0, 16) || "", end_date: h.end_date?.slice(0, 16) || "" }); setHackDialogOpen(true); }}>Edit</Button>
                       <Button size="sm" variant="destructive" onClick={() => deleteHackathon(h.id)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
