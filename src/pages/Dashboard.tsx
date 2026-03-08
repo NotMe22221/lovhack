@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, MessageSquare, Edit } from "lucide-react";
+import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SubmitProjectModal from "@/components/SubmitProjectModal";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
@@ -19,7 +20,6 @@ const tabs = [
   { id: "contributions", label: "Contributions", icon: Users },
   { id: "credits", label: "API Credits", icon: Key },
   { id: "certificates", label: "Certificates", icon: FileText },
-  { id: "messages", label: "Messages", icon: MessageSquare },
 ];
 
 const Dashboard = () => {
