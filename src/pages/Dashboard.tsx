@@ -366,12 +366,28 @@ const Dashboard = () => {
             {/* MESSAGES TAB */}
             {activeTab === "messages" && (
               <div>
-                <h2 className="text-xl font-semibold mb-6">Messages</h2>
-                <div className="text-center py-12">
-                  <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-                  <p className="text-muted-foreground">No messages yet.</p>
-                  <p className="text-xs text-muted-foreground/70 mt-1">Announcements and notifications will appear here.</p>
-                </div>
+                <h2 className="text-xl font-semibold mb-6">Announcements</h2>
+                {announcementsLoading ? (
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+                ) : announcements.length === 0 ? (
+                  <div className="text-center py-12">
+                    <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                    <p className="text-muted-foreground">No announcements yet.</p>
+                    <p className="text-xs text-muted-foreground/70 mt-1">Stay tuned for updates from the LovHack team.</p>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {announcements.map((a: any) => (
+                      <div key={a.id} className="rounded-xl border border-border/50 p-4 bg-muted/30">
+                        <h3 className="font-semibold text-foreground">{a.title}</h3>
+                        <p className="text-sm text-muted-foreground mt-1">{a.message}</p>
+                        <p className="text-xs text-muted-foreground/60 mt-2">
+                          {new Date(a.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
