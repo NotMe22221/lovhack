@@ -205,6 +205,37 @@ const AdminDashboard = () => {
     toast({ title: "Role removed" });
   };
 
+  // ---- Announcements ----
+  const saveAnnouncement = async () => {
+    const payload = { title: annForm.title, message: annForm.message, published: annForm.published };
+    if (editingAnnId) {
+      await supabase.from("announcements").update(payload).eq("id", editingAnnId);
+    } else {
+      await supabase.from("announcements").insert(payload);
+    }
+    setAnnDialogOpen(false);
+    setEditingAnnId(null);
+    setAnnForm({ title: "", message: "", published: false });
+    loadAll();
+    toast({ title: editingAnnId ? "Announcement updated" : "Announcement created" });
+  };
+
+  const deleteAnnouncement = async (id: string) => {
+    await supabase.from("announcements").delete().eq("id", id);
+    loadAll();
+    toast({ title: "Announcement deleted" });
+  };
+
+  // Analytics data
+  const statusCounts = ["pending", "approved", "rejected", "winner"].map((s) => ({
+    status: s.charAt(0).toUpperCase() + s.slice(1),
+    count: projects.filter((p) => p.status === s).length,
+  }));
+  const PIE_COLORS = ["hsl(var(--primary))", "hsl(120, 60%, 50%)", "hsl(0, 70%, 55%)", "hsl(270, 60%, 55%)"];
+    loadAll();
+    toast({ title: "Role removed" });
+  };
+
   if (isAdmin === null) {
     return (
       <div className="min-h-screen flex items-center justify-center">
