@@ -14,6 +14,41 @@ export type Database = {
   }
   public: {
     Tables: {
+      announcements: {
+        Row: {
+          created_at: string
+          hackathon_id: string | null
+          id: string
+          message: string
+          published: boolean
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          hackathon_id?: string | null
+          id?: string
+          message: string
+          published?: boolean
+          title: string
+        }
+        Update: {
+          created_at?: string
+          hackathon_id?: string | null
+          id?: string
+          message?: string
+          published?: boolean
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "announcements_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       certificates: {
         Row: {
           certificate_id: string
