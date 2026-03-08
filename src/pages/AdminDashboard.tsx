@@ -68,6 +68,12 @@ const AdminDashboard = () => {
   const [roleEmail, setRoleEmail] = useState("");
   const [roleToAssign, setRoleToAssign] = useState("admin");
 
+  // Announcements
+  const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [annForm, setAnnForm] = useState({ title: "", message: "", published: false });
+  const [annDialogOpen, setAnnDialogOpen] = useState(false);
+  const [editingAnnId, setEditingAnnId] = useState<string | null>(null);
+
   useEffect(() => {
     if (!user) return;
     supabase.rpc("has_role", { _user_id: user.id, _role: "admin" }).then(({ data }) => {
