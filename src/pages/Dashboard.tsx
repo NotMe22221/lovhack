@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, MessageSquare, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SubmitProjectModal from "@/components/SubmitProjectModal";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
