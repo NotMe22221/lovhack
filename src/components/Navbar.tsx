@@ -72,7 +72,7 @@ const Navbar = () => {
 
             <div className="flex items-center gap-2">
               <a
-                href="https://discord.gg/lovable-dev"
+                href="https://t.co/qMNpoZoiQZ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:inline-flex"
