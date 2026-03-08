@@ -36,14 +36,13 @@ const Index = () => {
       <main>
         <NewHeroSection />
         <WhatIsLovHackSection />
+        <StatsSection />
         <WhoIsForSection />
         <Season1PreviewSection />
         <WinnersSection />
-        <StatsSection />
         <UpcomingEventsSection />
         <SponsorsPreviewSection />
         <FAQSection />
-        <DiscordCTASection />
       </main>
       
       <Footer />
