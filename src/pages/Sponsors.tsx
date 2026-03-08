@@ -23,6 +23,7 @@ import featherlessLogo from "@/assets/featherless-logo.png";
 import brandoyeLogo from "@/assets/brandoye-logo.png";
 
 const Sponsors = () => {
+  const [brandOyeModalOpen, setBrandOyeModalOpen] = useState(false);
   const sponsors = [
     {
       name: "Lovable",
