@@ -76,6 +76,19 @@ const Dashboard = () => {
       setCertificates(data || []);
       setCertsLoading(false);
     });
+    // Load contributions (teams the user belongs to)
+    supabase.from("team_members").select("*, teams(name, id)").eq("user_id", user.id).then(async ({ data }) => {
+      if (data && data.length > 0) {
+        const teamIds = data.map((tm: any) => tm.team_id);
+        const { data: projects } = await supabase.from("projects").select("id, title, status, thumbnail_url, team_id").in("team_id", teamIds);
+        const enriched = data.map((tm: any) => ({
+          ...tm,
+          projects: (projects || []).filter((p: any) => p.team_id === tm.team_id),
+        }));
+        setContributions(enriched);
+      }
+      setContribLoading(false);
+    });
   }, [user]);
 
   const handleSaveProfile = async () => {
