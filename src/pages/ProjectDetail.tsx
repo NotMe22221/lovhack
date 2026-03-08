@@ -166,11 +166,27 @@ const ProjectDetail = () => {
             </Button>
           </div>
 
-          {/* Video Embed */}
-          {project.demo_video_link && (
+          {/* Demo Video (uploaded or link) */}
+          {(project.demo_video_url || project.demo_video_link) && (
             <section className="mb-8">
               <h2 className="text-xl font-semibold text-foreground mb-3">Demo Video</h2>
-              <VideoEmbed url={project.demo_video_link} />
+              {project.demo_video_url && project.demo_video_url.match(/\.(mp4|webm)$/i) ? (
+                <video src={project.demo_video_url} controls className="w-full rounded-2xl border border-border/50" />
+              ) : (
+                <VideoEmbed url={project.demo_video_url || project.demo_video_link} />
+              )}
+            </section>
+          )}
+
+          {/* Tech Video */}
+          {project.tech_video_url && (
+            <section className="mb-8">
+              <h2 className="text-xl font-semibold text-foreground mb-3">Tech Video</h2>
+              {project.tech_video_url.match(/\.(mp4|webm)$/i) ? (
+                <video src={project.tech_video_url} controls className="w-full rounded-2xl border border-border/50" />
+              ) : (
+                <VideoEmbed url={project.tech_video_url} />
+              )}
             </section>
           )}
 
