@@ -147,27 +147,24 @@ const Navbar = () => {
                 <div className="h-px bg-black/5 my-2" />
                 {user ? (
                   <>
-                    <Link
-                      to="/submit"
-                      onClick={() => setIsOpen(false)}
-                      className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5"
-                    >
+                    {isAdmin && (
+                      <Link to="/admin" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5 flex items-center gap-2">
+                        <ShieldCheck className="w-5 h-5" /> Admin
+                      </Link>
+                    )}
+                    {isJudge && (
+                      <Link to="/judge" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5 flex items-center gap-2">
+                        <Star className="w-5 h-5" /> Judge
+                      </Link>
+                    )}
+                    <Link to="/submit" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl text-base font-medium text-foreground/70 hover:bg-black/5">
                       Submit Project
                     </Link>
-                    <Link
-                      to="/dashboard"
-                      onClick={() => setIsOpen(false)}
-                      className="px-4 py-3 rounded-2xl bg-primary/10 text-primary font-semibold flex items-center justify-center gap-2"
-                    >
-                      <User className="w-5 h-5" />
-                      Dashboard
+                    <Link to="/dashboard" onClick={() => setIsOpen(false)} className="px-4 py-3 rounded-2xl bg-primary/10 text-primary font-semibold flex items-center justify-center gap-2">
+                      <User className="w-5 h-5" /> Dashboard
                     </Link>
-                    <button
-                      onClick={() => { signOut(); setIsOpen(false); }}
-                      className="px-4 py-3 rounded-2xl text-sm text-muted-foreground hover:bg-black/5 flex items-center justify-center gap-2"
-                    >
-                      <LogOut className="w-4 h-4" />
-                      Sign Out
+                    <button onClick={() => { signOut(); setIsOpen(false); }} className="px-4 py-3 rounded-2xl text-sm text-muted-foreground hover:bg-black/5 flex items-center justify-center gap-2">
+                      <LogOut className="w-4 h-4" /> Sign Out
                     </button>
                   </>
                 ) : (
