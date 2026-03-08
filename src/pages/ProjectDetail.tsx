@@ -19,6 +19,8 @@ const ProjectDetail = () => {
   const [likeCount, setLikeCount] = useState(0);
   const [likePending, setLikePending] = useState(false);
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  const [projectMedia, setProjectMedia] = useState<any[]>([]);
+  const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProject = async () => {
