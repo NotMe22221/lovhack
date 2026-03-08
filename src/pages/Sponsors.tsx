@@ -3,9 +3,10 @@ import Navbar from "@/components/Navbar";
 import AnimatedBackground from "@/components/AnimatedBackground";
 import Footer from "@/components/sections/Footer";
 import DiscordCTASection from "@/components/sections/DiscordCTASection";
-import { ExternalLink, Gift, Handshake } from "lucide-react";
+import { ExternalLink, Gift, Handshake, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
@@ -19,6 +20,7 @@ import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import miroLogo from "@/assets/miro-logo.webp";
 import n8nLogo from "@/assets/n8n-logo.webp";
 import featherlessLogo from "@/assets/featherless-logo.png";
+import brandoyeLogo from "@/assets/brandoye-logo.png";
 
 const Sponsors = () => {
   const sponsors = [
