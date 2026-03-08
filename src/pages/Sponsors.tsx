@@ -132,7 +132,7 @@ const Sponsors = () => {
     {
       name: "BrandOye",
       logo: brandoyeLogo,
-      description: "AI-powered marketing platform to automate social media content creation, scheduling, and analytics.",
+      description: "AI-powered marketing platform designed to help businesses automate and manage their social media content creation, scheduling, and analytics.",
       website: "__modal__",
       size: "small",
       color: "from-orange-500/20 to-amber-500/5",
