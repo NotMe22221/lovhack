@@ -27,10 +27,10 @@ const Navbar = () => {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/about", label: "About" },
+    { to: "/season-2", label: "Season 2" },
+    { to: "/projects", label: "Projects" },
     { to: "/hackathons", label: "Hackathons" },
     { to: "/sponsors", label: "Sponsors" },
-    { to: "/season-1", label: "Season 1" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -72,7 +72,7 @@ const Navbar = () => {
 
             <div className="flex items-center gap-2">
               <a
-                href="https://discord.gg/lovable-dev"
+                href="https://t.co/qMNpoZoiQZ"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:inline-flex"
@@ -164,7 +164,7 @@ const Navbar = () => {
                   </Link>
                 ))}
                 <a
-                  href="https://discord.gg/lovable-dev"
+                  href="https://t.co/qMNpoZoiQZ"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}

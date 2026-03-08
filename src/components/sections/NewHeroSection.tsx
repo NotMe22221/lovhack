@@ -143,6 +143,14 @@ const NewHeroSection = () => {
             ))}
           </div>
         </div>
+
+        {/* Explore projects link */}
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground/50 hover:text-primary transition-colors duration-200 mt-6"
+        >
+          or explore Season 1 projects <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
     </section>
   );
