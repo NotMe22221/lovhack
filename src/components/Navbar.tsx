@@ -27,10 +27,10 @@ const Navbar = () => {
 
   const navLinks = [
     { to: "/", label: "Home" },
-    { to: "/projects", label: "Projects" },
-    { to: "/winners", label: "Winners" },
-    { to: "/mentoring", label: "Mentoring" },
-    { to: "/support", label: "Support" },
+    { to: "/about", label: "About" },
+    { to: "/hackathons", label: "Hackathons" },
+    { to: "/sponsors", label: "Sponsors" },
+    { to: "/season-1", label: "Season 1" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -71,6 +71,17 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center gap-2">
+              <a
+                href="https://discord.gg/lovable-dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:inline-flex"
+              >
+                <Button size="sm" className="rounded-full px-4 bg-[#5865F2] hover:bg-[#4752C4] text-white">
+                  <MessageSquare className="w-4 h-4 mr-1" />
+                  Discord
+                </Button>
+              </a>
               {user ? (
                 <>
                   {isAdmin && (
@@ -152,6 +163,15 @@ const Navbar = () => {
                     {isActive(link.to) && <div className="w-2 h-2 rounded-full bg-primary" />}
                   </Link>
                 ))}
+                <a
+                  href="https://discord.gg/lovable-dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="px-4 py-3 rounded-2xl text-base font-medium text-white bg-[#5865F2] hover:bg-[#4752C4] flex items-center justify-center gap-2"
+                >
+                  <MessageSquare className="w-5 h-5" /> Discord
+                </a>
                 <div className="h-px bg-black/5 my-2" />
                 {user ? (
                   <>
