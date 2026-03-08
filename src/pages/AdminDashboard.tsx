@@ -232,9 +232,6 @@ const AdminDashboard = () => {
     count: projects.filter((p) => p.status === s).length,
   }));
   const PIE_COLORS = ["hsl(var(--primary))", "hsl(120, 60%, 50%)", "hsl(0, 70%, 55%)", "hsl(270, 60%, 55%)"];
-    loadAll();
-    toast({ title: "Role removed" });
-  };
 
   if (isAdmin === null) {
     return (
