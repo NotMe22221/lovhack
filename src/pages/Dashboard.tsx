@@ -281,6 +281,42 @@ const Dashboard = () => {
               </div>
             )}
 
+            {/* CONTRIBUTIONS TAB */}
+            {activeTab === "contributions" && (
+              <div>
+                <h2 className="text-xl font-semibold mb-6">My Contributions</h2>
+                {contribLoading ? (
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+                ) : contributions.length === 0 ? (
+                  <p className="text-muted-foreground">You haven't joined any teams yet.</p>
+                ) : (
+                  <div className="space-y-3">
+                    {contributions.map((c: any) => (
+                      <div key={c.id} className="rounded-xl border border-border/50 p-4 bg-muted/30">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="font-semibold text-foreground">{c.teams?.name || "Unnamed Team"}</h3>
+                          <Badge variant="outline" className="text-xs capitalize">{c.role}</Badge>
+                        </div>
+                        {c.projects?.length > 0 ? (
+                          <div className="space-y-1">
+                            {c.projects.map((p: any) => (
+                              <Link key={p.id} to={`/projects/${p.id}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+                                <FolderOpen className="w-3 h-3" />
+                                {p.title}
+                                <Badge className={`text-[10px] ml-auto ${statusColor[p.status] || ""}`}>{p.status}</Badge>
+                              </Link>
+                            ))}
+                          </div>
+                        ) : (
+                          <p className="text-xs text-muted-foreground">No projects linked to this team yet.</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* CERTIFICATES TAB */}
             {activeTab === "certificates" && (
               <div>
@@ -315,6 +351,18 @@ const Dashboard = () => {
                     ))}
                   </div>
                 )}
+              </div>
+            )}
+
+            {/* MESSAGES TAB */}
+            {activeTab === "messages" && (
+              <div>
+                <h2 className="text-xl font-semibold mb-6">Messages</h2>
+                <div className="text-center py-12">
+                  <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
+                  <p className="text-muted-foreground">No messages yet.</p>
+                  <p className="text-xs text-muted-foreground/70 mt-1">Announcements and notifications will appear here.</p>
+                </div>
               </div>
             )}
           </div>

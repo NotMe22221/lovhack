@@ -57,6 +57,7 @@ const App = () => (
               <Route path="/support" element={<Support />} />
               <Route path="/submit" element={<ProtectedRoute><SubmitProject /></ProtectedRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/dashboard/projects/:id/edit" element={<ProtectedRoute><EditProject /></ProtectedRoute>} />
               <Route path="/admin/certificates" element={<AdminCertificates />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
