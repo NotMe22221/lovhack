@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
 import hadoLogo from "@/assets/hado-logo-v3.png";
@@ -9,6 +13,7 @@ import medoLogo from "@/assets/medo-logo.png";
 import nodebaseLogo from "@/assets/nodebase-logo.webp";
 import miroLogo from "@/assets/miro-logo.webp";
 import n8nLogo from "@/assets/n8n-logo.webp";
+import brandoyeLogo from "@/assets/brandoye-logo.png";
 
 const SponsorsSection = () => {
   return (
