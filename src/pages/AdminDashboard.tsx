@@ -14,7 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
-import { ShieldCheck, Plus, Search, Trash2, UserPlus, Megaphone, BarChart3 } from "lucide-react";
+import { ShieldCheck, Plus, Search, Trash2, UserPlus, Megaphone, BarChart3, FileText } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const statusColors: Record<string, string> = {
@@ -128,6 +128,32 @@ const AdminDashboard = () => {
     await supabase.from("hackathons").delete().eq("id", id);
     loadAll();
     toast({ title: "Hackathon deleted" });
+  };
+
+  const generateCertificates = async (hackathonId: string, hackathonName: string) => {
+    if (!confirm(`Generate certificates for all participants in ${hackathonName}? This will create certificates for all approved and winner projects.`)) return;
+    
+    toast({ title: "Generating certificates...", description: "This may take a few moments." });
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-certificates', {
+        body: { hackathon_id: hackathonId }
+      });
+      
+      if (error) throw error;
+      
+      toast({ 
+        title: "Certificates generated!", 
+        description: data.message 
+      });
+      loadAll();
+    } catch (err: any) {
+      toast({ 
+        title: "Failed to generate certificates", 
+        description: err.message, 
+        variant: "destructive" 
+      });
+    }
   };
 
   // ---- Track CRUD ----
@@ -325,6 +351,11 @@ const AdminDashboard = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge className={statusColors[h.status]}>{h.status}</Badge>
+                      {h.status === 'completed' && (
+                        <Button size="sm" variant="secondary" onClick={() => generateCertificates(h.id, h.name)}>
+                          <FileText className="w-4 h-4 mr-1" /> Generate Certificates
+                        </Button>
+                      )}
                       <Button size="sm" variant="outline" onClick={() => { setEditingHackId(h.id); setHackForm({ name: h.name, season: h.season, status: h.status, start_date: h.start_date?.slice(0, 16) || "", end_date: h.end_date?.slice(0, 16) || "" }); setHackDialogOpen(true); }}>Edit</Button>
                       <Button size="sm" variant="destructive" onClick={() => deleteHackathon(h.id)}><Trash2 className="w-4 h-4" /></Button>
                     </div>
