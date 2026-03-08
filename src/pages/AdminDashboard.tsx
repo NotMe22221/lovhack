@@ -83,7 +83,7 @@ const AdminDashboard = () => {
   }, [user]);
 
   const loadAll = async () => {
-    const [h, p, t, j, tk, pr, ur] = await Promise.all([
+    const [h, p, t, j, tk, pr, ur, ann] = await Promise.all([
       supabase.from("hackathons").select("*").order("season", { ascending: false }),
       supabase.from("projects").select("*, hackathons(name), tracks(name)").order("created_at", { ascending: false }),
       supabase.from("support_tickets").select("*").order("created_at", { ascending: false }),
@@ -91,6 +91,7 @@ const AdminDashboard = () => {
       supabase.from("tracks").select("*, hackathons(name)").order("name"),
       supabase.from("profiles").select("*").order("name"),
       supabase.from("user_roles").select("*"),
+      supabase.from("announcements").select("*").order("created_at", { ascending: false }),
     ]);
     if (h.data) setHackathons(h.data);
     if (p.data) setProjects(p.data);
@@ -99,6 +100,7 @@ const AdminDashboard = () => {
     if (tk.data) setTracks(tk.data);
     if (pr.data) setProfiles(pr.data);
     if (ur.data) setUserRoles(ur.data);
+    if (ann.data) setAnnouncements(ann.data);
   };
 
   // ---- Hackathon CRUD ----
