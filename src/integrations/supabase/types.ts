@@ -178,6 +178,35 @@ export type Database = {
         }
         Relationships: []
       }
+      project_likes: {
+        Row: {
+          created_at: string
+          id: string
+          project_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          project_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          project_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_likes_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           ai_summary: string | null
@@ -516,6 +545,8 @@ export type Database = {
         }
         Returns: boolean
       }
+      increment_views: { Args: { p_project_id: string }; Returns: undefined }
+      toggle_like: { Args: { p_project_id: string }; Returns: boolean }
       verify_certificate: {
         Args: { p_certificate_id: string }
         Returns: {
