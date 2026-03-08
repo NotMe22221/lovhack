@@ -242,6 +242,9 @@ const Dashboard = () => {
                           <p className="text-xs text-muted-foreground truncate">{p.tagline}</p>
                         </div>
                         <Badge className={`text-xs ${statusColor[p.status] || ""}`}>{p.status}</Badge>
+                        <Link to={`/dashboard/projects/${p.id}/edit`} className="text-muted-foreground hover:text-primary">
+                          <Edit className="w-4 h-4" />
+                        </Link>
                         <button onClick={() => handleDeleteProject(p.id)} className="text-muted-foreground hover:text-destructive">
                           <Trash2 className="w-4 h-4" />
                         </button>
