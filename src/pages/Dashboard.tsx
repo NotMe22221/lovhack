@@ -50,6 +50,10 @@ const Dashboard = () => {
   const [contributions, setContributions] = useState<any[]>([]);
   const [contribLoading, setContribLoading] = useState(true);
 
+  // Announcements state
+  const [announcements, setAnnouncements] = useState<any[]>([]);
+  const [announcementsLoading, setAnnouncementsLoading] = useState(true);
+
   useEffect(() => {
     if (!user) return;
     // Load profile
