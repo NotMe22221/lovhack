@@ -26,6 +26,7 @@ const Dashboard = () => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("profile");
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
   // Profile state
   const [profile, setProfile] = useState<any>(null);
