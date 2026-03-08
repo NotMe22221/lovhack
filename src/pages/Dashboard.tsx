@@ -52,9 +52,8 @@ const Dashboard = () => {
   const [contributions, setContributions] = useState<any[]>([]);
   const [contribLoading, setContribLoading] = useState(true);
 
-  // Announcements state
-  const [announcements, setAnnouncements] = useState<any[]>([]);
-  const [announcementsLoading, setAnnouncementsLoading] = useState(true);
+  // Active hackathons (for submission lock)
+  const [hasActiveHackathon, setHasActiveHackathon] = useState(true);
 
   useEffect(() => {
     if (!user) return;
