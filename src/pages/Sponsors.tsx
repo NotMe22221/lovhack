@@ -6,7 +6,7 @@ import DiscordCTASection from "@/components/sections/DiscordCTASection";
 import { ExternalLink, Gift, Handshake, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import lovableLogo from "@/assets/lovable-logo.png";
 import creaoLogo from "@/assets/creao-logo.png";
@@ -252,6 +252,15 @@ const BrandOyeModal = ({ open, onClose }: { open: boolean; onClose: () => void }
 
 const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: number; onBrandOyeClick?: () => void }) => {
   const [expanded, setExpanded] = useState(false);
+  const [isClamped, setIsClamped] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (el) {
+      setIsClamped(el.scrollHeight > el.clientHeight + 2);
+    }
+  }, [sponsor.description]);
   const colSpan = sponsor.size === "large" ? "lg:col-span-2 sm:col-span-2" : "col-span-1";
   const bgGradient = sponsor.color || "from-pink-500/5 to-transparent";
 
@@ -292,14 +301,17 @@ const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: n
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="overflow-hidden mb-1"
         >
-          <p className="text-base text-foreground/70">{sponsor.description}</p>
+          <p ref={textRef} className="text-base text-foreground/70">{sponsor.description}</p>
         </motion.div>
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="text-xs font-medium text-primary/70 hover:text-primary transition-colors mb-4"
-        >
-          {expanded ? "Show less" : "Read more"}
-        </button>
+        {(isClamped || expanded) && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-xs font-medium text-primary/70 hover:text-primary transition-colors mb-4"
+          >
+            {expanded ? "Show less" : "Read more"}
+          </button>
+        )}
+        {!isClamped && !expanded && <div className="mb-4" />}
 
         <div>
           <a
