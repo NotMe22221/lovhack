@@ -227,9 +227,22 @@ const Dashboard = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold">My Projects</h2>
-                  <Button className="rounded-xl" size="sm" onClick={() => setSubmitModalOpen(true)}>
-                    Submit New
-                  </Button>
+                  {hasActiveHackathon ? (
+                    <Button className="rounded-xl" size="sm" onClick={() => setSubmitModalOpen(true)}>
+                      Submit New
+                    </Button>
+                  ) : (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span>
+                          <Button className="rounded-xl" size="sm" disabled>
+                            Submit New
+                          </Button>
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>Submissions are closed between hackathons</TooltipContent>
+                    </Tooltip>
+                  )}
                 </div>
                 <SubmitProjectModal
                   open={submitModalOpen}
