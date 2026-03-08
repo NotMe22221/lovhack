@@ -4,11 +4,13 @@ import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/sections/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { Eye, Heart, Search, ChevronDown } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Eye, Heart, Search, ChevronDown, Plus } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import SubmitProjectModal from "@/components/SubmitProjectModal";
 
 const ITEMS_PER_PAGE = 12;
 
