@@ -30,6 +30,7 @@ import Support from "./pages/Support";
 import EditProject from "./pages/EditProject";
 import AdminDashboard from "./pages/AdminDashboard";
 import JudgeDashboard from "./pages/JudgeDashboard";
+import PublicProfile from "./pages/PublicProfile";
 
 const queryClient = new QueryClient();
 
@@ -65,6 +66,7 @@ const App = () => (
                 <Route path="/admin/certificates" element={<AdminCertificates />} />
                 <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
                 <Route path="/judge" element={<ProtectedRoute><JudgeDashboard /></ProtectedRoute>} />
+                <Route path="/profile/:userId" element={<PublicProfile />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </AuthProvider>

@@ -7,7 +7,8 @@ import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, Github, Heart, Eye, Play } from "lucide-react";
+import { Textarea } from "@/components/ui/textarea";
+import { ArrowLeft, ExternalLink, Github, Heart, Eye, MessageCircle, Send, Trash2 } from "lucide-react";
 import VideoEmbed from "@/components/VideoEmbed";
 
 const ProjectDetail = () => {
@@ -21,6 +22,9 @@ const ProjectDetail = () => {
   const [teamMembers, setTeamMembers] = useState<any[]>([]);
   const [projectMedia, setProjectMedia] = useState<any[]>([]);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
+  const [comments, setComments] = useState<any[]>([]);
+  const [newComment, setNewComment] = useState("");
+  const [submittingComment, setSubmittingComment] = useState(false);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -35,7 +39,6 @@ const ProjectDetail = () => {
       setProject(data);
       setLikeCount(data?.likes || 0);
 
-      // Check if user liked
       if (data && user) {
         const { data: likeData } = await supabase
           .from("project_likes" as any)
@@ -46,7 +49,6 @@ const ProjectDetail = () => {
         setLiked(!!likeData);
       }
 
-      // Fetch team members
       if (data?.team_id) {
         const { data: members } = await supabase
           .from("team_members")
@@ -67,14 +69,59 @@ const ProjectDetail = () => {
         }
       }
 
-      // Fetch project media
       const { data: media } = await supabase.from("project_media" as any).select("*").eq("project_id", id).order("sort_order", { ascending: true });
       setProjectMedia(media || []);
+
+      // Fetch comments
+      await fetchComments();
 
       setLoading(false);
     };
     fetchProject();
   }, [id, user]);
+
+  const fetchComments = async () => {
+    if (!id) return;
+    const { data } = await supabase
+      .from("project_comments" as any)
+      .select("*")
+      .eq("project_id", id)
+      .order("created_at", { ascending: true });
+    
+    if (data?.length) {
+      const userIds = [...new Set(data.map((c: any) => c.user_id))];
+      const { data: profiles } = await supabase
+        .from("profiles")
+        .select("user_id, name, avatar_url")
+        .in("user_id", userIds);
+      setComments(
+        data.map((c: any) => ({
+          ...c,
+          profile: profiles?.find((p) => p.user_id === c.user_id),
+        }))
+      );
+    } else {
+      setComments([]);
+    }
+  };
+
+  const handleSubmitComment = async () => {
+    if (!user || !newComment.trim() || submittingComment) return;
+    setSubmittingComment(true);
+    await (supabase.from("project_comments" as any) as any).insert({
+      project_id: id,
+      user_id: user.id,
+      content: newComment.trim(),
+    });
+    setNewComment("");
+    await fetchComments();
+    setSubmittingComment(false);
+  };
+
+  const handleDeleteComment = async (commentId: string) => {
+    await (supabase.from("project_comments" as any) as any).delete().eq("id", commentId);
+    await fetchComments();
+  };
 
   const handleLike = async () => {
     if (!user || likePending) return;
@@ -139,7 +186,6 @@ const ProjectDetail = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{project.title}</h1>
           {project.tagline && <p className="text-lg text-muted-foreground mb-6">{project.tagline}</p>}
 
-          {/* Action buttons + Like */}
           <div className="flex flex-wrap gap-3 mb-8">
             {project.live_demo_link && (
               <Button asChild className="rounded-xl">
@@ -166,7 +212,7 @@ const ProjectDetail = () => {
             </Button>
           </div>
 
-          {/* Demo Video (uploaded or link) */}
+          {/* Demo Video */}
           {(project.demo_video_url || project.demo_video_link) && (
             <section className="mb-8">
               <h2 className="text-xl font-semibold text-foreground mb-3">Demo Video</h2>
@@ -217,27 +263,37 @@ const ProjectDetail = () => {
               <h2 className="text-xl font-semibold text-foreground mb-3">Tech Stack</h2>
               <div className="flex flex-wrap gap-2">
                 {techStack.map((tech: string, i: number) => (
-                  <Badge key={i} variant="secondary">{tech}</Badge>
+                  <Link key={i} to={`/projects?tech=${encodeURIComponent(tech)}`}>
+                    <Badge variant="secondary" className="cursor-pointer hover:bg-primary/20 transition-colors">{tech}</Badge>
+                  </Link>
                 ))}
               </div>
             </section>
           )}
 
-          {/* Team Members */}
+          {/* Team Members — clickable to profile */}
           {teamMembers.length > 0 && (
             <section className="mb-8">
               <h2 className="text-xl font-semibold text-foreground mb-3">Team</h2>
               <div className="flex flex-wrap gap-3">
                 {teamMembers.map((m, i) => (
-                  <div key={i} className="flex items-center gap-2 bg-muted/50 rounded-xl px-3 py-2">
-                    <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-medium text-primary">
-                      {m.profile?.name?.[0]?.toUpperCase() || "?"}
+                  <Link
+                    key={i}
+                    to={`/profile/${m.user_id}`}
+                    className="flex items-center gap-2 bg-muted/50 rounded-xl px-3 py-2 hover:bg-muted transition-colors"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-xs font-medium text-primary overflow-hidden">
+                      {m.profile?.avatar_url ? (
+                        <img src={m.profile.avatar_url} alt={m.profile.name} className="w-full h-full object-cover" />
+                      ) : (
+                        m.profile?.name?.[0]?.toUpperCase() || "?"
+                      )}
                     </div>
                     <div>
                       <p className="text-sm font-medium text-foreground">{m.profile?.name || "Unknown"}</p>
                       <p className="text-xs text-muted-foreground capitalize">{m.role}</p>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </section>
@@ -276,6 +332,81 @@ const ProjectDetail = () => {
               </div>
             </section>
           )}
+
+          {/* Comments Section */}
+          <section className="border-t border-border/50 pt-8">
+            <h2 className="text-xl font-semibold text-foreground mb-4 flex items-center gap-2">
+              <MessageCircle className="w-5 h-5" /> Comments ({comments.length})
+            </h2>
+
+            {/* Comment Input */}
+            {user ? (
+              <div className="flex gap-3 mb-6">
+                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-medium text-primary shrink-0">
+                  {user.email?.[0]?.toUpperCase() || "?"}
+                </div>
+                <div className="flex-1">
+                  <Textarea
+                    placeholder="Write a comment..."
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    rows={2}
+                    className="rounded-xl mb-2"
+                  />
+                  <Button
+                    size="sm"
+                    className="rounded-xl"
+                    onClick={handleSubmitComment}
+                    disabled={!newComment.trim() || submittingComment}
+                  >
+                    <Send className="w-4 h-4 mr-2" /> Post
+                  </Button>
+                </div>
+              </div>
+            ) : (
+              <p className="text-sm text-muted-foreground mb-6">
+                <Link to="/login" className="text-primary hover:underline">Sign in</Link> to leave a comment.
+              </p>
+            )}
+
+            {/* Comments List */}
+            <div className="space-y-4">
+              {comments.map((comment) => (
+                <div key={comment.id} className="flex gap-3">
+                  <Link to={`/profile/${comment.user_id}`} className="shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs font-medium text-primary overflow-hidden">
+                      {comment.profile?.avatar_url ? (
+                        <img src={comment.profile.avatar_url} alt="" className="w-full h-full object-cover" />
+                      ) : (
+                        comment.profile?.name?.[0]?.toUpperCase() || "?"
+                      )}
+                    </div>
+                  </Link>
+                  <div className="flex-1 bg-muted/50 rounded-xl px-4 py-3">
+                    <div className="flex items-center justify-between mb-1">
+                      <Link to={`/profile/${comment.user_id}`} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                        {comment.profile?.name || "Unknown"}
+                      </Link>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(comment.created_at).toLocaleDateString()}
+                        </span>
+                        {user?.id === comment.user_id && (
+                          <button onClick={() => handleDeleteComment(comment.id)} className="text-muted-foreground hover:text-destructive transition-colors">
+                            <Trash2 className="w-3 h-3" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground whitespace-pre-line">{comment.content}</p>
+                  </div>
+                </div>
+              ))}
+              {comments.length === 0 && (
+                <p className="text-sm text-muted-foreground text-center py-4">No comments yet. Be the first!</p>
+              )}
+            </div>
+          </section>
 
           {/* Fullscreen image viewer */}
           {fullscreenImage && (

@@ -151,6 +151,12 @@ const AdminDashboard = () => {
     toast({ title: `Project marked as ${status}` });
   };
 
+  const toggleFeatured = async (id: string, current: boolean) => {
+    await supabase.from("projects").update({ featured: !current } as any).eq("id", id);
+    loadAll();
+    toast({ title: current ? "Removed from Staff Picks" : "Added to Staff Picks" });
+  };
+
   const filteredProjects = projects.filter((p) => {
     const matchSearch = !projectSearch || p.title.toLowerCase().includes(projectSearch.toLowerCase());
     const matchStatus = projectStatusFilter === "all" || p.status === projectStatusFilter;
@@ -384,11 +390,17 @@ const AdminDashboard = () => {
                 {filteredProjects.map((p) => (
                   <div key={p.id} className="border border-border rounded-xl p-4 bg-card flex items-center justify-between gap-4">
                     <div className="min-w-0 flex-1">
-                      <p className="font-semibold truncate">{p.title}</p>
+                      <div className="flex items-center gap-2">
+                        <p className="font-semibold truncate">{p.title}</p>
+                        {(p as any).featured && <Badge className="bg-accent text-accent-foreground text-xs">⭐ Featured</Badge>}
+                      </div>
                       <p className="text-sm text-muted-foreground truncate">{p.tagline}</p>
                       <p className="text-xs text-muted-foreground">{(p.hackathons as any)?.name} · {(p.tracks as any)?.name || "No track"}</p>
                     </div>
                     <div className="flex items-center gap-2">
+                      <Button size="sm" variant={(p as any).featured ? "default" : "outline"} onClick={() => toggleFeatured(p.id, !!(p as any).featured)}>
+                        ⭐
+                      </Button>
                       <Select value={p.status} onValueChange={(v) => updateProjectStatus(p.id, v)}>
                         <SelectTrigger className="w-32"><SelectValue /></SelectTrigger>
                         <SelectContent>
