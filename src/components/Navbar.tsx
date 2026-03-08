@@ -92,6 +92,14 @@ const Navbar = () => {
                       Dashboard
                     </Link>
                   </Button>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="hidden md:inline-flex rounded-full px-3"
+                    onClick={signOut}
+                  >
+                    <LogOut className="w-4 h-4" />
+                  </Button>
                 </>
               ) : (
                 <Button
