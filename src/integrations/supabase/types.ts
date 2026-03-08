@@ -56,6 +56,429 @@ export type Database = {
         }
         Relationships: []
       }
+      hackathons: {
+        Row: {
+          created_at: string
+          end_date: string | null
+          id: string
+          name: string
+          season: number
+          start_date: string | null
+          status: Database["public"]["Enums"]["hackathon_status"]
+        }
+        Insert: {
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          name: string
+          season?: number
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["hackathon_status"]
+        }
+        Update: {
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          name?: string
+          season?: number
+          start_date?: string | null
+          status?: Database["public"]["Enums"]["hackathon_status"]
+        }
+        Relationships: []
+      }
+      judges: {
+        Row: {
+          hackathon_id: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          hackathon_id: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          hackathon_id?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "judges_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mentor_profiles: {
+        Row: {
+          available: boolean
+          company: string | null
+          created_at: string
+          expertise: string | null
+          id: string
+          photo_url: string | null
+          user_id: string
+        }
+        Insert: {
+          available?: boolean
+          company?: string | null
+          created_at?: string
+          expertise?: string | null
+          id?: string
+          photo_url?: string | null
+          user_id: string
+        }
+        Update: {
+          available?: boolean
+          company?: string | null
+          created_at?: string
+          expertise?: string | null
+          id?: string
+          photo_url?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          email: string | null
+          github: string | null
+          id: string
+          linkedin: string | null
+          name: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          github?: string | null
+          id?: string
+          linkedin?: string | null
+          name?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          github?: string | null
+          id?: string
+          linkedin?: string | null
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          ai_summary: string | null
+          created_at: string
+          demo_link: string | null
+          demo_video_link: string | null
+          description: string | null
+          github_link: string | null
+          hackathon_id: string | null
+          id: string
+          likes: number
+          live_demo_link: string | null
+          problem: string | null
+          screenshots: Json | null
+          solution: string | null
+          status: Database["public"]["Enums"]["project_status"]
+          tagline: string | null
+          team_id: string | null
+          tech_stack: Json | null
+          thumbnail_url: string | null
+          title: string
+          track_id: string | null
+          updated_at: string
+          user_id: string
+          views: number
+        }
+        Insert: {
+          ai_summary?: string | null
+          created_at?: string
+          demo_link?: string | null
+          demo_video_link?: string | null
+          description?: string | null
+          github_link?: string | null
+          hackathon_id?: string | null
+          id?: string
+          likes?: number
+          live_demo_link?: string | null
+          problem?: string | null
+          screenshots?: Json | null
+          solution?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+          tagline?: string | null
+          team_id?: string | null
+          tech_stack?: Json | null
+          thumbnail_url?: string | null
+          title: string
+          track_id?: string | null
+          updated_at?: string
+          user_id: string
+          views?: number
+        }
+        Update: {
+          ai_summary?: string | null
+          created_at?: string
+          demo_link?: string | null
+          demo_video_link?: string | null
+          description?: string | null
+          github_link?: string | null
+          hackathon_id?: string | null
+          id?: string
+          likes?: number
+          live_demo_link?: string | null
+          problem?: string | null
+          screenshots?: Json | null
+          solution?: string | null
+          status?: Database["public"]["Enums"]["project_status"]
+          tagline?: string | null
+          team_id?: string | null
+          tech_stack?: Json | null
+          thumbnail_url?: string | null
+          title?: string
+          track_id?: string | null
+          updated_at?: string
+          user_id?: string
+          views?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "projects_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "projects_track_id_fkey"
+            columns: ["track_id"]
+            isOneToOne: false
+            referencedRelation: "tracks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scores: {
+        Row: {
+          created_at: string
+          execution_score: number
+          feedback: string | null
+          id: string
+          idea_score: number
+          judge_id: string
+          presentation_score: number
+          project_id: string
+          total_score: number | null
+        }
+        Insert: {
+          created_at?: string
+          execution_score?: number
+          feedback?: string | null
+          id?: string
+          idea_score?: number
+          judge_id: string
+          presentation_score?: number
+          project_id: string
+          total_score?: number | null
+        }
+        Update: {
+          created_at?: string
+          execution_score?: number
+          feedback?: string | null
+          id?: string
+          idea_score?: number
+          judge_id?: string
+          presentation_score?: number
+          project_id?: string
+          total_score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scores_judge_id_fkey"
+            columns: ["judge_id"]
+            isOneToOne: false
+            referencedRelation: "judges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scores_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsor_credits: {
+        Row: {
+          claim_code: string | null
+          created_at: string
+          description: string | null
+          hackathon_id: string | null
+          id: string
+          instructions: string | null
+          logo_url: string | null
+          sponsor_name: string
+        }
+        Insert: {
+          claim_code?: string | null
+          created_at?: string
+          description?: string | null
+          hackathon_id?: string | null
+          id?: string
+          instructions?: string | null
+          logo_url?: string | null
+          sponsor_name: string
+        }
+        Update: {
+          claim_code?: string | null
+          created_at?: string
+          description?: string | null
+          hackathon_id?: string | null
+          id?: string
+          instructions?: string | null
+          logo_url?: string | null
+          sponsor_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_credits_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      support_tickets: {
+        Row: {
+          admin_response: string | null
+          created_at: string
+          id: string
+          message: string
+          status: Database["public"]["Enums"]["ticket_status"]
+          subject: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_response?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          status?: Database["public"]["Enums"]["ticket_status"]
+          subject: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_response?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          status?: Database["public"]["Enums"]["ticket_status"]
+          subject?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      team_members: {
+        Row: {
+          id: string
+          role: string
+          team_id: string
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role?: string
+          team_id: string
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: string
+          team_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "team_members_team_id_fkey"
+            columns: ["team_id"]
+            isOneToOne: false
+            referencedRelation: "teams"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      teams: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      tracks: {
+        Row: {
+          description: string | null
+          hackathon_id: string
+          id: string
+          name: string
+        }
+        Insert: {
+          description?: string | null
+          hackathon_id: string
+          id?: string
+          name: string
+        }
+        Update: {
+          description?: string | null
+          hackathon_id?: string
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tracks_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -82,6 +505,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_project_score: {
+        Args: { p_project_id: string }
+        Returns: number
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -104,7 +531,7 @@ export type Database = {
       }
     }
     Enums: {
-      app_role: "admin" | "user"
+      app_role: "admin" | "user" | "judge"
       certificate_type:
         | "participant"
         | "winner_1"
@@ -117,6 +544,9 @@ export type Database = {
         | "winner_8"
         | "winner_9"
         | "winner_10"
+      hackathon_status: "draft" | "active" | "completed"
+      project_status: "pending" | "approved" | "rejected" | "winner"
+      ticket_status: "open" | "in_progress" | "resolved" | "closed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -244,7 +674,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["admin", "user"],
+      app_role: ["admin", "user", "judge"],
       certificate_type: [
         "participant",
         "winner_1",
@@ -258,6 +688,9 @@ export const Constants = {
         "winner_9",
         "winner_10",
       ],
+      hackathon_status: ["draft", "active", "completed"],
+      project_status: ["pending", "approved", "rejected", "winner"],
+      ticket_status: ["open", "in_progress", "resolved", "closed"],
     },
   },
 } as const
