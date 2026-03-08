@@ -93,6 +93,11 @@ const Dashboard = () => {
       }
       setContribLoading(false);
     });
+    // Load announcements
+    supabase.from("announcements").select("*").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => {
+      setAnnouncements(data || []);
+      setAnnouncementsLoading(false);
+    });
   }, [user]);
 
   const handleSaveProfile = async () => {
