@@ -11,7 +11,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/hooks/use-toast";
-import { ShieldCheck, Star, CheckCircle } from "lucide-react";
+import { ShieldCheck, Star, CheckCircle, ExternalLink, FileText } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const JudgeDashboard = () => {
   const { user } = useAuth();
@@ -21,6 +22,11 @@ const JudgeDashboard = () => {
   const [scores, setScores] = useState<any[]>([]);
   const [selectedHackathon, setSelectedHackathon] = useState<string>("");
   const [scoringProject, setScoringProject] = useState<string | null>(null);
+  const [activeView, setActiveView] = useState<"scoring" | "certificates">("scoring");
+
+  // Certificates
+  const [certificates, setCertificates] = useState<any[]>([]);
+  const [certsLoading, setCertsLoading] = useState(true);
 
   // Score form
   const [ideaScore, setIdeaScore] = useState(5);
@@ -32,9 +38,19 @@ const JudgeDashboard = () => {
     if (!user) return;
     supabase.rpc("has_role", { _user_id: user.id, _role: "judge" }).then(({ data }) => {
       setIsJudge(data === true);
-      if (data === true) loadAssignments();
+      if (data === true) {
+        loadAssignments();
+        loadCertificates();
+      }
     });
   }, [user]);
+
+  const loadCertificates = async () => {
+    setCertsLoading(true);
+    const { data } = await supabase.from("certificates" as any).select("*").eq("recipient_email", user!.email) as any;
+    setCertificates(data || []);
+    setCertsLoading(false);
+  };
 
   const loadAssignments = async () => {
     const { data: judgeRows } = await supabase.from("judges").select("*, hackathons(id, name, status)").eq("user_id", user!.id);
@@ -143,76 +159,139 @@ const JudgeDashboard = () => {
       <Navbar />
       <main className="flex-1 pt-32 pb-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8">Judge Dashboard</h1>
+          <h1 className="text-3xl font-bold mb-6">Judge Dashboard</h1>
 
-          <Tabs value={selectedHackathon} onValueChange={setSelectedHackathon}>
-            <TabsList className="mb-6">
+          {/* View switcher */}
+          <div className="flex gap-2 mb-8">
+            <Button
+              variant={activeView === "scoring" ? "default" : "outline"}
+              size="sm"
+              className="rounded-xl"
+              onClick={() => setActiveView("scoring")}
+            >
+              <Star className="w-4 h-4 mr-1" /> Scoring
+            </Button>
+            <Button
+              variant={activeView === "certificates" ? "default" : "outline"}
+              size="sm"
+              className="rounded-xl"
+              onClick={() => setActiveView("certificates")}
+            >
+              <FileText className="w-4 h-4 mr-1" /> Certificates
+            </Button>
+          </div>
+
+          {/* SCORING VIEW */}
+          {activeView === "scoring" && (
+            <Tabs value={selectedHackathon} onValueChange={setSelectedHackathon}>
+              <TabsList className="mb-6">
+                {assignments.map((a) => (
+                  <TabsTrigger key={a.hackathon_id} value={a.hackathon_id}>
+                    {(a.hackathons as any)?.name}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+
               {assignments.map((a) => (
-                <TabsTrigger key={a.hackathon_id} value={a.hackathon_id}>
-                  {(a.hackathons as any)?.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+                <TabsContent key={a.hackathon_id} value={a.hackathon_id}>
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">{projects.length} projects to review</p>
 
-            {assignments.map((a) => (
-              <TabsContent key={a.hackathon_id} value={a.hackathon_id}>
-                <div className="space-y-4">
-                  <p className="text-muted-foreground">{projects.length} projects to review</p>
+                    {projects.map((p) => {
+                      const existing = getExistingScore(p.id);
+                      const isScoring = scoringProject === p.id;
 
-                  {projects.map((p) => {
-                    const existing = getExistingScore(p.id);
-                    const isScoring = scoringProject === p.id;
-
-                    return (
-                      <div key={p.id} className="border border-border rounded-xl p-4 bg-card space-y-4">
-                        <div className="flex items-start justify-between">
-                          <div>
+                      return (
+                        <div key={p.id} className="border border-border rounded-xl p-4 bg-card space-y-4">
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <Link to={`/projects/${p.id}`} target="_blank" className="font-semibold hover:text-primary transition-colors flex items-center gap-1">
+                                  {p.title}
+                                  <ExternalLink className="w-3 h-3 opacity-50" />
+                                </Link>
+                                {existing && <CheckCircle className="w-4 h-4 text-primary" />}
+                              </div>
+                              <p className="text-sm text-muted-foreground">{p.tagline}</p>
+                            </div>
                             <div className="flex items-center gap-2">
-                              <p className="font-semibold">{p.title}</p>
-                              {existing && <CheckCircle className="w-4 h-4 text-primary" />}
+                              {existing && <Badge variant="outline">Score: {existing.total_score}/30</Badge>}
+                              <Button size="sm" variant={isScoring ? "secondary" : "default"} onClick={() => isScoring ? setScoringProject(null) : openScoring(p.id)}>
+                                <Star className="w-4 h-4 mr-1" />
+                                {existing ? "Update" : "Score"}
+                              </Button>
                             </div>
-                            <p className="text-sm text-muted-foreground">{p.tagline}</p>
                           </div>
-                          <div className="flex items-center gap-2">
-                            {existing && <Badge variant="outline">Score: {existing.total_score}/30</Badge>}
-                            <Button size="sm" variant={isScoring ? "secondary" : "default"} onClick={() => isScoring ? setScoringProject(null) : openScoring(p.id)}>
-                              <Star className="w-4 h-4 mr-1" />
-                              {existing ? "Update" : "Score"}
-                            </Button>
-                          </div>
-                        </div>
 
-                        {isScoring && (
-                          <div className="bg-muted/50 rounded-xl p-4 space-y-5">
-                            <div>
-                              <div className="flex justify-between mb-2"><Label>Idea</Label><span className="text-sm font-semibold">{ideaScore}/10</span></div>
-                              <Slider value={[ideaScore]} min={1} max={10} step={1} onValueChange={([v]) => setIdeaScore(v)} />
+                          {isScoring && (
+                            <div className="bg-muted/50 rounded-xl p-4 space-y-5">
+                              <div>
+                                <div className="flex justify-between mb-2"><Label>Idea</Label><span className="text-sm font-semibold">{ideaScore}/10</span></div>
+                                <Slider value={[ideaScore]} min={1} max={10} step={1} onValueChange={([v]) => setIdeaScore(v)} />
+                              </div>
+                              <div>
+                                <div className="flex justify-between mb-2"><Label>Execution</Label><span className="text-sm font-semibold">{executionScore}/10</span></div>
+                                <Slider value={[executionScore]} min={1} max={10} step={1} onValueChange={([v]) => setExecutionScore(v)} />
+                              </div>
+                              <div>
+                                <div className="flex justify-between mb-2"><Label>Presentation</Label><span className="text-sm font-semibold">{presentationScore}/10</span></div>
+                                <Slider value={[presentationScore]} min={1} max={10} step={1} onValueChange={([v]) => setPresentationScore(v)} />
+                              </div>
+                              <div className="text-center font-bold text-lg">Total: {ideaScore + executionScore + presentationScore}/30</div>
+                              <div>
+                                <Label>Feedback</Label>
+                                <Textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} placeholder="Optional feedback..." rows={3} className="mt-1" />
+                              </div>
+                              <Button onClick={submitScore} className="w-full">{existing ? "Update Score" : "Submit Score"}</Button>
                             </div>
-                            <div>
-                              <div className="flex justify-between mb-2"><Label>Execution</Label><span className="text-sm font-semibold">{executionScore}/10</span></div>
-                              <Slider value={[executionScore]} min={1} max={10} step={1} onValueChange={([v]) => setExecutionScore(v)} />
-                            </div>
-                            <div>
-                              <div className="flex justify-between mb-2"><Label>Presentation</Label><span className="text-sm font-semibold">{presentationScore}/10</span></div>
-                              <Slider value={[presentationScore]} min={1} max={10} step={1} onValueChange={([v]) => setPresentationScore(v)} />
-                            </div>
-                            <div className="text-center font-bold text-lg">Total: {ideaScore + executionScore + presentationScore}/30</div>
-                            <div>
-                              <Label>Feedback</Label>
-                              <Textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} placeholder="Optional feedback..." rows={3} className="mt-1" />
-                            </div>
-                            <Button onClick={submitScore} className="w-full">{existing ? "Update Score" : "Submit Score"}</Button>
-                          </div>
+                          )}
+                        </div>
+                      );
+                    })}
+
+                    {projects.length === 0 && <p className="text-muted-foreground text-center py-8">No projects to review yet.</p>}
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          )}
+
+          {/* CERTIFICATES VIEW */}
+          {activeView === "certificates" && (
+            <div>
+              <h2 className="text-xl font-semibold mb-6">My Certificates</h2>
+              {certsLoading ? (
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+              ) : certificates.length === 0 ? (
+                <p className="text-muted-foreground">Your certificates will appear here after a hackathon ends.</p>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {certificates.map((c: any) => (
+                    <div key={c.id} className="rounded-xl border border-border/50 p-4 bg-card">
+                      <h3 className="font-semibold text-foreground">{c.hackathon_name}</h3>
+                      <p className="text-sm text-muted-foreground capitalize mt-1">{c.certificate_type?.replace("_", " ")}</p>
+                      <div className="flex gap-2 mt-3">
+                        {c.pdf_url && (
+                          <Button size="sm" variant="outline" asChild className="rounded-lg text-xs">
+                            <a href={c.pdf_url} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="w-3 h-3 mr-1" /> PDF
+                            </a>
+                          </Button>
+                        )}
+                        {c.image_url && (
+                          <Button size="sm" variant="outline" asChild className="rounded-lg text-xs">
+                            <a href={c.image_url} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="w-3 h-3 mr-1" /> Image
+                            </a>
+                          </Button>
                         )}
                       </div>
-                    );
-                  })}
-
-                  {projects.length === 0 && <p className="text-muted-foreground text-center py-8">No projects to review yet.</p>}
+                    </div>
+                  ))}
                 </div>
-              </TabsContent>
-            ))}
-          </Tabs>
+              )}
+            </div>
+          )}
         </div>
       </main>
       <Footer />

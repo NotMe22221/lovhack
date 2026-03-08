@@ -21,7 +21,7 @@ const Season1 = () => {
     { icon: Users, value: "100+", label: "Builders" },
     { icon: Rocket, value: "43", label: "Shipped" },
     { icon: Globe, value: "20+", label: "Countries" },
-    { icon: Trophy, value: "$5K+", label: "In Prizes" },
+    { icon: Trophy, value: "$10K+", label: "In Prizes" },
   ];
 
   const sponsors = [

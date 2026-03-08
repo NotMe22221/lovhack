@@ -6,12 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, MessageSquare, Edit } from "lucide-react";
+import { User, FolderOpen, Key, FileText, Upload, ExternalLink, Trash2, Users, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SubmitProjectModal from "@/components/SubmitProjectModal";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
@@ -19,7 +20,6 @@ const tabs = [
   { id: "contributions", label: "Contributions", icon: Users },
   { id: "credits", label: "API Credits", icon: Key },
   { id: "certificates", label: "Certificates", icon: FileText },
-  { id: "messages", label: "Messages", icon: MessageSquare },
 ];
 
 const Dashboard = () => {
@@ -52,9 +52,8 @@ const Dashboard = () => {
   const [contributions, setContributions] = useState<any[]>([]);
   const [contribLoading, setContribLoading] = useState(true);
 
-  // Announcements state
-  const [announcements, setAnnouncements] = useState<any[]>([]);
-  const [announcementsLoading, setAnnouncementsLoading] = useState(true);
+  // Active hackathons (for submission lock)
+  const [hasActiveHackathon, setHasActiveHackathon] = useState(true);
 
   useEffect(() => {
     if (!user) return;
@@ -95,10 +94,9 @@ const Dashboard = () => {
       }
       setContribLoading(false);
     });
-    // Load announcements
-    supabase.from("announcements").select("*").eq("published", true).order("created_at", { ascending: false }).then(({ data }) => {
-      setAnnouncements(data || []);
-      setAnnouncementsLoading(false);
+    // Check if there's an active hackathon
+    supabase.from("hackathons").select("id").eq("status", "active").limit(1).then(({ data }) => {
+      setHasActiveHackathon((data || []).length > 0);
     });
   }, [user]);
 
@@ -229,9 +227,22 @@ const Dashboard = () => {
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold">My Projects</h2>
-                  <Button className="rounded-xl" size="sm" onClick={() => setSubmitModalOpen(true)}>
-                    Submit New
-                  </Button>
+                  {hasActiveHackathon ? (
+                    <Button className="rounded-xl" size="sm" onClick={() => setSubmitModalOpen(true)}>
+                      Submit New
+                    </Button>
+                  ) : (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <span>
+                          <Button className="rounded-xl" size="sm" disabled>
+                            Submit New
+                          </Button>
+                        </span>
+                      </TooltipTrigger>
+                      <TooltipContent>Submissions are closed between hackathons</TooltipContent>
+                    </Tooltip>
+                  )}
                 </div>
                 <SubmitProjectModal
                   open={submitModalOpen}
@@ -372,33 +383,6 @@ const Dashboard = () => {
               </div>
             )}
 
-            {/* MESSAGES TAB */}
-            {activeTab === "messages" && (
-              <div>
-                <h2 className="text-xl font-semibold mb-6">Announcements</h2>
-                {announcementsLoading ? (
-                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
-                ) : announcements.length === 0 ? (
-                  <div className="text-center py-12">
-                    <MessageSquare className="w-12 h-12 text-muted-foreground/30 mx-auto mb-4" />
-                    <p className="text-muted-foreground">No announcements yet.</p>
-                    <p className="text-xs text-muted-foreground/70 mt-1">Stay tuned for updates from the LovHack team.</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {announcements.map((a: any) => (
-                      <div key={a.id} className="rounded-xl border border-border/50 p-4 bg-muted/30">
-                        <h3 className="font-semibold text-foreground">{a.title}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">{a.message}</p>
-                        <p className="text-xs text-muted-foreground/60 mt-2">
-                          {new Date(a.created_at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         </div>
       </main>
