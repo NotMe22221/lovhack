@@ -268,12 +268,14 @@ const AdminDashboard = () => {
           <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
 
           <Tabs defaultValue="hackathons">
-            <TabsList className="mb-6 flex flex-wrap gap-1">
+            <TabsList className="mb-6 flex flex-wrap gap-1 overflow-x-auto">
               <TabsTrigger value="hackathons">Hackathons</TabsTrigger>
               <TabsTrigger value="projects">Projects</TabsTrigger>
               <TabsTrigger value="judges">Judges</TabsTrigger>
               <TabsTrigger value="tickets">Support</TabsTrigger>
               <TabsTrigger value="users">Users</TabsTrigger>
+              <TabsTrigger value="announcements">Announcements</TabsTrigger>
+              <TabsTrigger value="analytics">Analytics</TabsTrigger>
             </TabsList>
 
             {/* ===== HACKATHONS ===== */}
