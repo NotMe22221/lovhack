@@ -1,6 +1,6 @@
 import { useAuth } from "@/contexts/AuthContext";
 import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/sections/Footer";
+import Footer from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
 import { User, FolderOpen, Award, MessageSquare, Key, FileText } from "lucide-react";
 import { useState } from "react";

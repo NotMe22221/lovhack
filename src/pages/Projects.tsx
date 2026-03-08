@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/sections/Footer";
+import Footer from "@/components/sections/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { Eye, Heart, Search, Filter } from "lucide-react";
 import { Input } from "@/components/ui/input";

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/sections/Footer";
+import Footer from "@/components/sections/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,7 @@ const ProjectDetail = () => {
     const fetchProject = async () => {
       if (!id) return;
       // Increment views
-      await supabase.rpc("increment_views" as any, { p_project_id: id }).catch(() => {});
+      try { await supabase.rpc("increment_views" as any, { p_project_id: id }); } catch {}
       
       const { data } = await supabase
         .from("projects")
