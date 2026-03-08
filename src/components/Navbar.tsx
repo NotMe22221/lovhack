@@ -164,7 +164,7 @@ const Navbar = () => {
                   </Link>
                 ))}
                 <a
-                  href="https://discord.gg/lovable-dev"
+                  href="https://t.co/qMNpoZoiQZ"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
