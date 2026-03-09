@@ -26,8 +26,8 @@ const Signup = () => {
     setLoading(true);
     try {
       await signUp(email, password, name);
-      toast({ title: "Account created!", description: "You're now signed in." });
-      navigate("/dashboard");
+      toast({ title: "Account created!", description: "Check your email to verify your account before signing in." });
+      // Don't navigate — user needs to verify email first
     } catch (error: any) {
       toast({
         title: "Sign up failed",

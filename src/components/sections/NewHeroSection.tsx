@@ -46,8 +46,8 @@ const NewHeroSection = () => {
 
   const stats = [
     { icon: Globe, label: "20+ Countries" },
-    { icon: Rocket, label: "40+ Projects Shipped" },
-    { icon: Zap, label: "100+ Builders" },
+    { icon: Rocket, label: "50+ Projects Shipped" },
+    { icon: Zap, label: "350+ Builders" },
   ];
 
   return (

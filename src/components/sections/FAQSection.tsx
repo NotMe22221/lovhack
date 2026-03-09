@@ -22,7 +22,7 @@ const FAQSection = () => {
     },
     {
       question: "What can I build?",
-      answer: "Anything you want! Web apps, AI tools, games, productivity tools, browser extensions. If you can build it in 48 hours, it counts. We encourage creativity and experimentation.",
+      answer: "Anything you want! Web apps, AI tools, games, productivity tools, browser extensions. If you can build it during the hackathon, it counts. We encourage creativity and experimentation.",
     },
     {
       question: "Is it really free?",
