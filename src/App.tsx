@@ -31,6 +31,7 @@ import EditProject from "./pages/EditProject";
 import AdminDashboard from "./pages/AdminDashboard";
 import JudgeDashboard from "./pages/JudgeDashboard";
 import PublicProfile from "./pages/PublicProfile";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
