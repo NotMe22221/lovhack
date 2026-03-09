@@ -31,6 +31,7 @@ import EditProject from "./pages/EditProject";
 import AdminDashboard from "./pages/AdminDashboard";
 import JudgeDashboard from "./pages/JudgeDashboard";
 import PublicProfile from "./pages/PublicProfile";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
                 <Route path="/season-2" element={<Season2 />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/projects/:id" element={<ProjectDetail />} />
                 <Route path="/winners" element={<Winners />} />

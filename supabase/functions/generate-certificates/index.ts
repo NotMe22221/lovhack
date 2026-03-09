@@ -32,10 +32,10 @@ Deno.serve(async (req) => {
 
     if (hackError) throw hackError;
 
-    // Get all approved/winner projects for this hackathon with their owners
+    // Get all approved/winner projects for this hackathon
     const { data: projects, error: projError } = await supabaseClient
       .from('projects')
-      .select('id, title, status, user_id, profiles!inner(name, email)')
+      .select('id, title, status, user_id')
       .eq('hackathon_id', hackathon_id)
       .in('status', ['approved', 'winner']);
 
@@ -48,21 +48,42 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Fetch profiles for all project owners
+    const userIds = [...new Set(projects.map(p => p.user_id))];
+    const { data: profiles, error: profileError } = await supabaseClient
+      .from('profiles')
+      .select('user_id, name, email')
+      .in('user_id', userIds);
+
+    if (profileError) throw profileError;
+
+    const profileMap = new Map((profiles || []).map(p => [p.user_id, p]));
+
+    // Fetch existing certificates for this hackathon to avoid duplicates
+    const { data: existingCerts } = await supabaseClient
+      .from('certificates')
+      .select('recipient_email, hackathon_name')
+      .eq('hackathon_name', hackathon.name);
+
+    const existingSet = new Set(
+      (existingCerts || []).map(c => `${c.recipient_email}::${c.hackathon_name}`)
+    );
+
     const results = [];
+    let skipped = 0;
 
     for (const project of projects) {
-      const profile = (project as any).profiles;
-      const recipientName = profile.name || 'Participant';
-      const recipientEmail = profile.email;
+      const profile = profileMap.get(project.user_id);
+      const recipientName = profile?.name || 'Participant';
+      const recipientEmail = profile?.email;
 
-      // Determine certificate type
-      let certificateType: string;
-      if (project.status === 'winner') {
-        // For now, default to winner_1, can be enhanced to detect rank
-        certificateType = 'participant'; // Or 'winner_1' if you want
-      } else {
-        certificateType = 'participant';
+      // Skip if certificate already exists for this recipient + hackathon
+      if (recipientEmail && existingSet.has(`${recipientEmail}::${hackathon.name}`)) {
+        skipped++;
+        continue;
       }
+
+      const certificateType = 'participant';
 
       // Generate unique certificate ID
       const certId = `${hackathon.season}-${recipientName.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`;
@@ -165,6 +186,11 @@ Deno.serve(async (req) => {
         continue;
       }
 
+      // Mark as existing to handle multiple projects by same user
+      if (recipientEmail) {
+        existingSet.add(`${recipientEmail}::${hackathon.name}`);
+      }
+
       results.push({
         name: recipientName,
         email: recipientEmail,
@@ -175,7 +201,7 @@ Deno.serve(async (req) => {
     return new Response(
       JSON.stringify({
         success: true,
-        message: `Generated ${results.length} certificates for ${hackathon.name}`,
+        message: `Generated ${results.length} certificates for ${hackathon.name}${skipped > 0 ? ` (${skipped} skipped as duplicates)` : ''}`,
         certificates: results,
       }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
