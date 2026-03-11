@@ -105,14 +105,19 @@ const Season2 = () => {
   return (
     <>
       <Helmet>
-        <title>LovHack Season 2 | Our Biggest Event Yet | LovHack</title>
-        <meta name="description" content="LovHack Season 2 — our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026. Register now!" />
+        <title>LovHack Season 2 — One-Week Online Hackathon | March 2026</title>
+        <meta name="description" content="Join LovHack Season 2, a one-week online hackathon starting March 21, 2026. 8+ sponsors, 4 tracks, global participation, and amazing prizes. Register now!" />
+        <meta name="keywords" content="LovHack Season 2, LovHack hackathon 2026, online hackathon March 2026, beginner hackathon, vibe coding hackathon, one week hackathon, hackathon with prizes, lovhack.dev" />
         <link rel="canonical" href="https://lovhack.dev/season-2" />
-        <meta property="og:title" content="LovHack Season 2 | Our Biggest Event Yet" />
-        <meta property="og:description" content="Our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="LovHack Season 2 — One-Week Online Hackathon | March 2026" />
+        <meta property="og:description" content="Join LovHack Season 2, a one-week online hackathon starting March 21, 2026. 8+ sponsors, 4 tracks, global participation, and amazing prizes." />
         <meta property="og:url" content="https://lovhack.dev/season-2" />
-        <meta name="twitter:title" content="LovHack Season 2 | Our Biggest Event Yet" />
-        <meta name="twitter:description" content="Our biggest hackathon yet. 8 sponsors, global participation, amazing prizes. March 21, 2026." />
+        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/4OzrPHFY4FbStji9TO8qx9tGVMq1/social-images/social-1767131669906-Screenshot 2025-12-30 225411.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="LovHack Season 2 — One-Week Online Hackathon | March 2026" />
+        <meta name="twitter:description" content="Join LovHack Season 2, a one-week online hackathon starting March 21, 2026. 8+ sponsors, 4 tracks, and amazing prizes." />
+        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/4OzrPHFY4FbStji9TO8qx9tGVMq1/social-images/social-1767131669906-Screenshot 2025-12-30 225411.png" />
       </Helmet>
 
       <AnimatedBackground />
