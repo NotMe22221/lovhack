@@ -71,8 +71,8 @@ const Dashboard = () => {
       setMyProjects(data || []);
       setProjectsLoading(false);
     });
-    // Load credits
-    supabase.from("sponsor_credits").select("*").then(({ data }) => {
+    // Load credits (using public view that excludes claim_code)
+    supabase.from("sponsor_credits_public" as any).select("*").then(({ data }: any) => {
       setCredits(data || []);
       setCreditsLoading(false);
     });
