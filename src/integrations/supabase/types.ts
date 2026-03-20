@@ -648,7 +648,44 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      sponsor_credits_public: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          hackathon_id: string | null
+          id: string | null
+          instructions: string | null
+          logo_url: string | null
+          sponsor_name: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          hackathon_id?: string | null
+          id?: string | null
+          instructions?: string | null
+          logo_url?: string | null
+          sponsor_name?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          hackathon_id?: string | null
+          id?: string | null
+          instructions?: string | null
+          logo_url?: string | null
+          sponsor_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_credits_hackathon_id_fkey"
+            columns: ["hackathon_id"]
+            isOneToOne: false
+            referencedRelation: "hackathons"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       calculate_project_score: {
