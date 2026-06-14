@@ -54,7 +54,7 @@ const Mentoring = () => {
               <div key={mentor.id} className="bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl p-6 text-center">
                 <div className="w-20 h-20 rounded-full bg-muted mx-auto mb-4 overflow-hidden">
                   {mentor.photo_url ? (
-                    <img src={mentor.photo_url} alt="" className="w-full h-full object-cover" />
+                    <img src={mentor.photo_url} alt={`${mentor.profiles?.name || "Mentor"} portrait`} className="w-full h-full object-cover" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground">
                       <Users className="w-8 h-8" />

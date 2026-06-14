@@ -64,7 +64,27 @@ const Winners = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Winners | LovHack</title>
-        <meta name="description" content="See the winning projects from LovHack hackathons." />
+        <meta name="description" content="See the winning projects, teams, and demos from past LovHack hackathons — featuring AI tools, web apps, and creative builds from our community." />
+        <link rel="canonical" href="https://lovhack.dev/winners" />
+        <meta property="og:title" content="Winners | LovHack" />
+        <meta property="og:description" content="Celebrating the best projects from past LovHack hackathons." />
+        <meta property="og:url" content="https://lovhack.dev/winners" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "LovHack Winners",
+          description: "Winning projects from past LovHack hackathons.",
+          url: "https://lovhack.dev/winners",
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: winners.slice(0, 20).map((w, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://lovhack.dev/projects/${w.id}`,
+              name: w.title,
+            })),
+          },
+        })}</script>
       </Helmet>
       <Navbar />
       <main className="pt-28 pb-16 px-4 max-w-6xl mx-auto">

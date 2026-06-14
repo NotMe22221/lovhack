@@ -166,8 +166,8 @@ const TicketCard = ({ event, index }: { event: any, index: number }) => {
         <QrCode className="w-24 h-24 text-foreground/20 mb-4 mix-blend-overlay" />
 
         {event.link ? (
-          <div className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl font-bold py-2 px-4 text-center">
-            Learn More
+          <div className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-xl font-bold py-2 px-4 text-center" aria-label={`Learn more about ${event.name}`}>
+            Learn more about {event.name}
           </div>
         ) : (
           <Button
