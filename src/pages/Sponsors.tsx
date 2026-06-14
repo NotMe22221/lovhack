@@ -233,6 +233,7 @@ const BrandOyeModal = ({ open, onClose }: { open: boolean; onClose: () => void }
         >
           <button
             onClick={onClose}
+            aria-label="Close"
             className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
           >
             <X className="w-5 h-5" />
@@ -283,7 +284,7 @@ const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: n
 
       <div className="flex items-start justify-between mb-4">
         <div className="w-20 h-20 bg-white/90 rounded-2xl p-4 flex items-center justify-center shadow-sm">
-          <img src={sponsor.logo} alt={sponsor.name} className="w-full h-full object-contain" />
+          <img src={sponsor.logo} alt={`${sponsor.name} logo`} className="w-full h-full object-contain" />
         </div>
 
         {sponsor.offer && (
@@ -306,9 +307,10 @@ const BentoCard = ({ sponsor, index, onBrandOyeClick }: { sponsor: any; index: n
         {(isClamped || expanded) && (
           <button
             onClick={() => setExpanded(!expanded)}
+            aria-label={expanded ? `Show less about ${sponsor.name}` : `Read more about ${sponsor.name}`}
             className="text-xs font-medium text-primary/70 hover:text-primary transition-colors mb-4"
           >
-            {expanded ? "Show less" : "Read more"}
+            {expanded ? "Show less" : `Read more about ${sponsor.name}`}
           </button>
         )}
         {!isClamped && !expanded && <div className="mb-4" />}

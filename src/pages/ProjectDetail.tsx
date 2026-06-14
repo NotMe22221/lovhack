@@ -165,6 +165,20 @@ const ProjectDetail = () => {
       <Helmet>
         <title>{project.title} | LovHack</title>
         <meta name="description" content={project.tagline || project.description?.slice(0, 160)} />
+        <link rel="canonical" href={`https://lovhack.dev/projects/${project.id}`} />
+        <meta property="og:title" content={`${project.title} | LovHack`} />
+        <meta property="og:description" content={project.tagline || project.description?.slice(0, 160) || ""} />
+        <meta property="og:url" content={`https://lovhack.dev/projects/${project.id}`} />
+        {project.thumbnail_url && <meta property="og:image" content={project.thumbnail_url} />}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.tagline || project.description?.slice(0, 300),
+          url: `https://lovhack.dev/projects/${project.id}`,
+          ...(project.thumbnail_url ? { image: project.thumbnail_url } : {}),
+          ...(project.hackathons?.name ? { isPartOf: { "@type": "Event", name: project.hackathons.name } } : {}),
+        })}</script>
       </Helmet>
       <Navbar />
       <main className="pt-28 pb-16 px-4 max-w-4xl mx-auto">

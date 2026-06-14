@@ -145,7 +145,28 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>Projects | LovHack</title>
-        <meta name="description" content="Browse hackathon projects submitted by the LovHack community." />
+        <meta name="description" content="Browse hackathon projects submitted by the LovHack community — explore AI tools, web apps, and creative builds from builders around the world." />
+        <link rel="canonical" href="https://lovhack.dev/projects" />
+        <meta property="og:title" content="Projects | LovHack" />
+        <meta property="og:description" content="Explore amazing projects built by the LovHack community." />
+        <meta property="og:url" content="https://lovhack.dev/projects" />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "LovHack Projects",
+          description: "Hackathon projects submitted by the LovHack community.",
+          url: "https://lovhack.dev/projects",
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: projects.length,
+            itemListElement: projects.slice(0, 20).map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://lovhack.dev/projects/${p.id}`,
+              name: p.title,
+            })),
+          },
+        })}</script>
       </Helmet>
       <Navbar />
       <main className="pt-28 pb-16 px-4 max-w-7xl mx-auto">
