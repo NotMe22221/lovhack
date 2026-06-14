@@ -43,10 +43,10 @@ const Season1 = () => {
         <meta property="og:title" content="Season 1 Recap | LovHack Time Capsule" />
         <meta property="og:description" content="The archive of LovHack Season 1. See the winners and projects from our first 48-hour hackathon." />
         <meta property="og:url" content="https://lovhack.dev/season-1" />
-        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot%202026-01-07%20174428.png" />
         <meta name="twitter:title" content="Season 1 Recap | LovHack Time Capsule" />
         <meta name="twitter:description" content="The archive of LovHack Season 1. See the winners and projects from our first 48-hour hackathon." />
-        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot%202026-01-07%20174428.png" />
       </Helmet>
 
       <AnimatedBackground />

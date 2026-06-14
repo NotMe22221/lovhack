@@ -153,7 +153,7 @@ const Sponsors = () => {
         <meta property="og:url" content="https://lovhack.dev/sponsors" />
         <meta
           property="og:image"
-          content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png"
+          content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot%202026-01-07%20174428.png"
         />
         <meta name="twitter:title" content="Sponsors | Powered by the Best | LovHack" />
         <meta
@@ -162,8 +162,22 @@ const Sponsors = () => {
         />
         <meta
           name="twitter:image"
-          content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png"
+          content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot%202026-01-07%20174428.png"
         />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "LovHack Sponsors",
+          itemListElement: sponsors.map((s, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Organization",
+              name: s.name,
+              url: s.website && s.website !== "__modal__" ? s.website : "https://lovhack.dev/sponsors",
+            },
+          })),
+        })}</script>
       </Helmet>
 
       <AnimatedBackground />
