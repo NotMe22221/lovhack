@@ -108,6 +108,7 @@ const Navbar = () => {
                     variant="ghost"
                     className="hidden md:inline-flex rounded-full px-3"
                     onClick={signOut}
+                    aria-label="Sign out"
                   >
                     <LogOut className="w-4 h-4" />
                   </Button>

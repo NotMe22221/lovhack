@@ -76,6 +76,22 @@ const PublicProfile = () => {
       <Helmet>
         <title>{profile.name || "User"} | LovHack</title>
         <meta name="description" content={`${profile.name}'s profile on LovHack — view their projects and achievements.`} />
+        <link rel="canonical" href={`https://lovhack.dev/profile/${userId}`} />
+        <meta property="og:title" content={`${profile.name || "User"} | LovHack`} />
+        <meta property="og:description" content={`${profile.name}'s profile on LovHack — projects, achievements, and certificates.`} />
+        <meta property="og:url" content={`https://lovhack.dev/profile/${userId}`} />
+        {profile.avatar_url && <meta property="og:image" content={profile.avatar_url} />}
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ProfilePage",
+          mainEntity: {
+            "@type": "Person",
+            name: profile.name || "LovHack Builder",
+            description: profile.bio || `${profile.name || "Builder"} on LovHack`,
+            image: profile.avatar_url || undefined,
+            url: `https://lovhack.dev/profile/${userId}`,
+          },
+        })}</script>
       </Helmet>
       <Navbar />
       <main className="pt-28 pb-16 px-4 max-w-4xl mx-auto">

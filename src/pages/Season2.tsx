@@ -283,7 +283,7 @@ const Season2 = () => {
                   <a href="https://creao.ai" target="_blank" rel="noreferrer" className="block w-48 sm:w-56 transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl">
                     <GlassCard className="!p-6 h-full flex items-center justify-center border-2 border-primary/30" hover={false}>
                       <div className="h-16 flex items-center justify-center">
-                        <img src={creaoLogo} alt="Creao" className="max-h-full max-w-[140px] object-contain" />
+                        <img src={creaoLogo} alt="Creao logo" className="max-h-full max-w-[140px] object-contain" />
                       </div>
                     </GlassCard>
                   </a>
@@ -295,7 +295,7 @@ const Season2 = () => {
                     <a key={sponsor.name} href={sponsor.url} target="_blank" rel="noreferrer" className="block transition-all duration-300 hover:scale-105 hover:shadow-glow rounded-3xl">
                       <GlassCard className="!p-5 h-full flex items-center justify-center" hover={false}>
                         <div className="h-14 flex items-center justify-center">
-                          <img src={sponsor.logo} alt={sponsor.name} className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`} />
+                          <img src={sponsor.logo} alt={`${sponsor.name} logo`} className={`max-h-full max-w-[120px] object-contain ${sponsor.invert ? "invert brightness-200" : ""}`} />
                         </div>
                       </GlassCard>
                     </a>

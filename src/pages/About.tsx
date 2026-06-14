@@ -67,10 +67,10 @@ const About = () => {
         <meta property="og:title" content="About LovHack | We Build" />
         <meta property="og:description" content="We are a community of builders. Learn about LovHack's mission to help you ship your first project." />
         <meta property="og:url" content="https://lovhack.dev/about" />
-        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta property="og:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot%202026-01-07%20174428.png" />
         <meta name="twitter:title" content="About LovHack | We Build" />
         <meta name="twitter:description" content="We are a community of builders. Learn about LovHack's mission to help you ship your first project." />
-        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot 2026-01-07 174428.png" />
+        <meta name="twitter:image" content="https://storage.googleapis.com/gpt-engineer-file-uploads/0Zdn8PJ5cxRgu3hYnqh6K0Z3tOm1/social-images/social-1767829485654-Screenshot%202026-01-07%20174428.png" />
       </Helmet>
 
       <AnimatedBackground />
